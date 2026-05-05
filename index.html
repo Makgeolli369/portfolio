@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Lee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 9999px; }
+  </style>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 transition-colors duration-200">
+
+<div class="max-w-xl mx-auto px-6 py-16">
+
+  <!-- ─── THEME TOGGLE ─── -->
+  <button id="themeToggle" onclick="toggleTheme()"
+    class="fixed top-4 right-4 p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+    aria-label="Toggle theme">
+    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
+    </svg>
+    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+    </svg>
+  </button>
+
+  <!-- ─── HEADER ─── -->
+  <header class="mb-10">
+    <h1 class="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Michael Lee</h1>
+    <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Information Science · University of Maryland · Maryland</p>
+    <p class="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+      I build things end-to-end — from data pipelines to deployed SaaS products. I'm most useful at the intersection of engineering, data, and business: I don't just write code, I ship products that solve real problems.
+    </p>
+
+    <!-- Contact -->
+    <div class="flex flex-wrap gap-4 mt-5 text-xs text-zinc-500 dark:text-zinc-400">
+      <a href="mailto:michaellee@example.com" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors underline underline-offset-2">Email</a>
+      <a href="https://github.com/michaellee" target="_blank" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors underline underline-offset-2">GitHub</a>
+      <a href="https://linkedin.com/in/michaellee" target="_blank" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors underline underline-offset-2">LinkedIn</a>
+      <a href="https://reviewstar.cv" target="_blank" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors underline underline-offset-2">reviewstar.cv</a>
+    </div>
+  </header>
+
+  <!-- ─── SKILLS ─── -->
+  <section class="mb-10">
+    <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">Skills</h2>
+    <div class="flex flex-wrap gap-2" id="skillsContainer"></div>
+  </section>
+
+  <!-- ─── PROJECTS ─── -->
+  <section class="mb-10">
+    <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">Projects</h2>
+    <div class="space-y-8" id="projectsContainer"></div>
+  </section>
+
+  <!-- ─── EDUCATION ─── -->
+  <section class="mb-10">
+    <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">Education</h2>
+    <div>
+      <div class="flex justify-between items-baseline">
+        <span class="text-sm font-medium text-zinc-800 dark:text-zinc-200">University of Maryland, College Park</span>
+        <span class="text-xs text-zinc-400 dark:text-zinc-500">2025</span>
+      </div>
+      <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">B.S. Information Science</p>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="text-xs text-zinc-400 dark:text-zinc-600 pt-6 border-t border-zinc-100 dark:border-zinc-800">
+    Maryland · Open to new opportunities
+  </footer>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  SKILLS — add/remove freely
+// ─────────────────────────────────────────────
+const skills = [
+  'Python', 'TypeScript', 'SQL', 'Java',
+  'React', 'Next.js', 'FastAPI', 'Node.js',
+  'PostgreSQL', 'Supabase', 'Snowflake',
+  'dbt', 'Apache Airflow', 'ETL',
+  'AWS', 'Terraform', 'GitHub Actions', 'Docker',
+  'Pandas', 'SQLAlchemy', 'Playwright',
+  'Claude API', 'Groq API', 'Stripe',
+];
+
+// ─────────────────────────────────────────────
+//  PROJECTS — add new entries to this array
+//  Each entry follows the PER method:
+//    problem  — what gap/challenge existed
+//    evidence — what you specifically built
+//    result   — measurable outcome
+// ─────────────────────────────────────────────
+const projects = [
+  {
+    name: 'ReviewStar',
+    url: 'https://reviewstar.cv',
+    status: 'Live · SaaS',
+    stack: ['FastAPI', 'Next.js', 'Supabase', 'Groq', 'Stripe', 'AWS EC2'],
+    problem: 'Job seekers struggle to get structured, honest feedback on behavioral interview answers — generic tips don\'t cut it.',
+    evidence: 'Built a full-stack SaaS from scratch: FastAPI backend, Next.js frontend, Supabase auth + DB, voice/text input, and LLaMA 3.3 70B (via Groq) for per-STAR-section AI scoring and answer rewrites. Shipped Stripe subscriptions and a session history dashboard.',
+    result: 'Live in production at reviewstar.cv. Free tier (credit-based) and Pro tier ($9/mo). Deployed on AWS EC2 with systemd process management.',
+  },
+  {
+    name: 'AWS IAM Lifecycle Pipeline',
+    url: 'https://github.com/michaellee/aws-iam-lifecycle-pipeline',
+    status: 'Production-ready',
+    stack: ['Python', 'boto3', 'Terraform', 'GitHub Actions', 'pytest'],
+    problem: 'Manual IAM management in enterprise environments creates compliance gaps — offboarding delays leave stale accounts with active access.',
+    evidence: 'Automated joiner-mover-leaver IAM workflow: Terraform-provisioned infrastructure, MFA enforcement, least-privilege role assignment, CloudTrail audit logging, and IAM Access Analyzer integration. Dry-run mode for safe review before apply. Full pytest coverage.',
+    result: 'Production-ready pipeline satisfying NIST 800-53 and CMMC Level 2 controls. Reduces manual access-review time and creates a full audit trail per change.',
+  },
+  {
+    name: 'DoD Small Business Contract Pipeline',
+    url: 'https://github.com/michaellee/dod-sb-pipeline',
+    status: 'Functional',
+    stack: ['Python', 'PostgreSQL', 'SQLAlchemy', 'Streamlit', 'Plotly', 'Azure'],
+    problem: 'Federal contract data from USASpending.gov is large, paginated, and unstructured — no easy way to track DoD small business trends.',
+    evidence: 'Built an end-to-end ETL pipeline: paginated REST API ingestion, PostgreSQL storage via SQLAlchemy 2.0, NAICS sector classification, and an interactive Streamlit/Plotly KPI dashboard with pipeline audit logging. Extended to Azure (Blob Storage, Data Factory, Azure SQL).',
+    result: 'Fully functional analytics platform over federal contract data, usable for vendor research or competitive landscape analysis.',
+  },
+  {
+    name: 'AI Labor Market Pipeline',
+    url: 'https://github.com/michaellee/ai-labor-pipeline',
+    status: 'Active',
+    stack: ['Apache Airflow', 'Snowflake', 'dbt', 'Pandas', 'Scipy'],
+    problem: 'Labor market intelligence is scattered across BLS, O*NET, and economic indices with no unified view.',
+    evidence: 'Built Airflow DAGs for scheduled multi-source ingestion (BLS, O*NET, economic indices), loaded into Snowflake, transformed with dbt models, and analyzed with Scipy for trend detection.',
+    result: 'Active pipeline producing structured, queryable labor market intelligence — useful for job market analysis and workforce planning.',
+  },
+  {
+    name: 'Job Agent',
+    url: 'https://github.com/michaellee/job-agent',
+    status: 'Running daily',
+    stack: ['Python', 'Playwright', 'Claude API', 'SQLite', 'Gmail API'],
+    problem: 'Manually checking dozens of career pages and USAJobs every day is slow and easy to miss relevant postings.',
+    evidence: 'Built a scraper with Playwright that hits career pages and USAJobs, deduplicates via SQLite, ranks listings by relevance using the Claude API, and delivers a curated digest via Gmail API on a cron schedule.',
+    result: 'Runs daily automatically, surfacing only relevant opportunities — removes the manual search loop entirely.',
+  },
+];
+
+// ─────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────
+function renderSkills() {
+  const container = document.getElementById('skillsContainer');
+  skills.forEach(skill => {
+    const span = document.createElement('span');
+    span.className = 'tag bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400';
+    span.textContent = skill;
+    container.appendChild(span);
+  });
+}
+
+function renderProjects() {
+  const container = document.getElementById('projectsContainer');
+  projects.forEach(p => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1.5">
+        <a href="${p.url}" target="_blank"
+           class="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-2">
+          ${p.name}
+        </a>
+        <span class="text-xs text-zinc-400 dark:text-zinc-500">${p.status}</span>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mb-3">
+        ${p.stack.map(t => `<span class="tag bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">${t}</span>`).join('')}
+      </div>
+      <div class="space-y-1.5 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+        <p><span class="font-medium text-zinc-700 dark:text-zinc-300">Problem · </span>${p.problem}</p>
+        <p><span class="font-medium text-zinc-700 dark:text-zinc-300">Evidence · </span>${p.evidence}</p>
+        <p><span class="font-medium text-zinc-700 dark:text-zinc-300">Result · </span>${p.result}</p>
+      </div>
+    `;
+    container.appendChild(div);
+
+    // divider between cards (not after last)
+    if (p !== projects[projects.length - 1]) {
+      const hr = document.createElement('hr');
+      hr.className = 'border-zinc-100 dark:border-zinc-800';
+      container.appendChild(hr);
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+//  THEME
+// ─────────────────────────────────────────────
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.classList.contains('dark');
+  html.classList.toggle('dark', !isDark);
+  document.getElementById('iconSun').classList.toggle('hidden', isDark);
+  document.getElementById('iconMoon').classList.toggle('hidden', !isDark);
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+// Init theme from localStorage or system preference
+(function() {
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const useDark = saved ? saved === 'dark' : prefersDark;
+  document.documentElement.classList.toggle('dark', useDark);
+  document.getElementById('iconSun').classList.toggle('hidden', !useDark);
+  document.getElementById('iconMoon').classList.toggle('hidden', useDark);
+})();
+
+renderSkills();
+renderProjects();
+</script>
+</body>
+</html>
