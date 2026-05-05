@@ -6,13 +6,22 @@
   <title>Michael Lee</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-    }
+    tailwind.config = { darkMode: 'class' }
   </script>
   <style>
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     .tag { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 9999px; }
+    .filter-btn { cursor: pointer; transition: all 0.15s; }
+    .filter-btn.active {
+      background-color: #18181b;
+      color: #f4f4f5;
+    }
+    .dark .filter-btn.active {
+      background-color: #f4f4f5;
+      color: #18181b;
+    }
+    .project-card { transition: opacity 0.15s; }
+    .project-card.hidden-card { display: none; }
   </style>
 </head>
 <body class="bg-white dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 transition-colors duration-200">
@@ -38,8 +47,6 @@
     <p class="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
       I build things end-to-end — from data pipelines to deployed SaaS products. I'm most useful at the intersection of engineering, data, and business: I don't just write code, I ship products that solve real problems.
     </p>
-
-    <!-- Contact -->
     <div class="flex flex-wrap gap-4 mt-5 text-xs text-zinc-500 dark:text-zinc-400">
       <a href="mailto:michaellee@example.com" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors underline underline-offset-2">Email</a>
       <a href="https://github.com/michaellee" target="_blank" class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors underline underline-offset-2">GitHub</a>
@@ -48,7 +55,7 @@
     </div>
   </header>
 
-  <!-- ─── SKILLS ─── -->
+  <!-- ─── SKILLS (static display) ─── -->
   <section class="mb-10">
     <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">Skills</h2>
     <div class="flex flex-wrap gap-2" id="skillsContainer"></div>
@@ -56,8 +63,15 @@
 
   <!-- ─── PROJECTS ─── -->
   <section class="mb-10">
-    <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">Projects</h2>
-    <div class="space-y-8" id="projectsContainer"></div>
+    <div class="flex items-baseline justify-between mb-4">
+      <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Projects</h2>
+      <span id="projectCount" class="text-xs text-zinc-400 dark:text-zinc-500"></span>
+    </div>
+
+    <!-- Filter bar — auto-generated from project stack tags -->
+    <div class="flex flex-wrap gap-1.5 mb-6" id="filterContainer"></div>
+
+    <div id="projectsContainer"></div>
   </section>
 
   <!-- ─── EDUCATION ─── -->
@@ -81,75 +95,175 @@
 
 <script>
 // ─────────────────────────────────────────────
-//  SKILLS — add/remove freely
+//  SKILLS — displayed in the skills section
 // ─────────────────────────────────────────────
 const skills = [
-  'Python', 'TypeScript', 'SQL', 'Java',
-  'React', 'Next.js', 'FastAPI', 'Node.js',
-  'PostgreSQL', 'Supabase', 'Snowflake',
-  'dbt', 'Apache Airflow', 'ETL',
-  'AWS', 'Terraform', 'GitHub Actions', 'Docker',
-  'Pandas', 'SQLAlchemy', 'Playwright',
-  'Claude API', 'Groq API', 'Stripe',
+  'Python', 'TypeScript', 'SQL', 'Java', 'C++',
+  'React', 'Next.js', 'Tailwind CSS', 'FastAPI', 'Node.js',
+  'PostgreSQL', 'MySQL', 'Supabase', 'Snowflake', 'SQLite',
+  'dbt', 'Apache Airflow', 'ETL', 'SQLAlchemy', 'Pandas',
+  'AWS', 'Azure', 'Terraform', 'GitHub Actions', 'Docker',
+  'MITRE ATT&CK', 'NIST 800-53', 'CMMC', 'CVE Analysis',
+  'Network Security', 'Cisco Packet Tracer',
+  'Claude API', 'Groq API', 'RAG', 'LLM',
+  'Playwright', 'Stripe', 'Data Visualization', 'Streamlit',
 ];
 
 // ─────────────────────────────────────────────
-//  PROJECTS — add new entries to this array
-//  Each entry follows the PER method:
-//    problem  — what gap/challenge existed
-//    evidence — what you specifically built
-//    result   — measurable outcome
+//  PROJECTS
+//  PER format: problem / evidence / result
+//  stack[] drives the filter buttons — add any
+//  keyword tags that describe the project's skills
+//
+//  To add a project: append a new {} object below
 // ─────────────────────────────────────────────
 const projects = [
+  // ── ENGINEERING / SAAS ──────────────────────
   {
     name: 'ReviewStar',
     url: 'https://reviewstar.cv',
     status: 'Live · SaaS',
-    stack: ['FastAPI', 'Next.js', 'Supabase', 'Groq', 'Stripe', 'AWS EC2'],
-    problem: 'Job seekers struggle to get structured, honest feedback on behavioral interview answers — generic tips don\'t cut it.',
-    evidence: 'Built a full-stack SaaS from scratch: FastAPI backend, Next.js frontend, Supabase auth + DB, voice/text input, and LLaMA 3.3 70B (via Groq) for per-STAR-section AI scoring and answer rewrites. Shipped Stripe subscriptions and a session history dashboard.',
-    result: 'Live in production at reviewstar.cv. Free tier (credit-based) and Pro tier ($9/mo). Deployed on AWS EC2 with systemd process management.',
+    stack: ['FastAPI', 'Next.js', 'Supabase', 'Groq', 'Stripe', 'AWS', 'Python', 'LLM'],
+    problem: 'Job seekers get no structured feedback on behavioral interview answers — generic advice doesn\'t help them improve.',
+    evidence: 'Built a full-stack SaaS: FastAPI backend, Next.js frontend, Supabase auth + DB, voice/text input, and LLaMA 3.3 70B (via Groq) for per-STAR-section AI scoring and answer rewrites. Shipped Stripe subscriptions and a session history dashboard.',
+    result: 'Live in production at reviewstar.cv. Free (credit-based) and Pro ($9/mo) tiers. Deployed on AWS EC2 with systemd.',
   },
   {
     name: 'AWS IAM Lifecycle Pipeline',
     url: 'https://github.com/michaellee/aws-iam-lifecycle-pipeline',
     status: 'Production-ready',
-    stack: ['Python', 'boto3', 'Terraform', 'GitHub Actions', 'pytest'],
-    problem: 'Manual IAM management in enterprise environments creates compliance gaps — offboarding delays leave stale accounts with active access.',
-    evidence: 'Automated joiner-mover-leaver IAM workflow: Terraform-provisioned infrastructure, MFA enforcement, least-privilege role assignment, CloudTrail audit logging, and IAM Access Analyzer integration. Dry-run mode for safe review before apply. Full pytest coverage.',
-    result: 'Production-ready pipeline satisfying NIST 800-53 and CMMC Level 2 controls. Reduces manual access-review time and creates a full audit trail per change.',
+    stack: ['Python', 'AWS', 'Terraform', 'GitHub Actions', 'NIST 800-53', 'CMMC', 'Cybersecurity'],
+    problem: 'Manual IAM management in enterprise environments creates compliance gaps — stale accounts linger after offboarding.',
+    evidence: 'Automated joiner-mover-leaver IAM workflow: Terraform-provisioned infra, MFA enforcement, least-privilege role assignment, CloudTrail audit logging, IAM Access Analyzer integration, dry-run mode, and full pytest coverage.',
+    result: 'Production-ready pipeline satisfying NIST 800-53 and CMMC Level 2 controls. Full audit trail per change, eliminates manual access-review lag.',
   },
   {
     name: 'DoD Small Business Contract Pipeline',
     url: 'https://github.com/michaellee/dod-sb-pipeline',
     status: 'Functional',
-    stack: ['Python', 'PostgreSQL', 'SQLAlchemy', 'Streamlit', 'Plotly', 'Azure'],
-    problem: 'Federal contract data from USASpending.gov is large, paginated, and unstructured — no easy way to track DoD small business trends.',
-    evidence: 'Built an end-to-end ETL pipeline: paginated REST API ingestion, PostgreSQL storage via SQLAlchemy 2.0, NAICS sector classification, and an interactive Streamlit/Plotly KPI dashboard with pipeline audit logging. Extended to Azure (Blob Storage, Data Factory, Azure SQL).',
-    result: 'Fully functional analytics platform over federal contract data, usable for vendor research or competitive landscape analysis.',
+    stack: ['Python', 'PostgreSQL', 'SQLAlchemy', 'ETL', 'Azure', 'Data Visualization', 'Streamlit'],
+    problem: 'Federal contract data from USASpending.gov is large, paginated, and raw — no easy way to track DoD small business trends.',
+    evidence: 'End-to-end ETL pipeline: paginated REST API ingestion, PostgreSQL via SQLAlchemy 2.0, NAICS sector classification, interactive Streamlit/Plotly KPI dashboard, pipeline audit logging. Extended to Azure Blob Storage, Data Factory, and Azure SQL.',
+    result: 'Fully functional analytics platform over federal contract data — usable for vendor research and competitive landscape analysis.',
   },
   {
     name: 'AI Labor Market Pipeline',
     url: 'https://github.com/michaellee/ai-labor-pipeline',
     status: 'Active',
-    stack: ['Apache Airflow', 'Snowflake', 'dbt', 'Pandas', 'Scipy'],
-    problem: 'Labor market intelligence is scattered across BLS, O*NET, and economic indices with no unified view.',
-    evidence: 'Built Airflow DAGs for scheduled multi-source ingestion (BLS, O*NET, economic indices), loaded into Snowflake, transformed with dbt models, and analyzed with Scipy for trend detection.',
-    result: 'Active pipeline producing structured, queryable labor market intelligence — useful for job market analysis and workforce planning.',
+    stack: ['Apache Airflow', 'Snowflake', 'dbt', 'Pandas', 'Python', 'ETL'],
+    problem: 'Labor market intelligence is siloed across BLS, O*NET, and economic indices with no unified queryable view.',
+    evidence: 'Airflow DAGs for scheduled multi-source ingestion, loaded into Snowflake, transformed with dbt models, and statistically analyzed with Scipy for trend detection.',
+    result: 'Active pipeline producing structured, queryable labor market intelligence useful for job market analysis and workforce planning.',
   },
   {
     name: 'Job Agent',
     url: 'https://github.com/michaellee/job-agent',
     status: 'Running daily',
-    stack: ['Python', 'Playwright', 'Claude API', 'SQLite', 'Gmail API'],
-    problem: 'Manually checking dozens of career pages and USAJobs every day is slow and easy to miss relevant postings.',
-    evidence: 'Built a scraper with Playwright that hits career pages and USAJobs, deduplicates via SQLite, ranks listings by relevance using the Claude API, and delivers a curated digest via Gmail API on a cron schedule.',
-    result: 'Runs daily automatically, surfacing only relevant opportunities — removes the manual search loop entirely.',
+    stack: ['Python', 'Playwright', 'Claude API', 'SQLite', 'LLM', 'Automation'],
+    problem: 'Manually checking dozens of career pages and USAJobs daily is slow, inconsistent, and easy to miss.',
+    evidence: 'Playwright scraper targeting career pages and USAJobs, SQLite deduplication, Claude API relevance ranking, Gmail API email digest — all on a cron schedule.',
+    result: 'Runs daily automatically, surfacing only relevant opportunities. Removes the manual search loop entirely.',
+  },
+
+  // ── DATA / ANALYTICS ────────────────────────
+  {
+    name: 'Game Sales Data Analysis',
+    url: 'https://github.com/michaellee/game-sales-db',
+    status: 'Academic project',
+    stack: ['MySQL', 'SQL', 'Data Modeling', 'Data Cleaning', 'Relational Database'],
+    problem: 'Global video game sales data from CSV exports had no structure for meaningful querying or trend analysis.',
+    evidence: 'Designed a normalized MySQL relational database with 6 tables (Games, Platforms, Publishers, Regions, Year, Sales); cleaned ~2,000 raw entries; wrote SQL queries with joins, aggregations, and subqueries to surface sales trends by platform, region, and genre.',
+    result: 'Identified high-performing titles and emerging market trends. Demonstrated the full data modeling lifecycle from raw CSV to analytical query.',
+  },
+  {
+    name: 'iConsultancy: Nonprofit Data Analysis',
+    url: '',
+    status: 'Consulting project',
+    stack: ['Data Analysis', 'Data Visualization', 'Data Cleaning', 'Data Governance', 'Process Mapping'],
+    problem: 'A nonprofit had inconsistent, uncleaned donor and pickup-request data with no framework for data-driven operational decisions.',
+    evidence: 'Cleaned and standardized multi-year donor and pickup datasets; built donor segmentation analysis (recurring patterns, specialty vs. standard pickups); created user journey maps from stakeholder interviews; identified data governance and privacy gaps; delivered dashboards and structured presentations to leadership.',
+    result: 'Translated qualitative and quantitative findings into actionable service workflow improvements, directly supporting strategic planning decisions.',
+  },
+
+  // ── CYBERSECURITY ────────────────────────────
+  {
+    name: 'Threat Intelligence Briefs',
+    url: '',
+    status: '10+ reports',
+    stack: ['MITRE ATT&CK', 'CVE Analysis', 'IOC Analysis', 'Cybersecurity', 'Threat Reporting', 'NIST 800-53'],
+    problem: 'Security teams need concise, actionable threat intelligence — raw CVE advisories are too dense to act on quickly.',
+    evidence: 'Authored 10+ threat briefs analyzing real-world CVE incidents; mapped adversary TTPs to the MITRE ATT&CK framework; outlined mitigations aligned with NIST and federal guidance for each incident.',
+    result: 'Produced structured, decision-ready intelligence reports covering the full incident-to-mitigation chain across a range of CVEs and threat actors.',
+  },
+  {
+    name: 'Internet Systems Architecture & Simulation',
+    url: '',
+    status: 'Lab project',
+    stack: ['Cisco Packet Tracer', 'Network Security', 'VPN', 'DNS', 'IPv4/IPv6', 'SDN', 'Cybersecurity'],
+    problem: 'Designing secure networks requires hands-on configuration experience beyond what theory alone provides.',
+    evidence: 'Simulated full internet architecture in Cisco Packet Tracer — reconfigured IP/DHCP/NAT/routing tables, set up DNS and HTTP servers, established VPN tunnels with encrypted comms validation, edited IoT and API server behavior, traced RIP/RIPng/IoT packets, and monitored an SDN dashboard for host and router provisioning.',
+    result: 'Demonstrated end-to-end secure network design from Layer 2 to application layer, including IPv4/IPv6 dual-stack and IoT integration across simulated enterprise topology.',
+  },
+
+  // ── PRODUCT / AI ─────────────────────────────
+  {
+    name: 'USG iSchool Chatbot',
+    url: '',
+    status: 'Collaborative project',
+    stack: ['RAG', 'LLM', 'AI', 'Stakeholder Management', 'Product Management'],
+    problem: 'An in-progress university chatbot lacked alignment between stakeholder expectations, student needs, and actual response quality.',
+    evidence: 'Joined mid-project; partnered with advisors, IT, and departmental stakeholders to define success criteria; analyzed the RAG-based LLM architecture to improve context structuring and prioritization; moderated quality using like/dislike feedback signals to iteratively refine response guidelines.',
+    result: 'Improved chatbot accuracy and relevance through structured feedback loops and better context management, aligned with real student-facing use cases.',
+  },
+  {
+    name: 'Smart Pet Litter Box Redesign',
+    url: '',
+    status: 'Product project',
+    stack: ['Product Management', 'User Research', 'Prototyping', 'Product Roadmap', 'Competitive Analysis'],
+    problem: 'Existing smart litter box products had persistent usability and maintenance pain points that competitors hadn\'t adequately addressed.',
+    evidence: 'Led end-to-end product discovery: user research, competitive analysis, problem statement and persona definition, feature prioritization based on user values and feasibility, low-fidelity prototyping for cleaning and odor control workflows, and a phased product roadmap with documented tradeoffs.',
+    result: 'Delivered a prioritized feature set and prototype targeting core user pain points, with a roadmap outlining phased improvements grounded in research.',
   },
 ];
 
 // ─────────────────────────────────────────────
-//  RENDER
+//  FILTER STATE
+// ─────────────────────────────────────────────
+const activeFilters = new Set();
+
+function toggleFilter(skill, btn) {
+  if (activeFilters.has(skill)) {
+    activeFilters.delete(skill);
+    btn.classList.remove('active');
+  } else {
+    activeFilters.add(skill);
+    btn.classList.add('active');
+  }
+  applyFilters();
+}
+
+function clearFilters(allBtn) {
+  activeFilters.clear();
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  allBtn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.project-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const cardSkills = JSON.parse(card.dataset.stack);
+    const show = activeFilters.size === 0 || cardSkills.some(s => activeFilters.has(s));
+    card.classList.toggle('hidden-card', !show);
+    if (show) visible++;
+  });
+  document.getElementById('projectCount').textContent =
+    activeFilters.size === 0 ? `${projects.length} projects` : `${visible} of ${projects.length}`;
+}
+
+// ─────────────────────────────────────────────
+//  RENDER SKILLS (static display)
 // ─────────────────────────────────────────────
 function renderSkills() {
   const container = document.getElementById('skillsContainer');
@@ -161,16 +275,58 @@ function renderSkills() {
   });
 }
 
+// ─────────────────────────────────────────────
+//  RENDER FILTER BUTTONS (from project stacks)
+// ─────────────────────────────────────────────
+function renderFilters() {
+  const container = document.getElementById('filterContainer');
+  const allTags = [...new Set(projects.flatMap(p => p.stack))].sort();
+
+  // "All" button
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All';
+  allBtn.className = 'filter-btn tag bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 active';
+  allBtn.onclick = () => clearFilters(allBtn);
+  container.appendChild(allBtn);
+
+  allTags.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.textContent = tag;
+    btn.className = 'filter-btn tag bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400';
+    btn.onclick = () => {
+      allBtn.classList.remove('active');
+      toggleFilter(tag, btn);
+      if (activeFilters.size === 0) allBtn.classList.add('active');
+    };
+    container.appendChild(btn);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  RENDER PROJECTS
+// ─────────────────────────────────────────────
 function renderProjects() {
   const container = document.getElementById('projectsContainer');
-  projects.forEach(p => {
-    const div = document.createElement('div');
-    div.innerHTML = `
+  // deduplicate by name
+  const seen = new Set();
+  const unique = projects.filter(p => {
+    if (seen.has(p.name)) return false;
+    seen.add(p.name);
+    return true;
+  });
+
+  unique.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.dataset.stack = JSON.stringify(p.stack);
+
+    const linkHtml = p.url
+      ? `<a href="${p.url}" target="_blank" class="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-2">${p.name}</a>`
+      : `<span class="text-sm font-medium text-zinc-900 dark:text-zinc-100">${p.name}</span>`;
+
+    card.innerHTML = `
       <div class="flex items-baseline justify-between flex-wrap gap-1 mb-1.5">
-        <a href="${p.url}" target="_blank"
-           class="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline underline-offset-2">
-          ${p.name}
-        </a>
+        ${linkHtml}
         <span class="text-xs text-zinc-400 dark:text-zinc-500">${p.status}</span>
       </div>
       <div class="flex flex-wrap gap-1.5 mb-3">
@@ -182,15 +338,16 @@ function renderProjects() {
         <p><span class="font-medium text-zinc-700 dark:text-zinc-300">Result · </span>${p.result}</p>
       </div>
     `;
-    container.appendChild(div);
+    container.appendChild(card);
 
-    // divider between cards (not after last)
-    if (p !== projects[projects.length - 1]) {
+    if (i < unique.length - 1) {
       const hr = document.createElement('hr');
-      hr.className = 'border-zinc-100 dark:border-zinc-800';
+      hr.className = 'border-zinc-100 dark:border-zinc-800 my-8';
       container.appendChild(hr);
     }
   });
+
+  document.getElementById('projectCount').textContent = `${unique.length} projects`;
 }
 
 // ─────────────────────────────────────────────
@@ -205,7 +362,6 @@ function toggleTheme() {
   localStorage.setItem('theme', isDark ? 'light' : 'dark');
 }
 
-// Init theme from localStorage or system preference
 (function() {
   const saved = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -216,6 +372,7 @@ function toggleTheme() {
 })();
 
 renderSkills();
+renderFilters();
 renderProjects();
 </script>
 </body>
