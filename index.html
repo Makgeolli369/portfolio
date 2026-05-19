@@ -366,7 +366,11 @@ function renderProjects(projects) {
         <span class="tag ${badgeClass} flex-shrink-0 text-xs">${p.status}</span>
       </div>
       <div class="flex flex-wrap gap-1.5 mb-3">${stackHtml}</div>
-      <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${p.description || ''}</p>
+      <div class="space-y-2">
+        ${[p.problem, p.evidence, p.result].filter(Boolean).map(t =>
+          `<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${t}</p>`
+        ).join('')}
+      </div>
     `;
     container.appendChild(card);
   });
