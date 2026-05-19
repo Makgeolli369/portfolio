@@ -1,12 +1,12 @@
 {
   "name": "Michael Lee",
   "initials": "ML",
-  "tagline": "M.S. Analytics · Georgia Tech  |  B.S. Information Science · UMD",
-  "bio": "I build things end-to-end — from data pipelines to deployed SaaS products. Most effective at the intersection of engineering, data, and business strategy: I don't just write code, I ship products that solve real problems. Background in USAF; focused on data engineering, federal, and defense roles.",
+  "tagline": "M.S. Analytics · Georgia Tech  ·  B.S. Information Science · UMD",
+  "bio": "I build things end-to-end, from data pipelines to deployed SaaS products. I work best at the intersection of engineering, data, and business strategy. Background in USAF with a focus on data, federal, and defense roles.",
   "links": {
     "email": "leem72929@gmail.com",
-    "github": "https://github.com/michaellee",
-    "linkedin": "https://linkedin.com/in/michaellee",
+    "github": "https://github.com/Makgeolli369",
+    "linkedin": "https://www.linkedin.com/in/michael-lee-z/",
     "website": "https://reviewstar.cv",
     "websiteLabel": "reviewstar.cv"
   },
@@ -17,7 +17,7 @@
     {
       "school": "Georgia Institute of Technology",
       "degree": "M.S. Analytics (in progress)",
-      "year": "2026–"
+      "year": "2026"
     },
     {
       "school": "University of Maryland, College Park",
@@ -26,15 +26,11 @@
     }
   ],
   "skills": [
-    "Python", "TypeScript", "SQL", "Java", "C++",
-    "React", "Next.js", "Tailwind CSS", "FastAPI", "Node.js",
-    "PostgreSQL", "MySQL", "Supabase", "Snowflake", "SQLite",
-    "dbt", "Apache Airflow", "ETL", "SQLAlchemy", "Pandas",
-    "AWS", "Azure", "Terraform", "GitHub Actions", "Docker",
-    "MITRE ATT&CK", "NIST 800-53", "CMMC", "CVE Analysis",
-    "Network Security", "Cisco Packet Tracer",
-    "Claude API", "Groq API", "RAG", "LLM",
-    "Playwright", "Stripe", "Data Visualization", "Streamlit"
+    "Python", "TypeScript", "SQL",
+    "React", "Next.js", "FastAPI",
+    "PostgreSQL", "Snowflake", "dbt",
+    "AWS", "Terraform", "Docker",
+    "Claude API", "Playwright", "Streamlit"
   ],
   "projects": [
     {
@@ -42,156 +38,108 @@
       "url": "https://reviewstar.cv",
       "status": "Live · SaaS",
       "statusType": "live",
-      "stack": ["FastAPI", "Next.js", "Supabase", "Groq API", "Stripe", "AWS", "Python", "LLM"],
-      "problem": "Job seekers practice behavioral interviews without structured feedback — generic advice doesn't help them improve at the STAR level.",
-      "evidence": "Built full-stack SaaS: FastAPI backend, Next.js frontend (static export), Supabase auth + PostgreSQL, Google OAuth, mic input (Web Speech API) or text. LLaMA 3.3 70B via Groq scores each STAR section and rewrites answers. Three-tier limits (anonymous: 3, free logged-in: 10/mo, Pro: unlimited). Stripe live subscriptions, session history dashboard for Pro users. Deployed on AWS EC2 Ubuntu with systemd.",
-      "result": "Live in production at reviewstar.cv. Free and Pro ($9/mo) tiers with paying subscribers.",
-      "image": "",
-      "video": ""
-    },
-    {
-      "name": "ClearDeath — Funeral Home Case Manager",
-      "url": "",
-      "status": "Deployed · Client",
-      "statusType": "live",
-      "stack": ["Next.js", "PostgreSQL", "Docker", "TypeScript", "React", "Prisma"],
-      "problem": "A local funeral home needed digital case management but couldn't rely on cloud SaaS — staff work in-office without guaranteed internet access.",
-      "evidence": "Built a self-hosted local web app: Next.js 16 + React 19 frontend, PostgreSQL via Prisma ORM, NextAuth v5 for staff authentication (bcrypt), Docker Compose deployment on a Windows mini PC. Staff access via office WiFi (local IP) — no internet required after setup. Weekly automated backups via Docker tar.gz.",
-      "result": "Deployed on a single mini PC, accessible to all staff on the local network. Full case management, multi-user auth, and automated backup — zero recurring SaaS cost.",
-      "image": "",
-      "video": ""
+      "stack": ["FastAPI", "Next.js", "Supabase", "Groq", "Stripe"],
+      "categories": ["Full Stack", "AI / LLM"],
+      "description": "AI-powered behavioral interview coaching platform. Users practice STAR answers via mic or text and get per-section scores and rewrites from LLaMA 3.3 70B. Built with FastAPI, Next.js, Supabase, Google OAuth, and Stripe. Live at reviewstar.cv with Free and Pro ($9/mo) tiers."
     },
     {
       "name": "AWS IAM Lifecycle Pipeline",
-      "url": "https://github.com/michaellee/aws-iam-lifecycle-pipeline",
+      "url": "https://github.com/Makgeolli369/aws-iam-lifecycle-pipeline",
       "status": "Production-ready",
       "statusType": "production",
-      "stack": ["Python", "AWS", "Terraform", "GitHub Actions", "NIST 800-53", "CMMC"],
-      "problem": "Manual IAM management in enterprise environments creates compliance gaps — stale accounts linger after offboarding and privilege creep goes undetected.",
-      "evidence": "Automated joiner-mover-leaver IAM workflow: Terraform-provisioned infra, MFA enforcement via policy condition (`aws:MultiFactorAuthPresent`), least-privilege role assignment, CloudTrail audit logging, IAM Access Analyzer integration, dry-run mode, and full pytest coverage. Users are never deleted — deprovisioned tag preserves audit trail for AC-2 compliance.",
-      "result": "Production-ready pipeline satisfying NIST 800-53 and CMMC Level 2 controls. Full per-change audit trail; eliminates manual access-review lag.",
-      "image": "",
-      "video": ""
+      "stack": ["Python", "AWS", "Terraform", "GitHub Actions"],
+      "categories": ["Cloud / DevOps", "Cybersecurity"],
+      "description": "End-to-end IAM automation for joiner, mover, and leaver workflows. Handles MFA enforcement, least-privilege assignment, access reviews, and deprovisioning with full CloudTrail audit logging. Satisfies NIST 800-53 and CMMC Level 2 controls."
     },
     {
       "name": "AI Labor Market Risk Pipeline",
-      "url": "https://github.com/michaellee/ai-labor-pipeline",
+      "url": "https://github.com/Makgeolli369/ai-labor-pipeline",
       "status": "Production",
       "statusType": "production",
-      "stack": ["Python", "Snowflake", "dbt", "Terraform", "AWS", "Pandas", "ETL"],
-      "problem": "No model existed to correlate AI-exposure risk with financial vulnerability across occupations — making it hard to assess credit risk in AI-disrupted labor markets.",
-      "evidence": "End-to-end pipeline: Python ingestion from BLS OEWS, Anthropic Economic Index, O*NET, and Census ACS PUMS; Terraform-provisioned AWS S3 + IAM; loaded to Snowflake via boto3; 43 dbt tests across staging → intermediate → mart layers. Composite risk score: 0.40 × AI exposure + 0.60 × financial vulnerability. Solved 15 real integration bugs (Census URL migration, BLS 403 errors, Snowflake load history, O*NET column mapping).",
-      "result": "MART_CREDIT_RISK_BY_OCCUPATION ranks every occupation by composite risk score (top: Medical Transcriptionists at 0.847). Full data quality coverage across all mart models.",
-      "image": "",
-      "video": ""
+      "stack": ["Python", "Snowflake", "dbt", "Terraform", "AWS"],
+      "categories": ["Data Engineering", "Cloud / DevOps"],
+      "description": "Data pipeline that quantifies AI-exposure risk against financial vulnerability across occupations. Ingests from BLS OEWS, Anthropic Economic Index, O*NET, and Census ACS PUMS into Snowflake with 43 dbt tests across staging to mart layers. Outputs a composite credit risk score per occupation."
     },
     {
       "name": "DoD Small Business Contract Pipeline",
-      "url": "https://github.com/michaellee/dod-sb-pipeline",
+      "url": "https://github.com/Makgeolli369/dod-sb-pipeline",
       "status": "Functional",
       "statusType": "production",
-      "stack": ["Python", "PostgreSQL", "SQLAlchemy", "ETL", "Azure", "Streamlit", "Data Visualization"],
-      "problem": "Federal contract data from USASpending.gov is large, paginated, and raw — no easy way to track DoD small business trends or benchmark vendors.",
-      "evidence": "End-to-end ETL: paginated REST API ingestion → pandas transforms (dedup, negative-amount filter, NAICS classification, 80% pass-rate validation) → PostgreSQL via SQLAlchemy 2.0 + pipeline audit log. Interactive Streamlit + Plotly dashboard with KPI cards, spending by NAICS sector, top-15 recipients, choropleth map, and sidebar filters. Extended to Azure Blob Storage, Data Factory, and Azure SQL.",
-      "result": "Fully functional analytics platform over federal contract data — usable for vendor research and competitive landscape analysis.",
-      "image": "",
-      "video": ""
+      "stack": ["Python", "PostgreSQL", "Streamlit", "Azure", "SQLAlchemy"],
+      "categories": ["Data Engineering"],
+      "description": "ETL pipeline that pulls DoD small business contract data from USASpending.gov into PostgreSQL. Includes NAICS sector classification, deduplication, and a Streamlit dashboard with KPI cards, choropleth map, and sidebar filters. Extended to Azure Blob Storage and Azure SQL."
     },
     {
       "name": "Job Agent",
-      "url": "https://github.com/michaellee/job-agent",
+      "url": "https://github.com/Makgeolli369/job-agent",
       "status": "Running daily",
       "statusType": "active",
-      "stack": ["Python", "Playwright", "Claude API", "SQLite", "LLM", "Automation"],
-      "problem": "Manually checking dozens of career pages and USAJobs daily is slow, inconsistent, and easy to miss relevant postings.",
-      "evidence": "Playwright scraper targeting Greenhouse, Lever, Workday, and USAJobs API; SQLite deduplication; Claude API relevance scoring against resume + profile summary (min score threshold configurable); Gmail App Password HTML email digest — all on a daily cron schedule.",
-      "result": "Runs every morning, surfacing only relevant opportunities scored above threshold. Removes the manual search loop entirely.",
-      "image": "",
-      "video": ""
+      "stack": ["Python", "Playwright", "Claude API", "SQLite"],
+      "categories": ["Automation", "AI / LLM"],
+      "description": "Automated job scraper targeting Greenhouse, Lever, Workday, and USAJobs. Claude API scores each listing against a resume and profile summary. Above-threshold results are delivered as a daily HTML email digest via Gmail."
     },
     {
       "name": "Crypto Spam Tracker",
-      "url": "https://github.com/michaellee/crypto-spam-tracker",
+      "url": "https://github.com/Makgeolli369/crypto-spam-tracker",
       "status": "Active",
       "statusType": "active",
-      "stack": ["FastAPI", "Python", "SQLite", "JavaScript", "Automation"],
-      "problem": "YouTube comment sections for crypto content are flooded with scam promotions — no easy way to monitor which coins are being targeted in real time.",
-      "evidence": "FastAPI backend with APScheduler polling the YouTube Comments API every 7 minutes; pattern-matching detector extracts crypto coin mentions and classifies spam; SQLite stores comment content, coin, and timestamp; live price lookup via prices.py; plain-JS dashboard with per-coin filtering and Windows desktop notifications.",
-      "result": "Running monitoring service tracking crypto spam patterns across YouTube with a live web dashboard showing comment content, timestamps, and coin-level breakdown.",
-      "image": "",
-      "video": ""
+      "stack": ["FastAPI", "Python", "SQLite", "YouTube API"],
+      "categories": ["Full Stack", "Automation"],
+      "description": "Real-time monitor for crypto spam in YouTube comments. Polls the YouTube Comments API every 7 minutes, detects coin mentions with pattern matching, and stores results in SQLite. Includes a web dashboard with per-coin filtering and live price data."
     },
     {
       "name": "Game Sales Data Analysis",
-      "url": "https://github.com/michaellee/game-sales-db",
+      "url": "https://github.com/Makgeolli369/game-sales-db",
       "status": "Academic project",
       "statusType": "academic",
-      "stack": ["MySQL", "SQL", "Data Modeling", "Data Cleaning", "Relational Database"],
-      "problem": "Global video game sales data from CSV exports had no structure for meaningful querying or trend analysis.",
-      "evidence": "Designed a normalized MySQL relational database with 6 tables (Games, Platforms, Publishers, Regions, Year, Sales); cleaned ~2,000 raw entries; wrote SQL queries with joins, aggregations, and subqueries to surface trends by platform, region, and genre.",
-      "result": "Identified high-performing titles and emerging market trends. Demonstrated the full data modeling lifecycle from raw CSV to analytical query.",
-      "image": "",
-      "video": ""
+      "stack": ["MySQL", "SQL"],
+      "categories": ["Data Engineering"],
+      "description": "Normalized MySQL relational database built from raw CSV game sales data. Six tables covering games, platforms, publishers, regions, and sales. SQL queries surface top titles and market trends by platform, region, and genre."
     },
     {
       "name": "iConsultancy: Nonprofit Data Analysis",
       "url": "",
       "status": "Consulting project",
       "statusType": "academic",
-      "stack": ["Data Analysis", "Data Visualization", "Data Cleaning", "Data Governance", "Process Mapping"],
-      "problem": "A nonprofit had inconsistent, uncleaned donor and pickup-request data with no framework for data-driven operational decisions.",
-      "evidence": "Cleaned and standardized multi-year donor and pickup datasets; built donor segmentation analysis; created user journey maps from stakeholder interviews; identified data governance and privacy gaps; delivered dashboards and structured presentations to leadership.",
-      "result": "Translated qualitative and quantitative findings into actionable service workflow improvements, directly supporting strategic planning decisions.",
-      "image": "",
-      "video": ""
+      "stack": ["Data Analysis", "Data Visualization"],
+      "categories": ["Data Engineering"],
+      "description": "Consulting project for a nonprofit with inconsistent donor and pickup-request data. Cleaned multi-year datasets, built donor segmentation analysis, and delivered dashboards and presentations to leadership. Findings directly supported strategic planning decisions."
     },
     {
       "name": "Threat Intelligence Briefs",
       "url": "",
       "status": "10+ Reports",
       "statusType": "cyber",
-      "stack": ["MITRE ATT&CK", "CVE Analysis", "Cybersecurity", "Threat Reporting", "NIST 800-53"],
-      "problem": "Security teams need concise, actionable threat intelligence — raw CVE advisories are too dense to act on quickly.",
-      "evidence": "Authored 10+ threat briefs analyzing real-world CVE incidents; mapped adversary TTPs to the MITRE ATT&CK framework; outlined mitigations aligned with NIST and federal guidance for each incident.",
-      "result": "Produced structured, decision-ready intelligence reports covering the full incident-to-mitigation chain across a range of CVEs and threat actors.",
-      "image": "",
-      "video": ""
+      "stack": ["MITRE ATT&CK", "CVE Analysis", "NIST 800-53"],
+      "categories": ["Cybersecurity"],
+      "description": "Series of 10+ threat intelligence reports on real-world CVE incidents. Each brief maps adversary TTPs to MITRE ATT&CK and outlines mitigations aligned with NIST and federal guidance."
     },
     {
       "name": "Internet Systems Architecture & Simulation",
       "url": "",
       "status": "Lab project",
       "statusType": "academic",
-      "stack": ["Cisco Packet Tracer", "Network Security", "DNS", "Cybersecurity"],
-      "problem": "Designing secure networks requires hands-on configuration experience beyond what theory alone provides.",
-      "evidence": "Simulated full internet architecture in Cisco Packet Tracer — reconfigured IP/DHCP/NAT/routing tables, set up DNS and HTTP servers, established VPN tunnels with encrypted comms validation, edited IoT and API server behavior, traced RIP/RIPng/IoT packets, and monitored an SDN dashboard.",
-      "result": "Demonstrated end-to-end secure network design from Layer 2 to application layer, including IPv4/IPv6 dual-stack and IoT integration across simulated enterprise topology.",
-      "image": "",
-      "video": ""
+      "stack": ["Cisco Packet Tracer", "Network Security"],
+      "categories": ["Cybersecurity"],
+      "description": "Full network architecture simulation in Cisco Packet Tracer. Configured IP, DHCP, NAT, DNS, HTTP servers, VPN tunnels, and RIP routing across a simulated enterprise topology with IPv4/IPv6 dual-stack and IoT integration."
     },
     {
       "name": "USG iSchool Chatbot",
       "url": "",
       "status": "Collaborative project",
       "statusType": "academic",
-      "stack": ["RAG", "LLM", "AI", "Stakeholder Management", "Product Management"],
-      "problem": "An in-progress university chatbot lacked alignment between stakeholder expectations, student needs, and actual response quality.",
-      "evidence": "Joined mid-project; partnered with advisors, IT, and departmental stakeholders to define success criteria; analyzed the RAG-based LLM architecture to improve context structuring; moderated quality using like/dislike feedback signals to iteratively refine response guidelines.",
-      "result": "Improved chatbot accuracy and relevance through structured feedback loops and better context management, aligned with real student-facing use cases.",
-      "image": "",
-      "video": ""
+      "stack": ["RAG", "LLM"],
+      "categories": ["AI / LLM"],
+      "description": "Mid-project contribution to a university RAG-based chatbot. Worked with advisors, IT, and stakeholders to define success criteria; improved context structuring and moderated response quality through like/dislike feedback loops."
     },
     {
       "name": "Smart Pet Litter Box Redesign",
       "url": "",
       "status": "Product project",
       "statusType": "academic",
-      "stack": ["Product Management", "User Research", "Prototyping", "Competitive Analysis"],
-      "problem": "Existing smart litter box products had persistent usability and maintenance pain points that competitors hadn't adequately addressed.",
-      "evidence": "Led end-to-end product discovery: user research, competitive analysis, problem statement and persona definition, feature prioritization, low-fidelity prototyping for cleaning and odor control workflows, and a phased product roadmap with documented tradeoffs.",
-      "result": "Delivered a prioritized feature set and prototype targeting core user pain points, with a roadmap outlining phased improvements grounded in research.",
-      "image": "",
-      "video": ""
+      "stack": ["User Research", "Product Management"],
+      "categories": ["Product"],
+      "description": "End-to-end product discovery for a smart litter box redesign. Conducted user research and competitive analysis, defined personas, built low-fidelity prototypes, and delivered a phased product roadmap with documented tradeoffs."
     }
   ]
 }

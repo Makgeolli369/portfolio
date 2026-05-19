@@ -6,17 +6,14 @@
   <title>Michael Lee — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-          colors: {
-            accent: { DEFAULT: '#6366f1', dark: '#818cf8' }
-          }
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
         }
       }
     }
@@ -24,22 +21,74 @@
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
 
+    /* ── Link buttons ── */
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 2px solid #c7d2fe;
+      color: #4f46e5;
+      background: #eef2ff;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .link-btn:hover {
+      background: #e0e7ff;
+      border-color: #a5b4fc;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99,102,241,0.15);
+    }
+    .link-btn-primary {
+      background: #6366f1;
+      color: #fff;
+      border-color: #6366f1;
+    }
+    .link-btn-primary:hover {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+    }
+    .dark .link-btn {
+      background: #1e1b4b;
+      color: #a5b4fc;
+      border-color: #3730a3;
+    }
+    .dark .link-btn:hover {
+      background: #2e1b6b;
+      border-color: #6366f1;
+    }
+    .dark .link-btn-primary {
+      background: #818cf8;
+      color: #0f172a;
+      border-color: #818cf8;
+    }
+    .dark .link-btn-primary:hover {
+      background: #a5b4fc;
+      border-color: #a5b4fc;
+    }
+
     /* ── Filter buttons ── */
     .filter-btn {
       cursor: pointer;
       transition: all 0.15s ease;
-      font-size: 0.7rem;
-      padding: 3px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 14px;
       border-radius: 9999px;
-      border: 1px solid transparent;
+      border: 1.5px solid transparent;
     }
     .filter-btn:not(.active) {
-      background: #f1f5f9;
+      background: #f8fafc;
       color: #64748b;
       border-color: #e2e8f0;
     }
     .filter-btn:not(.active):hover {
-      background: #e0e7ff;
+      background: #eef2ff;
       color: #4f46e5;
       border-color: #c7d2fe;
     }
@@ -47,6 +96,7 @@
       background: #6366f1;
       color: #fff;
       border-color: #6366f1;
+      box-shadow: 0 2px 8px rgba(99,102,241,0.25);
     }
     .dark .filter-btn:not(.active) {
       background: #1e293b;
@@ -54,7 +104,7 @@
       border-color: #334155;
     }
     .dark .filter-btn:not(.active):hover {
-      background: #312e81;
+      background: #1e1b4b;
       color: #a5b4fc;
       border-color: #4338ca;
     }
@@ -67,41 +117,42 @@
     /* ── Project cards ── */
     .project-card {
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 14px;
+      padding: 22px;
       background: #fff;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
     .project-card:hover {
-      box-shadow: 0 4px 20px rgba(99,102,241,0.08);
+      box-shadow: 0 8px 30px rgba(99,102,241,0.10);
       border-color: #c7d2fe;
+      transform: translateY(-2px);
     }
     .dark .project-card {
       border-color: #1e293b;
       background: #0f172a;
     }
     .dark .project-card:hover {
-      box-shadow: 0 4px 20px rgba(129,140,248,0.1);
+      box-shadow: 0 8px 30px rgba(129,140,248,0.12);
       border-color: #3730a3;
     }
     .project-card.hidden-card { display: none; }
 
-    /* ── Skill tags ── */
+    /* ── Skill / stack tags ── */
     .tag {
       display: inline-block;
       font-size: 0.68rem;
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 9999px;
       font-weight: 500;
     }
 
-    /* ── Section accent bar ── */
+    /* ── Section label ── */
     .section-label {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.68rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #94a3b8;
@@ -112,52 +163,32 @@
       width: 3px;
       height: 14px;
       border-radius: 2px;
-      background: #6366f1;
+      background: linear-gradient(to bottom, #6366f1, #a855f7);
       flex-shrink: 0;
     }
     .dark .section-label { color: #64748b; }
 
-    /* ── PER labels ── */
-    .per-label {
-      display: inline-block;
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 1px 6px;
-      border-radius: 4px;
-      margin-right: 6px;
-      vertical-align: middle;
+    /* ── Hero gradient card ── */
+    .hero-card {
+      background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 60%, #fdf4ff 100%);
+      border: 1px solid #e0e7ff;
+      border-radius: 20px;
+      padding: 2rem;
     }
-
-    /* ── Media ── */
-    .project-media {
-      border-radius: 8px;
-      overflow: hidden;
-      margin-top: 14px;
-      border: 1px solid #e2e8f0;
-    }
-    .dark .project-media { border-color: #1e293b; }
-    .project-media img { width: 100%; display: block; }
-    .project-media video { width: 100%; display: block; }
-    .project-media .embed-wrap {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-    }
-    .project-media .embed-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
+    .dark .hero-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border-color: #312e81;
     }
   </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 transition-colors duration-200">
+<body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 transition-colors duration-200">
 
-<!-- ─── THEME TOGGLE ─── -->
+<!-- ── Top accent bar ── -->
+<div class="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-violet-500"></div>
+
+<!-- ── Theme toggle ── -->
 <button id="themeToggle" onclick="toggleTheme()"
-  class="fixed top-5 right-5 z-50 p-2 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all"
+  class="fixed top-5 right-5 z-50 p-2.5 rounded-full bg-white dark:bg-slate-800 shadow border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all"
   aria-label="Toggle theme">
   <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
@@ -167,38 +198,34 @@
   </svg>
 </button>
 
-<div class="max-w-2xl mx-auto px-6 py-16">
+<div class="max-w-2xl mx-auto px-6 py-12">
 
-  <!-- ─── HEADER ─── -->
+  <!-- ── HEADER ── -->
   <header id="site-header" class="mb-12"></header>
 
-  <!-- ─── SKILLS ─── -->
+  <!-- ── SKILLS ── -->
   <section class="mb-12">
-    <div class="section-label mb-4">Skills</div>
+    <div class="section-label mb-4">Core Skills</div>
     <div class="flex flex-wrap gap-2" id="skillsContainer"></div>
   </section>
 
-  <!-- ─── PROJECTS ─── -->
+  <!-- ── PROJECTS ── -->
   <section class="mb-12">
     <div class="flex items-center justify-between mb-4">
       <div class="section-label">Projects</div>
       <span id="projectCount" class="text-xs text-slate-400 dark:text-slate-500 font-medium"></span>
     </div>
-
-    <!-- Filter bar -->
-    <div class="flex flex-wrap gap-1.5 mb-6" id="filterContainer"></div>
-
-    <!-- Cards -->
+    <div class="flex flex-wrap gap-2 mb-6" id="filterContainer"></div>
     <div class="flex flex-col gap-4" id="projectsContainer"></div>
   </section>
 
-  <!-- ─── EDUCATION ─── -->
+  <!-- ── EDUCATION ── -->
   <section class="mb-12">
     <div class="section-label mb-4">Education</div>
     <div id="educationContainer"></div>
   </section>
 
-  <!-- ─── FOOTER ─── -->
+  <!-- ── FOOTER ── -->
   <footer class="text-xs text-slate-400 dark:text-slate-600 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between">
     <span id="footerLeft"></span>
     <span id="footerRight"></span>
@@ -207,9 +234,6 @@
 </div>
 
 <script>
-// ─────────────────────────────────────────────
-//  STATUS BADGE COLORS
-// ─────────────────────────────────────────────
 const statusStyles = {
   live:       'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800',
   active:     'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800',
@@ -218,23 +242,15 @@ const statusStyles = {
   academic:   'bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
 };
 
-const perColors = {
-  Problem:  'bg-rose-50 text-rose-700 dark:bg-rose-900/20 dark:text-rose-400',
-  Evidence: 'bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400',
-  Result:   'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400',
-};
-
-// ─────────────────────────────────────────────
-//  FILTER STATE
-// ─────────────────────────────────────────────
+// ── Filter state ──
 const activeFilters = new Set();
 
-function toggleFilter(skill, btn) {
-  if (activeFilters.has(skill)) {
-    activeFilters.delete(skill);
+function toggleFilter(cat, btn) {
+  if (activeFilters.has(cat)) {
+    activeFilters.delete(cat);
     btn.classList.remove('active');
   } else {
-    activeFilters.add(skill);
+    activeFilters.add(cat);
     btn.classList.add('active');
   }
   applyFilters();
@@ -251,8 +267,8 @@ function applyFilters() {
   const cards = document.querySelectorAll('.project-card');
   let visible = 0;
   cards.forEach(card => {
-    const cardSkills = JSON.parse(card.dataset.stack);
-    const show = activeFilters.size === 0 || cardSkills.some(s => activeFilters.has(s));
+    const cats = JSON.parse(card.dataset.categories);
+    const show = activeFilters.size === 0 || cats.some(c => activeFilters.has(c));
     card.classList.toggle('hidden-card', !show);
     if (show) visible++;
   });
@@ -261,54 +277,50 @@ function applyFilters() {
     activeFilters.size === 0 ? `${total} projects` : `${visible} of ${total}`;
 }
 
-// ─────────────────────────────────────────────
-//  RENDER HEADER
-// ─────────────────────────────────────────────
+// ── Render header ──
 function renderHeader(data) {
   const l = data.links || {};
   const linksHtml = [
-    l.email    ? `<a href="mailto:${l.email}" class="text-indigo-600 dark:text-indigo-400 hover:underline underline-offset-2 font-medium">Email</a>` : '',
-    l.github   ? `<a href="${l.github}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline underline-offset-2 font-medium">GitHub</a>` : '',
-    l.linkedin ? `<a href="${l.linkedin}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline underline-offset-2 font-medium">LinkedIn</a>` : '',
-    l.website  ? `<a href="${l.website}" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline underline-offset-2 font-medium">${l.websiteLabel || l.website} ↗</a>` : '',
+    l.email    ? `<a href="mailto:${l.email}" class="link-btn">Email</a>` : '',
+    l.github   ? `<a href="${l.github}" target="_blank" class="link-btn">GitHub ↗</a>` : '',
+    l.linkedin ? `<a href="${l.linkedin}" target="_blank" class="link-btn">LinkedIn ↗</a>` : '',
+    l.website  ? `<a href="${l.website}" target="_blank" class="link-btn link-btn-primary">${l.websiteLabel || l.website} ↗</a>` : '',
   ].filter(Boolean).join('');
 
   document.getElementById('site-header').innerHTML = `
-    <div class="flex items-start gap-5">
-      <div class="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white font-semibold text-xl flex-shrink-0 shadow-md">
-        ${data.initials || ''}
+    <div class="hero-card">
+      <div class="flex items-start gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-lg">
+          ${data.initials || ''}
+        </div>
+        <div class="flex-1 min-w-0">
+          <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">${data.name}</h1>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${data.tagline || ''}</p>
+          <div class="flex flex-wrap gap-2 mt-4">${linksHtml}</div>
+        </div>
       </div>
-      <div>
-        <h1 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">${data.name}</h1>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">${data.tagline || ''}</p>
-        <div class="flex flex-wrap gap-3 mt-3 text-xs">${linksHtml}</div>
-      </div>
+      <p class="mt-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400 border-t border-indigo-100 dark:border-slate-700 pt-5">
+        ${data.bio || ''}
+      </p>
     </div>
-    <p class="mt-6 text-sm leading-relaxed text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-5 py-4">
-      ${data.bio || ''}
-    </p>
   `;
 }
 
-// ─────────────────────────────────────────────
-//  RENDER SKILLS
-// ─────────────────────────────────────────────
+// ── Render skills ──
 function renderSkills(skills) {
   const container = document.getElementById('skillsContainer');
   skills.forEach(skill => {
     const span = document.createElement('span');
-    span.className = 'tag bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700';
+    span.className = 'tag bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700';
     span.textContent = skill;
     container.appendChild(span);
   });
 }
 
-// ─────────────────────────────────────────────
-//  RENDER FILTER BUTTONS
-// ─────────────────────────────────────────────
+// ── Render filter buttons (by category) ──
 function renderFilters(projects) {
   const container = document.getElementById('filterContainer');
-  const allTags = [...new Set(projects.flatMap(p => p.stack))].sort();
+  const allCategories = [...new Set(projects.flatMap(p => p.categories || []))].sort();
 
   const allBtn = document.createElement('button');
   allBtn.textContent = 'All';
@@ -316,64 +328,27 @@ function renderFilters(projects) {
   allBtn.onclick = () => clearFilters(allBtn);
   container.appendChild(allBtn);
 
-  allTags.forEach(tag => {
+  allCategories.forEach(cat => {
     const btn = document.createElement('button');
-    btn.textContent = tag;
+    btn.textContent = cat;
     btn.className = 'filter-btn';
     btn.onclick = () => {
       allBtn.classList.remove('active');
-      toggleFilter(tag, btn);
+      toggleFilter(cat, btn);
       if (activeFilters.size === 0) allBtn.classList.add('active');
     };
     container.appendChild(btn);
   });
 }
 
-// ─────────────────────────────────────────────
-//  BUILD MEDIA HTML
-// ─────────────────────────────────────────────
-function buildMediaHtml(p) {
-  if (!p.image && !p.video) return '';
-
-  let inner = '';
-
-  if (p.image) {
-    inner += `<img src="${p.image}" alt="${p.name} screenshot" loading="lazy" />`;
-  }
-
-  if (p.video) {
-    if (p.video.startsWith('http')) {
-      inner += `
-        <div class="embed-wrap">
-          <iframe src="${p.video}" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        </div>`;
-    } else {
-      inner += `
-        <video controls preload="metadata">
-          <source src="${p.video}" type="video/mp4" />
-        </video>`;
-    }
-  }
-
-  return `<div class="project-media">${inner}</div>`;
-}
-
-// ─────────────────────────────────────────────
-//  RENDER PROJECTS
-// ─────────────────────────────────────────────
+// ── Render projects ──
 function renderProjects(projects) {
   const container = document.getElementById('projectsContainer');
-  const seen = new Set();
-  const unique = projects.filter(p => {
-    if (seen.has(p.name)) return false;
-    seen.add(p.name);
-    return true;
-  });
 
-  unique.forEach(p => {
+  projects.forEach(p => {
     const card = document.createElement('div');
     card.className = 'project-card';
-    card.dataset.stack = JSON.stringify(p.stack);
+    card.dataset.categories = JSON.stringify(p.categories || []);
 
     const nameHtml = p.url
       ? `<a href="${p.url}" target="_blank" class="font-semibold text-slate-900 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${p.name} ↗</a>`
@@ -381,41 +356,28 @@ function renderProjects(projects) {
 
     const badgeClass = statusStyles[p.statusType] || statusStyles.academic;
 
-    const stackHtml = p.stack.map(t =>
+    const stackHtml = (p.stack || []).map(t =>
       `<span class="tag bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">${t}</span>`
     ).join('');
-
-    const perRows = ['Problem', 'Evidence', 'Result'].map(label => {
-      const key = label.toLowerCase();
-      const color = perColors[label];
-      return `
-        <div class="flex gap-3 text-sm leading-relaxed">
-          <span class="per-label ${color} flex-shrink-0 mt-0.5">${label}</span>
-          <span class="text-slate-600 dark:text-slate-400">${p[key]}</span>
-        </div>`;
-    }).join('');
 
     card.innerHTML = `
       <div class="flex items-start justify-between gap-3 mb-3">
         <div class="text-base">${nameHtml}</div>
         <span class="tag ${badgeClass} flex-shrink-0 text-xs">${p.status}</span>
       </div>
-      <div class="flex flex-wrap gap-1.5 mb-4">${stackHtml}</div>
-      <div class="space-y-2.5">${perRows}</div>
-      ${buildMediaHtml(p)}
+      <div class="flex flex-wrap gap-1.5 mb-3">${stackHtml}</div>
+      <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${p.description || ''}</p>
     `;
     container.appendChild(card);
   });
 
-  document.getElementById('projectCount').textContent = `${unique.length} projects`;
+  document.getElementById('projectCount').textContent = `${projects.length} projects`;
 }
 
-// ─────────────────────────────────────────────
-//  RENDER EDUCATION
-// ─────────────────────────────────────────────
+// ── Render education ──
 function renderEducation(education) {
   document.getElementById('educationContainer').innerHTML = education.map(e => `
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-5 py-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-5 py-4 mb-3 last:mb-0">
       <div class="flex justify-between items-baseline flex-wrap gap-1">
         <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">${e.school}</span>
         <span class="text-xs text-slate-400 dark:text-slate-500">${e.year}</span>
@@ -425,17 +387,13 @@ function renderEducation(education) {
   `).join('');
 }
 
-// ─────────────────────────────────────────────
-//  RENDER FOOTER
-// ─────────────────────────────────────────────
+// ── Render footer ──
 function renderFooter(data) {
   document.getElementById('footerLeft').textContent = `${data.location} · ${data.availability}`;
   document.getElementById('footerRight').textContent = `${data.name} · ${data.year}`;
 }
 
-// ─────────────────────────────────────────────
-//  THEME
-// ─────────────────────────────────────────────
+// ── Theme ──
 function toggleTheme() {
   const html = document.documentElement;
   const isDark = html.classList.contains('dark');
@@ -454,9 +412,7 @@ function toggleTheme() {
   document.getElementById('iconMoon').classList.toggle('hidden', useDark);
 })();
 
-// ─────────────────────────────────────────────
-//  LOAD CONTENT AND RENDER
-// ─────────────────────────────────────────────
+// ── Load and render ──
 fetch('content.json')
   .then(r => r.json())
   .then(data => {
