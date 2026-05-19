@@ -11,11 +11,7 @@
   <script>
     tailwind.config = {
       darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-        }
-      }
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
     }
   </script>
   <style>
@@ -25,7 +21,6 @@
     .link-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
       padding: 8px 18px;
       border-radius: 9999px;
       font-size: 0.85rem;
@@ -120,6 +115,7 @@
       border-radius: 14px;
       padding: 22px;
       background: #fff;
+      cursor: pointer;
       transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
     .project-card:hover {
@@ -136,6 +132,15 @@
       border-color: #3730a3;
     }
     .project-card.hidden-card { display: none; }
+    .card-hint {
+      font-size: 0.7rem;
+      color: #a5b4fc;
+      font-weight: 600;
+      margin-top: 14px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .project-card:hover .card-hint { opacity: 1; }
 
     /* ── Skill / stack tags ── */
     .tag {
@@ -168,7 +173,7 @@
     }
     .dark .section-label { color: #64748b; }
 
-    /* ── Hero gradient card ── */
+    /* ── Hero card ── */
     .hero-card {
       background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 60%, #fdf4ff 100%);
       border: 1px solid #e0e7ff;
@@ -179,6 +184,24 @@
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
       border-color: #312e81;
     }
+
+    /* ── Modal ── */
+    .modal-backdrop {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .modal-backdrop.open { opacity: 1; }
+    .modal-panel {
+      transform: translateY(20px) scale(0.97);
+      opacity: 0;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    }
+    .modal-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 transition-colors duration-200">
@@ -188,7 +211,7 @@
 
 <!-- ── Theme toggle ── -->
 <button id="themeToggle" onclick="toggleTheme()"
-  class="fixed top-5 right-5 z-50 p-2.5 rounded-full bg-white dark:bg-slate-800 shadow border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all"
+  class="fixed top-5 right-5 z-40 p-2.5 rounded-full bg-white dark:bg-slate-800 shadow border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all"
   aria-label="Toggle theme">
   <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
@@ -231,6 +254,16 @@
     <span id="footerRight"></span>
   </footer>
 
+</div>
+
+<!-- ── PROJECT DETAIL MODAL ── -->
+<div id="projectModal"
+  class="modal-backdrop fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4"
+  style="display:none"
+  onclick="if(event.target===this)closeModal()">
+  <div class="modal-panel bg-white dark:bg-slate-900 rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-lg max-h-[90vh] overflow-y-auto">
+    <div id="modalContent" class="p-7"></div>
+  </div>
 </div>
 
 <script>
@@ -277,6 +310,83 @@ function applyFilters() {
     activeFilters.size === 0 ? `${total} projects` : `${visible} of ${total}`;
 }
 
+// ── Modal ──
+function openModal(project) {
+  const modal = document.getElementById('projectModal');
+  const content = document.getElementById('modalContent');
+
+  const badgeClass = statusStyles[project.statusType] || statusStyles.academic;
+
+  const stackHtml = (project.stack || []).map(t =>
+    `<span class="tag bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">${t}</span>`
+  ).join('');
+
+  const perHtml = [project.problem, project.evidence, project.result]
+    .filter(Boolean)
+    .map(t => `<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${t}</p>`)
+    .join('');
+
+  const highlightsHtml = project.highlights && project.highlights.length
+    ? `<div class="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800">
+        <div class="section-label mb-3">Highlights</div>
+        <ul class="space-y-2">
+          ${project.highlights.map(h => `
+            <li class="flex gap-2.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <span class="text-indigo-400 flex-shrink-0 mt-0.5">▸</span>
+              <span>${h}</span>
+            </li>`).join('')}
+        </ul>
+      </div>`
+    : '';
+
+  const linkHtml = project.url
+    ? `<div class="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800">
+        <a href="${project.url}" target="_blank" class="link-btn link-btn-primary">View Project ↗</a>
+      </div>`
+    : '';
+
+  content.innerHTML = `
+    <div class="flex items-start justify-between gap-3 mb-4">
+      <div>
+        <h2 class="text-xl font-bold text-slate-900 dark:text-slate-50 leading-snug">${project.name}</h2>
+        <span class="tag ${badgeClass} text-xs mt-2 inline-block">${project.status}</span>
+      </div>
+      <button onclick="closeModal()"
+        class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors flex-shrink-0 mt-0.5 text-2xl leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+        ×
+      </button>
+    </div>
+    <div class="flex flex-wrap gap-1.5 mb-4">${stackHtml}</div>
+    <div class="space-y-2.5">${perHtml}</div>
+    ${highlightsHtml}
+    ${linkHtml}
+  `;
+
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => {
+    modal.classList.add('open');
+    modal.querySelector('.modal-panel').classList.add('open');
+  });
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('projectModal');
+  modal.classList.remove('open');
+  modal.querySelector('.modal-panel').classList.remove('open');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 220);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('projectModal');
+    if (modal.style.display !== 'none') closeModal();
+  }
+});
+
 // ── Render header ──
 function renderHeader(data) {
   const l = data.links || {};
@@ -317,7 +427,7 @@ function renderSkills(skills) {
   });
 }
 
-// ── Render filter buttons (by category) ──
+// ── Render filter buttons ──
 function renderFilters(projects) {
   const container = document.getElementById('filterContainer');
   const allCategories = [...new Set(projects.flatMap(p => p.categories || []))].sort();
@@ -371,7 +481,13 @@ function renderProjects(projects) {
           `<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${t}</p>`
         ).join('')}
       </div>
+      <div class="card-hint">View details →</div>
     `;
+
+    // Open modal on card click; don't intercept clicks on the project link
+    card.addEventListener('click', () => openModal(p));
+    card.querySelectorAll('a').forEach(a => a.addEventListener('click', e => e.stopPropagation()));
+
     container.appendChild(card);
   });
 
