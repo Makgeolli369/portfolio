@@ -203,14 +203,16 @@
       "statusType": "academic",
       "stack": ["Cisco Packet Tracer", "Network Security"],
       "categories": ["Cybersecurity"],
-      "problem": "Designing secure networks requires hands-on configuration experience beyond what theory alone provides.",
-      "evidence": "Simulated a full internet architecture in Cisco Packet Tracer including IP, DHCP, NAT, routing tables, DNS and HTTP servers, VPN tunnels with encrypted comms validation, IoT and API server behavior, RIP/RIPng packet tracing, and an SDN dashboard.",
-      "result": "Demonstrated end-to-end secure network design from Layer 2 to application layer with IPv4/IPv6 dual-stack and IoT integration across a simulated enterprise topology.",
+      "problem": "Understanding secure network architecture requires hands-on configuration experience across all layers that theory alone cannot provide.",
+      "evidence": "Simulated and analyzed a full internet architecture in Cisco Packet Tracer, reconfiguring IP addressing, DHCP, NAT, and routing tables with custom IPv4/IPv6 subnets verified through pings and traceroutes. Set up DNS and HTTP servers for custom domain entries and validated application-layer services from client browsers. Established VPN tunnels between networks with encrypted communication validation, edited IoT and API server behavior, and traced RIP, RIPng, and IoT packets while monitoring the SDN dashboard for host and router provisioning.",
+      "result": "Demonstrated end-to-end network design and analysis from Layer 2 to the application layer, covering IPv4/IPv6 dual-stack, VPN security, IoT integration, and SDN monitoring across a simulated enterprise topology.",
       "highlights": [
-        "Configured IP, DHCP, NAT, routing tables, DNS, and HTTP servers from scratch",
-        "Established VPN tunnels and verified encrypted packet flow end-to-end",
-        "Traced RIP, RIPng, and IoT protocol packets across the simulated topology",
-        "IPv4/IPv6 dual-stack with IoT device integration and SDN dashboard monitoring"
+        "Reconfigured IP addressing, DHCP, NAT, and routing tables with custom IPv4/IPv6 subnets, verified through pings and traceroutes",
+        "Set up DNS and HTTP servers for custom domain entries and validated application-layer services from client browsers",
+        "Established VPN tunnels between networks and validated end-to-end encrypted communication",
+        "Edited IoT and API server behavior within the simulation environment",
+        "Traced RIP, RIPng, and IoT packets using Cisco Packet Tracer simulation mode",
+        "Monitored SDN dashboard for host and router provisioning across the topology"
       ]
     },
     {
@@ -235,16 +237,16 @@
       "url": "",
       "status": "Product project",
       "statusType": "academic",
-      "stack": ["User Research", "Product Management"],
+      "stack": ["User Research", "Product Discovery", "Feature Prioritization", "Product Roadmapping"],
       "categories": ["Product"],
-      "problem": "Existing smart litter box products had persistent usability and maintenance pain points that competitors hadn't adequately addressed.",
-      "evidence": "Led end-to-end product discovery including user research, competitive analysis, problem statement and persona definition, feature prioritization, low-fidelity prototyping for cleaning and odor control workflows, and a phased product roadmap with documented tradeoffs.",
-      "result": "Delivered a prioritized feature set and prototype targeting core user pain points with a roadmap outlining phased improvements grounded in research.",
+      "problem": "Existing smart litter box products had persistent usability and maintenance pain points that user research confirmed competitors had not adequately addressed.",
+      "evidence": "Led end-to-end product development by identifying pain points through user research and competitive analysis, defining problem statements and user personas, and translating insights into prioritized requirements aligned with user values and feasibility. Created low-fidelity prototypes targeting cleaning workflows, odor control, and user interactions, and built a phased product roadmap with documented tradeoffs.",
+      "result": "Delivered a prioritized feature set and prototype grounded in user research, with a phased roadmap outlining planned improvements and their tradeoffs.",
       "highlights": [
-        "User research identifying top pain points: cleaning frequency, odor control, and maintenance alerts",
-        "Competitive analysis across existing smart litter box products with feature gap analysis",
-        "Low-fidelity prototypes for cleaning workflow and odor control interaction patterns",
-        "Phased product roadmap with tradeoffs documented per feature tier"
+        "Identified usability and maintenance pain points through user research and competitive analysis of existing products",
+        "Defined problem statements and user personas by translating research insights into requirements aligned with user values and feasibility",
+        "Created low-fidelity prototypes for cleaning workflows, odor control, and user interaction patterns",
+        "Documented feature tradeoffs and outlined a phased product roadmap for future improvements"
       ]
     }
   ]
