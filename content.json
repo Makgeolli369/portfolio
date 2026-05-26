@@ -41,15 +41,15 @@
       "stack": ["FastAPI", "Next.js", "Supabase", "Groq", "Stripe"],
       "categories": ["Full Stack", "AI / LLM"],
       "problem": "Job seekers practice behavioral interviews without structured feedback and generic advice doesn't help them improve at the STAR level.",
-      "evidence": "Built a full-stack SaaS with a FastAPI backend, Next.js frontend, Supabase auth and PostgreSQL, Google OAuth, mic or text input, and LLaMA 3.3 70B via Groq for per-section STAR scoring and answer rewrites. Implemented three-tier usage limits, Stripe live subscriptions, and a Pro session history dashboard.",
+      "evidence": "Built a full-stack SaaS with a FastAPI backend, Next.js frontend, Supabase auth and PostgreSQL, Google OAuth, mic or text input, and LLaMA 3.3 70B via Groq for per-section STAR scoring and answer rewrites. Implemented tiered usage limits, Stripe live subscriptions, and a Pro session history dashboard.",
       "result": "Live at reviewstar.cv on AWS EC2 with paying Free and Pro ($9/mo) subscribers.",
       "highlights": [
-        "Scores each STAR section individually on a 1-10 scale with overall feedback and an answer rewrite in a single Groq API call",
-        "Dual rate-limiting: IP-based (20/day) for anonymous users and Supabase-persisted monthly counts for logged-in tiers",
-        "Streak bonus system: daily login credits, ad-watch credits, and 7/14/30-day milestones unlock 5/8/15 bonus credits",
-        "Practice Session mode queues 5 questions scored independently with a Pro session history dashboard and SVG trend charts",
-        "Next.js 16 static export served directly by FastAPI/uvicorn on AWS EC2 Ubuntu with systemd service management",
-        "Live Stripe recurring billing at $9/mo with webhook-driven plan upgrades reflected in Supabase profiles table"
+        "Scores each STAR section individually with per-section feedback and a full answer rewrite in a single Groq API call",
+        "Tiered rate-limiting: IP-based for anonymous users and Supabase-persisted monthly counts for logged-in tiers",
+        "Streak bonus system: daily login credits, ad-watch credits, and milestone streaks unlock bonus analyses",
+        "Practice Session mode queues multiple questions scored independently with a Pro session history dashboard and trend charts",
+        "Next.js static export served directly by FastAPI/uvicorn on AWS EC2 Ubuntu with systemd service management",
+        "Live Stripe recurring billing at $9/mo with webhook-driven plan upgrades reflected in Supabase profiles"
       ]
     },
     {
@@ -63,12 +63,12 @@
       "evidence": "Automated joiner, mover, and leaver workflows with Terraform-provisioned infra, MFA enforcement via policy condition, least-privilege role assignment, CloudTrail audit logging, IAM Access Analyzer integration, dry-run mode, and full pytest coverage. Users are never deleted; a deprovisioned tag preserves the audit trail for AC-2 compliance.",
       "result": "Production-ready pipeline satisfying NIST 800-53 and CMMC Level 2 controls with a full per-change audit trail.",
       "highlights": [
-        "Three lifecycle phases: 7-step provisioning (joiner), group update (mover), and 7-step removal with key revocation (leaver)",
+        "Three lifecycle phases: provisioning (joiner), group update (mover), and full access removal with key revocation (leaver)",
         "MFA-first enforcement: users cannot perform any AWS action until aws:MultiFactorAuthPresent is true at provisioning",
-        "Immutable audit trail: users are never deleted; every action logged to local JSONL, S3 (versioned + encrypted), and CloudTrail",
+        "Immutable audit trail: users are never deleted; every action logged to local JSONL, versioned S3, and CloudTrail",
         "Department-scoped least-privilege groups: engineers, finance, HR, security, and contractors each get distinct IAM policies",
-        "Access Analyzer flags dormant accounts (90+ day inactivity) and overly permissive policies on every review run",
-        "Dry-run flag logs all planned actions without AWS API calls; CI runs full pipeline in dry-run on every push"
+        "Access Analyzer flags dormant and overly permissive accounts on every review run",
+        "Dry-run flag logs all planned actions without AWS API calls; CI validates full pipeline without live credentials"
       ]
     },
     {
@@ -79,14 +79,14 @@
       "stack": ["Python", "Snowflake", "dbt", "Terraform", "AWS"],
       "categories": ["Data Engineering", "Cloud / DevOps"],
       "problem": "No model existed to correlate AI-exposure risk with financial vulnerability across occupations, making it difficult to assess credit risk in AI-disrupted labor markets.",
-      "evidence": "Built an end-to-end pipeline ingesting from BLS OEWS, Anthropic Economic Index, O*NET, and Census ACS PUMS into Snowflake via Terraform-provisioned AWS S3. Implemented 43 dbt tests across staging, intermediate, and mart layers with a composite score of 0.40 x AI exposure + 0.60 x financial vulnerability.",
-      "result": "MART_CREDIT_RISK_BY_OCCUPATION ranks every occupation by composite risk score. Top finding: Medical Transcriptionists at 0.847.",
+      "evidence": "Built an end-to-end pipeline ingesting from BLS OEWS, Anthropic Economic Index, O*NET, and Census ACS PUMS into Snowflake via Terraform-provisioned AWS S3. Implemented comprehensive dbt tests across staging, intermediate, and mart layers with a composite score weighting AI exposure against financial vulnerability.",
+      "result": "MART_CREDIT_RISK_BY_OCCUPATION ranks every occupation by composite risk score, with Medical Transcriptionists surfacing as the highest-risk occupation.",
       "highlights": [
-        "Six-source ETL: BLS OEWS (414K rows), Anthropic Economic Index (756 occupations), O*NET (30K rows), Census ACS PUMS (797K person records)",
-        "Composite score: 40% AI automation exposure + 60% financial vulnerability (unemployment, poverty, income instability, work instability)",
-        "Financial vulnerability aggregated from ACS microdata with 25% weight each for 4 economic stress indicators",
-        "43 dbt tests across staging, intermediate, and mart layers covering nulls, uniqueness, range checks (0-1), and accepted values",
-        "15 real-world integration bugs resolved: Anthropic dataset restructure, Census URL migration, BLS 403 errors, Snowflake COPY INTO idempotency, O*NET column renames",
+        "Multi-source ETL ingesting from BLS OEWS, Anthropic Economic Index, O*NET, and Census ACS PUMS into Snowflake",
+        "Composite score weighting AI automation exposure against financial vulnerability indicators including unemployment, poverty, and income instability",
+        "Financial vulnerability aggregated from Census ACS microdata across multiple economic stress indicators per occupation",
+        "Comprehensive dbt test suite across staging, intermediate, and mart layers covering nulls, uniqueness, range checks, and accepted values",
+        "Resolved multiple real-world integration bugs including Anthropic dataset restructures, Census URL migrations, and Snowflake COPY INTO idempotency",
         "Terraform IaC: S3 bucket, IAM role with Snowflake trust policy via external ID, SNS alerting"
       ]
     },
@@ -101,12 +101,12 @@
       "evidence": "Built an end-to-end ETL with paginated REST API ingestion, pandas transforms with NAICS classification and deduplication, PostgreSQL load via SQLAlchemy 2.0, and an interactive Streamlit dashboard with KPI cards, choropleth map, and sidebar filters. Extended to Azure Blob Storage and Azure SQL.",
       "result": "Fully functional analytics platform over federal contract data usable for vendor research and competitive landscape analysis.",
       "highlights": [
-        "Paginated ingestion from USASpending.gov /v2/search/spending_by_award/ with ~1 req/sec rate limiting",
-        "6 validation checks: deduplication, negative-amount filtering, date parsing, null tracking, and an 80% pass-rate threshold warning",
-        "Pipeline audit table tracks records_in, records_out, pass_rate_pct, and status per run",
-        "7 dashboard visualizations: KPI cards, monthly volume, NAICS sector spending, top-15 recipients, award tier donut, choropleth map, raw records table",
-        "Sidebar filters for sub-agency, NAICS sector, and award tier applied across all charts with a 5-minute cache TTL",
-        "Architecture maps directly to Azure DP-900 scope: Blob Storage, Data Factory, and Azure SQL"
+        "Paginated ingestion from USASpending.gov with multiple validation checks and a configurable pass-rate threshold",
+        "Pipeline audit table tracks records in, records out, pass rate, and status per run",
+        "Dashboard includes KPI cards, monthly volume chart, NAICS sector spending, top recipients, award tier breakdown, and a choropleth map",
+        "Sidebar filters for sub-agency, NAICS sector, and award tier applied dynamically across all visualizations",
+        "Dry-run mode extracts and transforms without writing to the database",
+        "Architecture maps to Azure DP-900 scope: Blob Storage, Data Factory, and Azure SQL"
       ]
     },
     {
@@ -120,11 +120,11 @@
       "evidence": "Built a Playwright scraper targeting Greenhouse, Lever, Workday, and USAJobs with SQLite deduplication, Claude API relevance scoring against a resume and profile summary, and a Gmail HTML email digest all running on a daily cron schedule.",
       "result": "Runs every morning and surfaces only relevant opportunities above the score threshold, removing the manual search loop entirely.",
       "highlights": [
-        "Scrapes 7+ career pages (Greenhouse, Lever, Workday) plus USAJobs API with URL-based SQLite deduplication before scoring",
-        "Title keyword pre-filtering before any AI calls: blocks senior/staff/principal/director/VP roles and requires data/analytics/engineering terms",
-        "Claude API scores each listing 1-10 against your resume; configurable MIN_RELEVANCE_SCORE threshold (default 6)",
-        "Flexible LLM backend: toggle between Claude API and local Ollama (gemma4:26b) with identical scoring interface",
-        "HTML email digest sent via Gmail App Password over SMTP TLS 587 on a daily cron at 8am",
+        "Scrapes multiple career pages including Greenhouse, Lever, and Workday boards plus USAJobs API with URL-based deduplication",
+        "Title keyword pre-filtering before AI calls blocks senior and director-level roles and requires relevant domain terms",
+        "Claude API scores each listing against your resume and profile summary with a configurable relevance threshold",
+        "Flexible LLM backend: toggle between Claude API and local Ollama with an identical scoring interface",
+        "HTML email digest sent via Gmail App Password over SMTP on a daily cron schedule",
         "Dry-run mode scrapes and scores without saving to SQLite or sending email"
       ]
     },
@@ -136,15 +136,15 @@
       "stack": ["FastAPI", "Python", "SQLite", "YouTube API"],
       "categories": ["Full Stack", "Automation"],
       "problem": "YouTube comment sections for crypto content are flooded with scam promotions with no easy way to monitor which coins are being targeted in real time.",
-      "evidence": "Built a FastAPI backend with APScheduler polling the YouTube Comments API every 7 minutes, a pattern-matching detector extracting coin mentions, SQLite storage, live price lookup, and a plain-JS dashboard with per-coin filtering.",
+      "evidence": "Built a FastAPI backend with APScheduler polling the YouTube Comments API on a recurring schedule, a pattern-matching detector extracting coin mentions, SQLite storage, live price lookup, and a plain-JS dashboard with per-coin filtering.",
       "result": "Running monitoring service tracking crypto spam patterns across YouTube with a live dashboard showing comment content, timestamps, and coin-level breakdown.",
       "highlights": [
-        "40-pattern spam signature library detecting 18 cryptocurrencies and 17 scam phrases (double your money, Telegram, trading signals, guaranteed profit, 100x returns, etc.)",
-        "APScheduler polls YouTube Comments API every 7 minutes with ~1 req/sec polite rate limiting",
-        "Three analytics endpoints: /api/comments (filtered spam), /api/stats (coin counts + live prices), /api/timeline/{symbol} (hourly spam vs price)",
-        "CoinGecko price integration enables correlation analysis between spam volume and price pump events",
-        "Dual-table SQLite schema: spam_comments + price_snapshots, both indexed on captured_at for efficient hourly aggregation",
-        "Windows desktop notifications via winotify on new spam detections"
+        "Signature-based spam detection library covering major cryptocurrencies and common scam phrases including trading signals, guaranteed returns, and recovery schemes",
+        "APScheduler polls YouTube Comments API on a recurring interval with polite rate limiting",
+        "Analytics endpoints for filtered spam comments, coin-level counts with live prices, and hourly spam volume per coin",
+        "CoinGecko price integration enables correlation analysis between spam volume and price movements",
+        "Dual-table SQLite schema with indexes on timestamp for efficient hourly aggregation",
+        "Windows desktop notifications on new spam detections"
       ]
     },
     {
@@ -155,11 +155,11 @@
       "stack": ["MySQL", "SQL"],
       "categories": ["Data Engineering"],
       "problem": "Global video game sales data from CSV exports had no structure for meaningful querying or trend analysis.",
-      "evidence": "Designed a normalized MySQL relational database with 6 tables covering games, platforms, publishers, regions, year, and sales; cleaned ~2,000 raw entries; and wrote SQL queries with joins, aggregations, and subqueries to surface trends by platform, region, and genre.",
+      "evidence": "Designed a normalized MySQL relational database with tables covering games, platforms, publishers, regions, year, and sales; cleaned raw entries; and wrote SQL queries with joins, aggregations, and subqueries to surface trends by platform, region, and genre.",
       "result": "Identified high-performing titles and emerging market trends and demonstrated the full data modeling lifecycle from raw CSV to analytical query.",
       "highlights": [
-        "Normalized 6-table MySQL schema: Games, Platforms, Publishers, Regions, Year, Sales",
-        "Cleaned ~2,000 raw CSV records with deduplication, null handling, and type normalization",
+        "Normalized relational schema across games, platforms, publishers, regions, year, and sales tables",
+        "Cleaned raw CSV records with deduplication, null handling, and type normalization",
         "Analytical queries surface genre trends, regional market share, and platform performance using joins, aggregations, and subqueries"
       ]
     },
@@ -188,10 +188,10 @@
       "stack": ["MITRE ATT&CK", "CVE Analysis", "NIST 800-53"],
       "categories": ["Cybersecurity"],
       "problem": "Security teams need concise, actionable threat intelligence as raw CVE advisories are too dense to act on quickly.",
-      "evidence": "Authored 10+ threat briefs analyzing real-world CVE incidents, mapped adversary TTPs to the MITRE ATT&CK framework, and outlined mitigations aligned with NIST and federal guidance for each incident.",
+      "evidence": "Authored a series of threat briefs analyzing real-world CVE incidents, mapped adversary TTPs to the MITRE ATT&CK framework, and outlined mitigations aligned with NIST and federal guidance for each incident.",
       "result": "Produced structured, decision-ready intelligence reports covering the full incident-to-mitigation chain across a range of CVEs and threat actors.",
       "highlights": [
-        "10+ reports spanning CVEs across multiple threat actor categories",
+        "Reports span CVEs across multiple threat actor categories and attack surfaces",
         "Each brief follows: incident summary, TTP mapping to MITRE ATT&CK technique IDs, NIST 800-53 mitigation chain",
         "Mitigations cross-referenced with NIST 800-53 controls and federal guidance for each incident"
       ]
