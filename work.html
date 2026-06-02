@@ -11,7 +11,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #374151; line-height: 1.6; font-size: 15px; }
     a { color: inherit; text-decoration: none; }
-    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
 
     nav { padding: 20px 0; border-bottom: 1px solid #F3F4F6; display: flex; align-items: center; justify-content: space-between; }
     .nav-name { font-size: 0.9rem; font-weight: 600; color: #111827; transition: color 0.15s; }
@@ -35,14 +35,20 @@
     .filter-btn:hover { border-color: #9CA3AF; color: #374151; }
     .filter-btn.active { background: #111827; color: #fff; border-color: #111827; }
 
-    .project-entry { padding: 32px 0; border-bottom: 1px solid #F3F4F6; }
+    .project-entry { padding: 36px 0; border-bottom: 1px solid #F3F4F6; }
     .project-entry:first-child { border-top: 1px solid #F3F4F6; }
     .project-entry.hidden { display: none; }
 
+    /* Side-by-side layout when preview image present */
+    .project-entry.has-preview { display: flex; gap: 40px; align-items: flex-start; }
+    .entry-image { flex: 0 0 320px; }
+    .entry-image img { width: 100%; border-radius: 8px; border: 1px solid #F3F4F6; display: block; }
+    .entry-body { flex: 1; min-width: 0; }
+
     .entry-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
     .entry-name { font-size: 1.0625rem; font-weight: 600; color: #111827; }
-    .entry-desc { font-size: 0.9rem; color: #4B5563; line-height: 1.7; margin-bottom: 14px; }
-    .entry-preview { width: 100%; border-radius: 8px; border: 1px solid #F3F4F6; display: block; max-height: 260px; object-fit: cover; margin-bottom: 14px; }
+    .entry-desc { font-size: 0.9rem; color: #4B5563; line-height: 1.7; margin-bottom: 10px; }
+    .entry-result { font-size: 0.875rem; color: #6B7280; line-height: 1.65; margin-bottom: 16px; }
     .learn-more { font-size: 0.875rem; font-weight: 500; color: #4F46E5; transition: color 0.15s; }
     .learn-more:hover { color: #3730A3; }
 
@@ -148,20 +154,35 @@ fetch('content.json')
       const brief = p.problem || '';
 
       const entry = document.createElement('div');
-      entry.className = 'project-entry';
       entry.dataset.categories = JSON.stringify(p.categories || []);
-      const previewHtml = p.preview
-        ? `<img src="${p.preview}" class="entry-preview" alt="${p.name}" loading="lazy" />`
-        : '';
-      entry.innerHTML = `
-        <div class="entry-header">
-          <span class="entry-name">${p.name}</span>
-          <span class="tag ${tc}">${p.status}</span>
-        </div>
-        <p class="entry-desc">${brief}</p>
-        ${previewHtml}
-        <a href="project.html?p=${slug}" class="learn-more">Learn More &rarr;</a>
-      `;
+
+      if (p.preview) {
+        entry.className = 'project-entry has-preview';
+        entry.innerHTML = `
+          <div class="entry-image">
+            <img src="${p.preview}" alt="${p.name}" loading="lazy" />
+          </div>
+          <div class="entry-body">
+            <div class="entry-header">
+              <span class="entry-name">${p.name}</span>
+              <span class="tag ${tc}">${p.status}</span>
+            </div>
+            <p class="entry-desc">${brief}</p>
+            ${p.result ? `<p class="entry-result">${p.result}</p>` : ''}
+            <a href="project.html?p=${slug}" class="learn-more">Learn More &rarr;</a>
+          </div>
+        `;
+      } else {
+        entry.className = 'project-entry';
+        entry.innerHTML = `
+          <div class="entry-header">
+            <span class="entry-name">${p.name}</span>
+            <span class="tag ${tc}">${p.status}</span>
+          </div>
+          <p class="entry-desc">${brief}</p>
+          <a href="project.html?p=${slug}" class="learn-more">Learn More &rarr;</a>
+        `;
+      }
       list.appendChild(entry);
     });
 

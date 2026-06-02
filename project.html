@@ -11,7 +11,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #374151; line-height: 1.6; font-size: 15px; }
     a { color: inherit; text-decoration: none; }
-    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
 
     nav { padding: 20px 0; border-bottom: 1px solid #F3F4F6; display: flex; align-items: center; justify-content: space-between; }
     .nav-name { font-size: 0.9rem; font-weight: 600; color: #111827; transition: color 0.15s; }
@@ -41,11 +41,9 @@
 
     .detail-para { font-size: 0.9375rem; color: #4B5563; line-height: 1.75; margin-bottom: 18px; }
 
-    /* ── Image grid ── */
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 28px 0; }
+    /* ── Image grid (under highlights) ── */
+    .image-grid { display: grid; gap: 16px; margin-top: 28px; }
     .image-grid img { width: 100%; border-radius: 8px; border: 1px solid #F3F4F6; display: block; }
-    .image-grid.single { grid-template-columns: 1fr; }
-    .image-grid.single img { max-height: 480px; object-fit: cover; }
 
     /* ── Highlights ── */
     .highlights-section { margin-top: 28px; padding-top: 28px; border-top: 1px solid #F3F4F6; }
@@ -126,12 +124,12 @@ fetch('content.json')
       .map(t => `<p class="detail-para">${t}</p>`)
       .join('');
 
-    // Images
+    // Images (rendered after highlights)
     const imgs = project.images || [];
     let imageHtml = '';
     if (imgs.length > 0) {
-      const gridClass = imgs.length === 1 ? 'image-grid single' : 'image-grid';
-      imageHtml = `<div class="${gridClass}">
+      const cols = Math.min(imgs.length, 3);
+      imageHtml = `<div class="image-grid" style="grid-template-columns: repeat(${cols}, 1fr);">
         ${imgs.map(src => `<img src="${src}" alt="${project.name}" loading="lazy" />`).join('')}
       </div>`;
     }
@@ -159,8 +157,8 @@ fetch('content.json')
       </div>
       <div style="margin-bottom:24px;">${stackHtml}</div>
       ${paragraphs}
-      ${imageHtml}
       ${highlightsHtml}
+      ${imageHtml}
       ${linkHtml}
     `;
   });
