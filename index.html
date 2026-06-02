@@ -1,587 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Michael Lee | Portfolio</title>
+  <title>Michael Lee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
-    }
-  </script>
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #374151; line-height: 1.6; font-size: 15px; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
 
-    /* ── Link buttons ── */
-    .link-btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 18px;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 2px solid #c7d2fe;
-      color: #4f46e5;
-      background: #eef2ff;
-      transition: all 0.15s ease;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .link-btn:hover {
-      background: #e0e7ff;
-      border-color: #a5b4fc;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(99,102,241,0.15);
-    }
-    .link-btn-primary {
-      background: #6366f1;
-      color: #fff;
-      border-color: #6366f1;
-    }
-    .link-btn-primary:hover {
-      background: #4f46e5;
-      border-color: #4f46e5;
-      box-shadow: 0 4px 12px rgba(99,102,241,0.3);
-    }
-    .dark .link-btn {
-      background: #1e1b4b;
-      color: #a5b4fc;
-      border-color: #3730a3;
-    }
-    .dark .link-btn:hover {
-      background: #2e1b6b;
-      border-color: #6366f1;
-    }
-    .dark .link-btn-primary {
-      background: #818cf8;
-      color: #0f172a;
-      border-color: #818cf8;
-    }
-    .dark .link-btn-primary:hover {
-      background: #a5b4fc;
-      border-color: #a5b4fc;
-    }
+    nav { padding: 20px 0; border-bottom: 1px solid #F3F4F6; display: flex; align-items: center; justify-content: space-between; }
+    .nav-name { font-size: 0.9rem; font-weight: 600; color: #111827; }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-link { font-size: 0.825rem; color: #6B7280; transition: color 0.15s; }
+    .nav-link:hover { color: #111827; }
+    .nav-link-accent { font-size: 0.825rem; font-weight: 500; color: #4F46E5; transition: color 0.15s; }
+    .nav-link-accent:hover { color: #3730A3; }
 
-    /* ── Filter buttons ── */
-    .filter-btn {
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 5px 14px;
-      border-radius: 9999px;
-      border: 1.5px solid transparent;
-    }
-    .filter-btn:not(.active) {
-      background: #f8fafc;
-      color: #64748b;
-      border-color: #e2e8f0;
-    }
-    .filter-btn:not(.active):hover {
-      background: #eef2ff;
-      color: #4f46e5;
-      border-color: #c7d2fe;
-    }
-    .filter-btn.active {
-      background: #6366f1;
-      color: #fff;
-      border-color: #6366f1;
-      box-shadow: 0 2px 8px rgba(99,102,241,0.25);
-    }
-    .dark .filter-btn:not(.active) {
-      background: #1e293b;
-      color: #94a3b8;
-      border-color: #334155;
-    }
-    .dark .filter-btn:not(.active):hover {
-      background: #1e1b4b;
-      color: #a5b4fc;
-      border-color: #4338ca;
-    }
-    .dark .filter-btn.active {
-      background: #818cf8;
-      color: #0f172a;
-      border-color: #818cf8;
-    }
+    main { padding: 56px 0 48px; }
+    section { margin-bottom: 48px; }
 
-    /* ── Project cards ── */
-    .project-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 22px;
-      background: #fff;
-      cursor: pointer;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-    .project-card:hover {
-      box-shadow: 0 8px 30px rgba(99,102,241,0.10);
-      border-color: #c7d2fe;
-      transform: translateY(-2px);
-    }
-    .dark .project-card {
-      border-color: #1e293b;
-      background: #0f172a;
-    }
-    .dark .project-card:hover {
-      box-shadow: 0 8px 30px rgba(129,140,248,0.12);
-      border-color: #3730a3;
-    }
-    .project-card.hidden-card { display: none; }
-    .card-hint {
-      font-size: 0.7rem;
-      color: #a5b4fc;
-      font-weight: 600;
-      margin-top: 14px;
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-    .project-card:hover .card-hint { opacity: 1; }
+    .section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 18px; }
 
-    /* ── Skill / stack tags ── */
-    .tag {
-      display: inline-block;
-      font-size: 0.68rem;
-      padding: 3px 9px;
-      border-radius: 9999px;
-      font-weight: 500;
-    }
+    .hero-name { font-size: 2.25rem; font-weight: 700; color: #111827; line-height: 1.15; margin-bottom: 8px; }
+    .hero-tagline { font-size: 0.875rem; color: #9CA3AF; margin-bottom: 20px; }
+    .hero-bio { font-size: 0.9375rem; color: #4B5563; line-height: 1.75; margin-bottom: 32px; }
 
-    /* ── Section label ── */
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #94a3b8;
+    .cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; padding: 10px 22px; border-radius: 6px;
+      background: #111827; color: #fff; font-size: 0.875rem; font-weight: 500;
+      transition: background 0.15s;
     }
-    .section-label::before {
-      content: '';
-      display: inline-block;
-      width: 3px;
-      height: 14px;
-      border-radius: 2px;
-      background: linear-gradient(to bottom, #6366f1, #a855f7);
-      flex-shrink: 0;
+    .btn-primary:hover { background: #1F2937; }
+    .btn-secondary {
+      display: inline-block; padding: 10px 22px; border-radius: 6px;
+      background: #fff; color: #374151; font-size: 0.875rem; font-weight: 500;
+      border: 1px solid #E5E7EB; transition: border-color 0.15s, color 0.15s;
     }
-    .dark .section-label { color: #64748b; }
+    .btn-secondary:hover { border-color: #9CA3AF; color: #111827; }
 
-    /* ── Hero card ── */
-    .hero-card {
-      background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 60%, #fdf4ff 100%);
-      border: 1px solid #e0e7ff;
-      border-radius: 20px;
-      padding: 2rem;
-    }
-    .dark .hero-card {
-      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-      border-color: #312e81;
-    }
+    .edu-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid #F9FAFB; gap: 12px; }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-school { font-size: 0.875rem; font-weight: 500; color: #1F2937; }
+    .edu-degree { font-size: 0.8rem; color: #6B7280; margin-left: 10px; }
+    .edu-year { font-size: 0.8rem; color: #9CA3AF; flex-shrink: 0; }
 
-    /* ── Card media ── */
-    .project-media {
-      border-radius: 8px;
-      overflow: hidden;
-      margin-top: 14px;
-      border: 1px solid #e2e8f0;
-    }
-    .dark .project-media { border-color: #1e293b; }
-    .project-media img { width: 100%; display: block; }
-    .project-media video { width: 100%; display: block; }
-    .project-media .embed-wrap {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-    }
-    .project-media .embed-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
+    .skill-tag { display: inline-block; font-size: 0.75rem; padding: 4px 11px; border-radius: 9999px; background: #F9FAFB; color: #4B5563; border: 1px solid #E5E7EB; margin: 3px 3px 3px 0; }
 
-    /* ── Modal ── */
-    .modal-backdrop {
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .modal-backdrop.open { opacity: 1; }
-    .modal-panel {
-      transform: translateY(20px) scale(0.97);
-      opacity: 0;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
-    }
-    .modal-panel.open {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
+    footer { padding: 24px 0; border-top: 1px solid #F3F4F6; font-size: 0.75rem; color: #9CA3AF; display: flex; justify-content: space-between; }
   </style>
 </head>
-<body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 transition-colors duration-200">
+<body>
+<div class="container">
 
-<!-- ── Top accent bar ── -->
-<div class="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-violet-500"></div>
+  <nav>
+    <span class="nav-name">Michael Lee</span>
+    <div class="nav-links" id="nav-links"></div>
+  </nav>
 
-<!-- ── Theme toggle ── -->
-<button id="themeToggle" onclick="toggleTheme()"
-  class="fixed top-5 right-5 z-40 p-2.5 rounded-full bg-white dark:bg-slate-800 shadow border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all"
-  aria-label="Toggle theme">
-  <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/>
-  </svg>
-  <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-  </svg>
-</button>
+  <main>
+    <section>
+      <div class="hero-name" id="hero-name"></div>
+      <div class="hero-tagline" id="hero-tagline"></div>
+      <p class="hero-bio" id="hero-bio"></p>
+      <div class="cta-group">
+        <a href="work.html" class="btn-primary">See All Work &rarr;</a>
+        <a href="cv.pdf" download class="btn-secondary">Download CV</a>
+      </div>
+    </section>
 
-<div class="max-w-2xl mx-auto px-6 py-12">
+    <section>
+      <div class="section-label">Education</div>
+      <div id="education-list"></div>
+    </section>
 
-  <!-- ── HEADER ── -->
-  <header id="site-header" class="mb-12"></header>
+    <section>
+      <div class="section-label">Skills</div>
+      <div id="skills-list"></div>
+    </section>
+  </main>
 
-  <!-- ── EDUCATION ── -->
-  <section class="mb-12">
-    <div class="section-label mb-4">Education</div>
-    <div id="educationContainer"></div>
-  </section>
-
-  <!-- ── SKILLS ── -->
-  <section class="mb-12">
-    <div class="section-label mb-4">Core Skills</div>
-    <div class="flex flex-wrap gap-2" id="skillsContainer"></div>
-  </section>
-
-  <!-- ── PROJECTS ── -->
-  <section class="mb-12">
-    <div class="flex items-center justify-between mb-4">
-      <div class="section-label">Projects</div>
-      <span id="projectCount" class="text-xs text-slate-400 dark:text-slate-500 font-medium"></span>
-    </div>
-    <div class="flex flex-wrap gap-2 mb-6" id="filterContainer"></div>
-    <div class="flex flex-col gap-4" id="projectsContainer"></div>
-  </section>
-
-  <!-- ── FOOTER ── -->
-  <footer class="text-xs text-slate-400 dark:text-slate-600 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between">
-    <span id="footerLeft"></span>
-    <span id="footerRight"></span>
-  </footer>
-
-</div>
-
-<!-- ── PROJECT DETAIL MODAL ── -->
-<div id="projectModal"
-  class="modal-backdrop fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4"
-  style="display:none"
-  onclick="if(event.target===this)closeModal()">
-  <div class="modal-panel bg-white dark:bg-slate-900 rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-lg max-h-[90vh] overflow-y-auto">
-    <div id="modalContent" class="p-7"></div>
-  </div>
+  <footer id="footer"></footer>
 </div>
 
 <script>
-const statusStyles = {
-  live:       'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800',
-  active:     'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800',
-  production: 'bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800',
-  cyber:      'bg-violet-50 text-violet-700 border border-violet-200 dark:bg-violet-900/20 dark:text-violet-400 dark:border-violet-800',
-  academic:   'bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
-};
-
-// ── Filter state ──
-const activeFilters = new Set();
-
-function toggleFilter(cat, btn) {
-  if (activeFilters.has(cat)) {
-    activeFilters.delete(cat);
-    btn.classList.remove('active');
-  } else {
-    activeFilters.add(cat);
-    btn.classList.add('active');
-  }
-  applyFilters();
-}
-
-function clearFilters(allBtn) {
-  activeFilters.clear();
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  allBtn.classList.add('active');
-  applyFilters();
-}
-
-function applyFilters() {
-  const cards = document.querySelectorAll('.project-card');
-  let visible = 0;
-  cards.forEach(card => {
-    const cats = JSON.parse(card.dataset.categories);
-    const show = activeFilters.size === 0 || cats.some(c => activeFilters.has(c));
-    card.classList.toggle('hidden-card', !show);
-    if (show) visible++;
-  });
-  const total = document.querySelectorAll('.project-card').length;
-  document.getElementById('projectCount').textContent =
-    activeFilters.size === 0 ? `${total} projects` : `${visible} of ${total}`;
-}
-
-// ── Card media ──
-function buildMediaHtml(p) {
-  if (!p.image && !p.video) return '';
-  let inner = '';
-  if (p.image) {
-    inner += `<img src="${p.image}" alt="${p.name}" loading="lazy" />`;
-  }
-  if (p.video) {
-    if (p.video.startsWith('http')) {
-      inner += `<div class="embed-wrap"><iframe src="${p.video}" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
-    } else {
-      inner += `<video controls preload="metadata"><source src="${p.video}" type="video/mp4" /></video>`;
-    }
-  }
-  return `<div class="project-media">${inner}</div>`;
-}
-
-// ── Modal ──
-function openModal(project) {
-  const modal = document.getElementById('projectModal');
-  const content = document.getElementById('modalContent');
-
-  const badgeClass = statusStyles[project.statusType] || statusStyles.academic;
-
-  const stackHtml = (project.stack || []).map(t =>
-    `<span class="tag bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">${t}</span>`
-  ).join('');
-
-  const perHtml = [project.problem, project.evidence, project.result]
-    .filter(Boolean)
-    .map(t => `<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${t}</p>`)
-    .join('');
-
-  const highlightsHtml = project.highlights && project.highlights.length
-    ? `<div class="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800">
-        <div class="section-label mb-3">Highlights</div>
-        <ul class="space-y-2">
-          ${project.highlights.map(h => `
-            <li class="flex gap-2.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              <span class="text-indigo-400 flex-shrink-0 mt-0.5">▸</span>
-              <span>${h}</span>
-            </li>`).join('')}
-        </ul>
-      </div>`
-    : '';
-
-  const linkHtml = project.url
-    ? `<div class="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800">
-        <a href="${project.url}" target="_blank" class="link-btn link-btn-primary">View Project ↗</a>
-      </div>`
-    : '';
-
-  content.innerHTML = `
-    <div class="flex items-start justify-between gap-3 mb-4">
-      <div>
-        <h2 class="text-xl font-bold text-slate-900 dark:text-slate-50 leading-snug">${project.name}</h2>
-        <span class="tag ${badgeClass} text-xs mt-2 inline-block">${project.status}</span>
-      </div>
-      <button onclick="closeModal()"
-        class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors flex-shrink-0 mt-0.5 text-2xl leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
-        ×
-      </button>
-    </div>
-    <div class="flex flex-wrap gap-1.5 mb-4">${stackHtml}</div>
-    <div class="space-y-2.5">${perHtml}</div>
-    ${highlightsHtml}
-    ${linkHtml}
-  `;
-
-  modal.style.display = 'flex';
-  requestAnimationFrame(() => {
-    modal.classList.add('open');
-    modal.querySelector('.modal-panel').classList.add('open');
-  });
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  const modal = document.getElementById('projectModal');
-  modal.classList.remove('open');
-  modal.querySelector('.modal-panel').classList.remove('open');
-  setTimeout(() => {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }, 220);
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const modal = document.getElementById('projectModal');
-    if (modal.style.display !== 'none') closeModal();
-  }
-});
-
-// ── Render header ──
-function renderHeader(data) {
-  const l = data.links || {};
-  const linksHtml = [
-    l.email    ? `<a href="mailto:${l.email}" class="link-btn">Email</a>` : '',
-    l.github   ? `<a href="${l.github}" target="_blank" class="link-btn">GitHub ↗</a>` : '',
-    l.linkedin ? `<a href="${l.linkedin}" target="_blank" class="link-btn">LinkedIn ↗</a>` : '',
-    l.website  ? `<a href="${l.website}" target="_blank" class="link-btn link-btn-primary">${l.websiteLabel || l.website} ↗</a>` : '',
-  ].filter(Boolean).join('');
-
-  document.getElementById('site-header').innerHTML = `
-    <div class="hero-card">
-      <div class="flex items-start gap-5">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-lg">
-          ${data.initials || ''}
-        </div>
-        <div class="flex-1 min-w-0">
-          <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">${data.name}</h1>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${data.tagline || ''}</p>
-          <div class="flex flex-wrap gap-2 mt-4">${linksHtml}</div>
-        </div>
-      </div>
-      <p class="mt-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400 border-t border-indigo-100 dark:border-slate-700 pt-5">
-        ${data.bio || ''}
-      </p>
-    </div>
-  `;
-}
-
-// ── Render skills ──
-function renderSkills(skills) {
-  const container = document.getElementById('skillsContainer');
-  skills.forEach(skill => {
-    const span = document.createElement('span');
-    span.className = 'tag bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700';
-    span.textContent = skill;
-    container.appendChild(span);
-  });
-}
-
-// ── Render filter buttons ──
-function renderFilters(projects) {
-  const container = document.getElementById('filterContainer');
-  const allCategories = [...new Set(projects.flatMap(p => p.categories || []))].sort();
-
-  const allBtn = document.createElement('button');
-  allBtn.textContent = 'All';
-  allBtn.className = 'filter-btn active';
-  allBtn.onclick = () => clearFilters(allBtn);
-  container.appendChild(allBtn);
-
-  allCategories.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.textContent = cat;
-    btn.className = 'filter-btn';
-    btn.onclick = () => {
-      allBtn.classList.remove('active');
-      toggleFilter(cat, btn);
-      if (activeFilters.size === 0) allBtn.classList.add('active');
-    };
-    container.appendChild(btn);
-  });
-}
-
-// ── Render projects ──
-function renderProjects(projects) {
-  const container = document.getElementById('projectsContainer');
-
-  projects.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    card.dataset.categories = JSON.stringify(p.categories || []);
-
-    const nameHtml = p.url
-      ? `<a href="${p.url}" target="_blank" class="font-semibold text-slate-900 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${p.name} ↗</a>`
-      : `<span class="font-semibold text-slate-900 dark:text-slate-100">${p.name}</span>`;
-
-    const badgeClass = statusStyles[p.statusType] || statusStyles.academic;
-
-    const stackHtml = (p.stack || []).map(t =>
-      `<span class="tag bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">${t}</span>`
-    ).join('');
-
-    card.innerHTML = `
-      <div class="flex items-start justify-between gap-3 mb-3">
-        <div class="text-base">${nameHtml}</div>
-        <span class="tag ${badgeClass} flex-shrink-0 text-xs">${p.status}</span>
-      </div>
-      <div class="flex flex-wrap gap-1.5 mb-3">${stackHtml}</div>
-      <div class="space-y-2">
-        ${[p.problem, p.evidence, p.result].filter(Boolean).map(t =>
-          `<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${t}</p>`
-        ).join('')}
-      </div>
-      ${buildMediaHtml(p)}
-      <div class="card-hint">View details →</div>
-    `;
-
-    // Open modal on card click; don't intercept clicks on the project link
-    card.addEventListener('click', () => openModal(p));
-    card.querySelectorAll('a').forEach(a => a.addEventListener('click', e => e.stopPropagation()));
-
-    container.appendChild(card);
-  });
-
-  document.getElementById('projectCount').textContent = `${projects.length} projects`;
-}
-
-// ── Render education ──
-function renderEducation(education) {
-  document.getElementById('educationContainer').innerHTML = education.map(e => `
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-5 py-4 mb-3 last:mb-0">
-      <div class="flex justify-between items-baseline flex-wrap gap-1">
-        <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">${e.school}</span>
-        <span class="text-xs text-slate-400 dark:text-slate-500">${e.year}</span>
-      </div>
-      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${e.degree}</p>
-    </div>
-  `).join('');
-}
-
-// ── Render footer ──
-function renderFooter(data) {
-  document.getElementById('footerLeft').textContent = `${data.location} · ${data.availability}`;
-  document.getElementById('footerRight').textContent = `${data.name} · ${data.year}`;
-}
-
-// ── Theme ──
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.classList.contains('dark');
-  html.classList.toggle('dark', !isDark);
-  document.getElementById('iconSun').classList.toggle('hidden', isDark);
-  document.getElementById('iconMoon').classList.toggle('hidden', !isDark);
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-}
-
-(function() {
-  const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const useDark = saved ? saved === 'dark' : prefersDark;
-  document.documentElement.classList.toggle('dark', useDark);
-  document.getElementById('iconSun').classList.toggle('hidden', !useDark);
-  document.getElementById('iconMoon').classList.toggle('hidden', useDark);
-})();
-
-// ── Load and render ──
 fetch('content.json')
   .then(r => r.json())
   .then(data => {
-    renderHeader(data);
-    renderSkills(data.skills);
-    renderFilters(data.projects);
-    renderProjects(data.projects);
-    renderEducation(data.education);
-    renderFooter(data);
+    const l = data.links || {};
+    document.title = data.name;
+    document.getElementById('nav-links').innerHTML = [
+      l.email    ? `<a href="mailto:${l.email}" class="nav-link">Email</a>` : '',
+      l.github   ? `<a href="${l.github}" target="_blank" class="nav-link">GitHub</a>` : '',
+      l.linkedin ? `<a href="${l.linkedin}" target="_blank" class="nav-link">LinkedIn</a>` : '',
+      `<a href="work.html" class="nav-link">Work</a>`,
+      l.website  ? `<a href="${l.website}" target="_blank" class="nav-link-accent">${l.websiteLabel || l.website}</a>` : '',
+    ].filter(Boolean).join('');
+
+    document.getElementById('hero-name').textContent = data.name;
+    document.getElementById('hero-tagline').textContent = data.tagline || '';
+    document.getElementById('hero-bio').textContent = data.bio || '';
+
+    document.getElementById('education-list').innerHTML = (data.education || []).map(e => `
+      <div class="edu-row">
+        <div>
+          <span class="edu-school">${e.school}</span>
+          <span class="edu-degree">${e.degree}</span>
+        </div>
+        <span class="edu-year">${e.year}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('skills-list').innerHTML = (data.skills || []).map(s =>
+      `<span class="skill-tag">${s}</span>`
+    ).join('');
+
+    document.getElementById('footer').innerHTML = `
+      <span>${data.location} &middot; ${data.availability}</span>
+      <span>${data.name} &middot; ${data.year}</span>
+    `;
   });
 </script>
 </body>

@@ -2,7 +2,7 @@
   "name": "Michael Lee",
   "initials": "ML",
   "tagline": "M.S. Analytics · Georgia Tech  ·  B.S. Information Science · UMD",
-  "bio": "I build things end-to-end, from data pipelines to deployed SaaS products. I work best at the intersection of engineering, data, and business strategy. Background in USAF with a focus on data, federal, and defense roles.",
+  "bio": "Product manager and builder with experience in customer discovery, product strategy, and end-to-end product delivery. I use hypothesis-driven iteration and real user feedback to validate product decisions before scaling engineering investment. Background in USAF with experience spanning enterprise ERP delivery, data consulting, and SaaS product development.",
   "links": {
     "email": "leem72929@gmail.com",
     "github": "https://github.com/Makgeolli369",
@@ -26,11 +26,11 @@
     }
   ],
   "skills": [
-    "Python", "TypeScript", "SQL",
-    "React", "Next.js", "FastAPI",
-    "PostgreSQL", "Snowflake", "dbt",
-    "AWS", "Terraform", "Docker",
-    "Claude API", "Playwright", "Streamlit"
+    "Product Discovery", "User Research", "Roadmap Prioritization",
+    "MVP Scoping", "Acceptance Criteria", "Stakeholder Interviews",
+    "Python", "SQL", "FastAPI",
+    "Next.js", "PostgreSQL", "AWS",
+    "Claude API", "Data Analysis", "Tableau"
   ],
   "projects": [
     {
@@ -39,14 +39,14 @@
       "status": "Live · SaaS",
       "statusType": "live",
       "stack": ["FastAPI", "Next.js", "Supabase", "Groq", "Stripe"],
-      "categories": ["Full Stack", "AI / LLM"],
+      "categories": ["Full Stack", "AI / LLM", "Product"],
       "problem": "Job seekers practice behavioral interviews without structured feedback and generic advice doesn't help them improve at the STAR level.",
-      "evidence": "Built a full-stack SaaS with a FastAPI backend, Next.js frontend, Supabase auth and PostgreSQL, Google OAuth, mic or text input, and LLaMA 3.3 70B via Groq for per-section STAR scoring and answer rewrites. Implemented tiered usage limits, Stripe live subscriptions, and a Pro session history dashboard.",
-      "result": "Live at reviewstar.cv on AWS EC2 with paying Free and Pro ($9/mo) subscribers.",
+      "evidence": "Defined product vision and managed the full lifecycle from discovery through 7 iterative releases. Built a full-stack SaaS with a FastAPI backend, Next.js frontend, Supabase auth and PostgreSQL, Google OAuth, mic or text input, and LLaMA 3.3 70B via Groq for per-section STAR scoring and answer rewrites. Implemented tiered usage limits, Stripe live subscriptions, and a Pro session history dashboard.",
+      "result": "Live at reviewstar.cv. Shipped 7 product updates, drove 40% active user engagement with the streak system, and pivoted from an ad-supported model to subscription-first after analyzing user behavior and engagement data.",
       "highlights": [
         "Scores each STAR section individually with per-section feedback and a full answer rewrite in a single Groq API call",
         "Tiered rate-limiting: IP-based for anonymous users and Supabase-persisted monthly counts for logged-in tiers",
-        "Streak bonus system: daily login credits, ad-watch credits, and milestone streaks unlock bonus analyses",
+        "Streak bonus system with daily login credits and milestone tracking drives 40% active user engagement; feature roadmap built across 7 releases from direct user feedback",
         "Practice Session mode queues multiple questions scored independently with a Pro session history dashboard and trend charts",
         "Next.js static export served directly by FastAPI/uvicorn on AWS EC2 Ubuntu with systemd service management",
         "Live Stripe recurring billing at $9/mo with webhook-driven plan upgrades reflected in Supabase profiles"
@@ -169,14 +169,14 @@
       "status": "Consulting project",
       "statusType": "academic",
       "stack": ["Data Analysis", "Data Visualization"],
-      "categories": ["Data Engineering"],
-      "problem": "A nonprofit had inconsistent, uncleaned donor and pickup-request data with no framework for data-driven operational decisions.",
-      "evidence": "Cleaned and standardized multi-year donor and pickup datasets, built donor segmentation analysis, created user journey maps from stakeholder interviews, identified data governance and privacy gaps, and delivered dashboards and presentations to leadership.",
-      "result": "Translated findings into actionable service workflow improvements that directly supported strategic planning decisions.",
+      "categories": ["Data Engineering", "Product"],
+      "problem": "A nonprofit had inconsistent donor and transaction data with no framework for data-driven operational decisions and no visibility into workflow inefficiencies.",
+      "evidence": "Mapped donor management and transaction workflows end-to-end, created user journey maps from stakeholder interviews to identify pain points, built donor segmentation analysis across giving frequency, recency, and amount, and synthesized quantitative trends with qualitative findings into an executive briefing presented to client leadership.",
+      "result": "Delivered an executive briefing formally reviewed and accepted by client leadership, translating findings into prioritized workflow redesign recommendations for strategic planning and budget decisions.",
       "highlights": [
-        "Cleaned and standardized multi-year donor and pickup-request datasets",
+        "Mapped donor management and transaction workflows end-to-end to identify operational bottlenecks",
+        "User journey maps built from direct stakeholder interviews to surface pain points and drive workflow redesign decisions",
         "Donor segmentation analysis by giving frequency, recency, and amount",
-        "User journey maps built from direct stakeholder interviews",
         "Identified data governance and PII handling gaps in existing workflows"
       ]
     },
@@ -224,12 +224,12 @@
       "categories": ["AI / LLM"],
       "problem": "An in-progress university chatbot lacked alignment between stakeholder expectations, student needs, and actual response quality.",
       "evidence": "Joined mid-project and partnered with advisors, IT, and departmental stakeholders to define success criteria; analyzed the RAG-based LLM architecture to improve context structuring; and moderated quality using like/dislike feedback signals to refine response guidelines.",
-      "result": "Improved chatbot accuracy and relevance through structured feedback loops and better context management aligned with real student-facing use cases.",
+      "result": "Improved satisfaction from a 65/35 to 95/5 like-to-dislike ratio through iterative, feedback-driven response improvements over the engagement period.",
       "highlights": [
         "Joined mid-project on an active university RAG-based chatbot deployment",
         "Mapped requirements across advisors, IT, and departmental stakeholders",
         "Identified context structuring improvements in the RAG pipeline to improve response relevance",
-        "Implemented like/dislike feedback collection for iterative quality refinement"
+        "Drove satisfaction from a 65/35 to 95/5 like-to-dislike ratio through iterative feedback-driven response improvements"
       ]
     },
     {
