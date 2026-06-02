@@ -10,8 +10,9 @@
   <style>
     /* ── LAYOUT CONTROLS — edit these values to adjust sizing ── */
     :root {
-      --page-padding: 96px;   /* left/right margin (96px ≈ 1 inch) */
-      --image-gap: 24px;      /* project page: gap between stacked images */
+      --page-padding: 96px;        /* left/right margin (96px ≈ 1 inch) */
+      --image-gap: 24px;           /* project page: gap between stacked images */
+      --detail-image-width: 70%;   /* project page: image column width */
     }
     /* ─────────────────────────────────────────────────────────── */
 
@@ -49,7 +50,7 @@
     .detail-para { font-size: 0.9375rem; color: #4B5563; line-height: 1.75; margin-bottom: 18px; }
 
     /* ── Image grid (under highlights, stacked single column) ── */
-    .image-grid { display: grid; grid-template-columns: 1fr; gap: var(--image-gap); margin-top: 28px; }
+    .image-grid { display: grid; grid-template-columns: 1fr; gap: var(--image-gap); margin-top: 28px; max-width: var(--detail-image-width); }
     .image-grid img { width: 100%; border-radius: 8px; border: 1px solid #F3F4F6; display: block; }
 
     /* ── Highlights ── */
