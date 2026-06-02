@@ -40,6 +40,8 @@
       "statusType": "live",
       "stack": ["FastAPI", "Next.js", "Supabase", "Groq", "Stripe"],
       "categories": ["Full Stack", "AI / LLM", "Product"],
+      "preview": "ReviewStar/ReviewStar1.png",
+      "images": ["ReviewStar/ReviewStar2.png", "ReviewStar/ReviewStar3.png", "ReviewStar/ReviewStar4.png"],
       "problem": "Job seekers practice behavioral interviews without structured feedback and generic advice doesn't help them improve at the STAR level.",
       "evidence": "Defined product vision and managed the full lifecycle from discovery through 7 iterative releases. Built a full-stack SaaS with a FastAPI backend, Next.js frontend, Supabase auth and PostgreSQL, Google OAuth, mic or text input, and LLaMA 3.3 70B via Groq for per-section STAR scoring and answer rewrites. Implemented tiered usage limits, Stripe live subscriptions, and a Pro session history dashboard.",
       "result": "Live at reviewstar.cv. Shipped 7 product updates, drove 40% active user engagement with the streak system, and pivoted from an ad-supported model to subscription-first after analyzing user behavior and engagement data.",

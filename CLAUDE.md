@@ -50,20 +50,23 @@ Remote: `https://github.com/Makgeolli369/portfolio.git`
   "evidence": "string — what was built and how",
   "result": "string — outcome or current state",
   "highlights": ["array", "of", "specific", "technical", "bullet", "points"],
-  "images": ["optional — relative paths to screenshot files, e.g. images/reviewstar/dashboard.png"]
+  "preview": "optional — path to the listing card thumbnail (ProjectName/ProjectName1.png)",
+  "images": ["optional — paths to detail page images (ProjectName2.png onward)"]
 }
 ```
 
 ### Adding images to a project
 
-1. Create a folder under `images/` named after the project, e.g. `images/reviewstar/`.
-2. Drop screenshot files there (PNG or JPG).
-3. Add an `"images"` array to the project entry in `content.json`:
+1. Create a folder at the portfolio root named after the project, e.g. `ReviewStar/`.
+2. Name files `ProjectName1.png`, `ProjectName2.png`, etc.
+3. Add to the project entry in `content.json`:
    ```json
-   "images": ["images/reviewstar/dashboard.png", "images/reviewstar/scoring.png"]
+   "preview": "ReviewStar/ReviewStar1.png",
+   "images": ["ReviewStar/ReviewStar2.png", "ReviewStar/ReviewStar3.png"]
    ```
-4. `project.html` renders a single image full-width, or a responsive grid for two or more.
-5. If `images` is absent or empty, no image section appears.
+4. `preview` shows as a thumbnail on the work.html listing card, before "Learn More".
+5. `images` renders as a grid on the project.html detail page, below all description paragraphs.
+6. Either field is optional — omit if not needed.
 
 ### Allowed categories (used for filter buttons — do not invent new ones)
 - `"Full Stack"`
