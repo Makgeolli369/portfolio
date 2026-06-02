@@ -8,10 +8,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* ── LAYOUT CONTROLS — edit these values to adjust sizing ── */
+    :root {
+      --page-padding: 96px;        /* left/right margin (96px ≈ 1 inch) */
+      --entry-image-width: 42%;    /* work page: preview image width (% of entry) */
+    }
+    /* ─────────────────────────────────────────────────────────── */
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #374151; line-height: 1.6; font-size: 15px; }
     a { color: inherit; text-decoration: none; }
-    .container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+    .container { max-width: 1800px; margin: 0 auto; padding: 0 var(--page-padding); }
 
     nav { padding: 20px 0; border-bottom: 1px solid #F3F4F6; display: flex; align-items: center; justify-content: space-between; }
     .nav-name { font-size: 0.9rem; font-weight: 600; color: #111827; transition: color 0.15s; }
@@ -41,7 +48,7 @@
 
     /* Side-by-side layout when preview image present */
     .project-entry.has-preview { display: flex; gap: 40px; align-items: flex-start; }
-    .entry-image { flex: 0 0 320px; }
+    .entry-image { flex: 0 0 var(--entry-image-width); }
     .entry-image img { width: 100%; border-radius: 8px; border: 1px solid #F3F4F6; display: block; }
     .entry-body { flex: 1; min-width: 0; }
 
