@@ -1,7 +1,7 @@
 {
   "name": "Michael Lee",
   "initials": "ML",
-  "tagline": "M.S. Analytics · Georgia Tech  ·  B.S. Information Science · UMD",
+  "tagline": "M.S. Analytics \u00c2\u00b7 Georgia Tech  \u00c2\u00b7  B.S. Information Science \u00c2\u00b7 UMD",
   "bio": "Product manager and builder with experience in customer discovery, product strategy, and end-to-end product delivery. I use hypothesis-driven iteration and real user feedback to validate product decisions before scaling engineering investment. Background in USAF with experience spanning enterprise ERP delivery, data consulting, and SaaS product development.",
   "links": {
     "email": "leem72929@gmail.com",
@@ -26,22 +26,46 @@
     }
   ],
   "skills": [
-    "Product Discovery", "User Research", "Roadmap Prioritization",
-    "MVP Scoping", "Acceptance Criteria", "Stakeholder Interviews",
-    "Python", "SQL", "FastAPI",
-    "Next.js", "PostgreSQL", "AWS",
-    "Claude API", "Data Analysis", "Tableau"
+    "Product Discovery",
+    "User Research",
+    "Roadmap Prioritization",
+    "MVP Scoping",
+    "Acceptance Criteria",
+    "Stakeholder Interviews",
+    "Python",
+    "SQL",
+    "FastAPI",
+    "Next.js",
+    "PostgreSQL",
+    "AWS",
+    "Claude API",
+    "Data Analysis",
+    "Tableau"
   ],
   "projects": [
     {
       "name": "ReviewStar",
       "url": "https://reviewstar.cv",
-      "status": "Live · SaaS",
+      "status": "Live \u00c2\u00b7 SaaS",
       "statusType": "live",
-      "stack": ["FastAPI", "Next.js", "Supabase", "Groq", "Stripe"],
-      "categories": ["Full Stack", "AI / LLM", "Product"],
+      "stack": [
+        "FastAPI",
+        "Next.js",
+        "Supabase",
+        "Groq",
+        "Stripe"
+      ],
+      "categories": [
+        "Full Stack",
+        "AI / LLM",
+        "Product"
+      ],
       "preview": "ReviewStar/ReviewStar1.png",
-      "images": ["ReviewStar/ReviewStar2.png", "ReviewStar/ReviewStar3.png", "ReviewStar/ReviewStar4.png"],
+      "images": [
+        "ReviewStar/ReviewStar2.png",
+        "ReviewStar/ReviewStar3.png",
+        "ReviewStar/ReviewStar4.png"
+      ],
       "problem": "Job seekers practice behavioral interviews without structured feedback and generic advice doesn't help them improve at the STAR level.",
       "evidence": "Defined product vision and managed the full lifecycle from discovery through 7 iterative releases. Built a full-stack SaaS with a FastAPI backend, Next.js frontend, Supabase auth and PostgreSQL, Google OAuth, mic or text input, and LLaMA 3.3 70B via Groq for per-section STAR scoring and answer rewrites. Implemented tiered usage limits, Stripe live subscriptions, and a Pro session history dashboard.",
       "result": "Live at reviewstar.cv. Shipped 7 product updates, drove 40% active user engagement with the streak system, and pivoted from an ad-supported model to subscription-first after analyzing user behavior and engagement data.",
@@ -55,31 +79,21 @@
       ]
     },
     {
-      "name": "AWS IAM Lifecycle Pipeline",
-      "url": "https://github.com/Makgeolli369/aws-iam-lifecycle-pipeline",
-      "status": "Production-ready",
-      "statusType": "production",
-      "stack": ["Python", "AWS", "Terraform", "GitHub Actions"],
-      "categories": ["Cloud / DevOps", "Cybersecurity"],
-      "problem": "Manual IAM management in enterprise environments creates compliance gaps as stale accounts linger after offboarding and privilege creep goes undetected.",
-      "evidence": "Automated joiner, mover, and leaver workflows with Terraform-provisioned infra, MFA enforcement via policy condition, least-privilege role assignment, CloudTrail audit logging, IAM Access Analyzer integration, dry-run mode, and full pytest coverage. Users are never deleted; a deprovisioned tag preserves the audit trail for AC-2 compliance.",
-      "result": "Production-ready pipeline satisfying NIST 800-53 and CMMC Level 2 controls with a full per-change audit trail.",
-      "highlights": [
-        "Three lifecycle phases: provisioning (joiner), group update (mover), and full access removal with key revocation (leaver)",
-        "MFA-first enforcement: users cannot perform any AWS action until aws:MultiFactorAuthPresent is true at provisioning",
-        "Immutable audit trail: users are never deleted; every action logged to local JSONL, versioned S3, and CloudTrail",
-        "Department-scoped least-privilege groups: engineers, finance, HR, security, and contractors each get distinct IAM policies",
-        "Access Analyzer flags dormant and overly permissive accounts on every review run",
-        "Dry-run flag logs all planned actions without AWS API calls; CI validates full pipeline without live credentials"
-      ]
-    },
-    {
       "name": "AI Labor Market Risk Pipeline",
       "url": "https://github.com/Makgeolli369/ai-labor-pipeline",
       "status": "Production",
       "statusType": "production",
-      "stack": ["Python", "Snowflake", "dbt", "Terraform", "AWS"],
-      "categories": ["Data Engineering", "Cloud / DevOps"],
+      "stack": [
+        "Python",
+        "Snowflake",
+        "dbt",
+        "Terraform",
+        "AWS"
+      ],
+      "categories": [
+        "Data Engineering",
+        "Cloud / DevOps"
+      ],
       "problem": "No model existed to correlate AI-exposure risk with financial vulnerability across occupations, making it difficult to assess credit risk in AI-disrupted labor markets.",
       "evidence": "Built an end-to-end pipeline ingesting from BLS OEWS, Anthropic Economic Index, O*NET, and Census ACS PUMS into Snowflake via Terraform-provisioned AWS S3. Implemented comprehensive dbt tests across staging, intermediate, and mart layers with a composite score weighting AI exposure against financial vulnerability.",
       "result": "MART_CREDIT_RISK_BY_OCCUPATION ranks every occupation by composite risk score, with Medical Transcriptionists surfacing as the highest-risk occupation.",
@@ -97,8 +111,16 @@
       "url": "https://github.com/Makgeolli369/dod-sb-pipeline",
       "status": "Functional",
       "statusType": "production",
-      "stack": ["Python", "PostgreSQL", "Streamlit", "Azure", "SQLAlchemy"],
-      "categories": ["Data Engineering"],
+      "stack": [
+        "Python",
+        "PostgreSQL",
+        "Streamlit",
+        "Azure",
+        "SQLAlchemy"
+      ],
+      "categories": [
+        "Data Engineering"
+      ],
       "problem": "Federal contract data from USASpending.gov is large, paginated, and raw with no easy way to track DoD small business trends or benchmark vendors.",
       "evidence": "Built an end-to-end ETL with paginated REST API ingestion, pandas transforms with NAICS classification and deduplication, PostgreSQL load via SQLAlchemy 2.0, and an interactive Streamlit dashboard with KPI cards, choropleth map, and sidebar filters. Extended to Azure Blob Storage and Azure SQL.",
       "result": "Fully functional analytics platform over federal contract data usable for vendor research and competitive landscape analysis.",
@@ -112,50 +134,17 @@
       ]
     },
     {
-      "name": "Job Agent",
-      "url": "https://github.com/Makgeolli369/job-agent",
-      "status": "Running daily",
-      "statusType": "active",
-      "stack": ["Python", "Playwright", "Claude API", "SQLite"],
-      "categories": ["Automation", "AI / LLM"],
-      "problem": "Manually checking dozens of career pages and USAJobs daily is slow, inconsistent, and easy to miss.",
-      "evidence": "Built a Playwright scraper targeting Greenhouse, Lever, Workday, and USAJobs with SQLite deduplication, Claude API relevance scoring against a resume and profile summary, and a Gmail HTML email digest all running on a daily cron schedule.",
-      "result": "Runs every morning and surfaces only relevant opportunities above the score threshold, removing the manual search loop entirely.",
-      "highlights": [
-        "Scrapes multiple career pages including Greenhouse, Lever, and Workday boards plus USAJobs API with URL-based deduplication",
-        "Title keyword pre-filtering before AI calls blocks senior and director-level roles and requires relevant domain terms",
-        "Claude API scores each listing against your resume and profile summary with a configurable relevance threshold",
-        "Flexible LLM backend: toggle between Claude API and local Ollama with an identical scoring interface",
-        "HTML email digest sent via Gmail App Password over SMTP on a daily cron schedule",
-        "Dry-run mode scrapes and scores without saving to SQLite or sending email"
-      ]
-    },
-    {
-      "name": "Crypto Spam Tracker",
-      "url": "https://github.com/Makgeolli369/crypto-spam-tracker",
-      "status": "Active",
-      "statusType": "active",
-      "stack": ["FastAPI", "Python", "SQLite", "YouTube API"],
-      "categories": ["Full Stack", "Automation"],
-      "problem": "YouTube comment sections for crypto content are flooded with scam promotions with no easy way to monitor which coins are being targeted in real time.",
-      "evidence": "Built a FastAPI backend with APScheduler polling the YouTube Comments API on a recurring schedule, a pattern-matching detector extracting coin mentions, SQLite storage, live price lookup, and a plain-JS dashboard with per-coin filtering.",
-      "result": "Running monitoring service tracking crypto spam patterns across YouTube with a live dashboard showing comment content, timestamps, and coin-level breakdown.",
-      "highlights": [
-        "Signature-based spam detection library covering major cryptocurrencies and common scam phrases including trading signals, guaranteed returns, and recovery schemes",
-        "APScheduler polls YouTube Comments API on a recurring interval with polite rate limiting",
-        "Analytics endpoints for filtered spam comments, coin-level counts with live prices, and hourly spam volume per coin",
-        "CoinGecko price integration enables correlation analysis between spam volume and price movements",
-        "Dual-table SQLite schema with indexes on timestamp for efficient hourly aggregation",
-        "Windows desktop notifications on new spam detections"
-      ]
-    },
-    {
       "name": "Game Sales Data Analysis",
       "url": "https://github.com/Makgeolli369/game-sales-db",
       "status": "Academic project",
       "statusType": "academic",
-      "stack": ["MySQL", "SQL"],
-      "categories": ["Data Engineering"],
+      "stack": [
+        "MySQL",
+        "SQL"
+      ],
+      "categories": [
+        "Data Engineering"
+      ],
       "problem": "Global video game sales data from CSV exports had no structure for meaningful querying or trend analysis.",
       "evidence": "Designed a normalized MySQL relational database with tables covering games, platforms, publishers, regions, year, and sales; cleaned raw entries; and wrote SQL queries with joins, aggregations, and subqueries to surface trends by platform, region, and genre.",
       "result": "Identified high-performing titles and emerging market trends and demonstrated the full data modeling lifecycle from raw CSV to analytical query.",
@@ -170,8 +159,14 @@
       "url": "",
       "status": "Consulting project",
       "statusType": "academic",
-      "stack": ["Data Analysis", "Data Visualization"],
-      "categories": ["Data Engineering", "Product"],
+      "stack": [
+        "Data Analysis",
+        "Data Visualization"
+      ],
+      "categories": [
+        "Data Engineering",
+        "Product"
+      ],
       "problem": "A nonprofit had inconsistent donor and transaction data with no framework for data-driven operational decisions and no visibility into workflow inefficiencies.",
       "evidence": "Mapped donor management and transaction workflows end-to-end, created user journey maps from stakeholder interviews to identify pain points, built donor segmentation analysis across giving frequency, recency, and amount, and synthesized quantitative trends with qualitative findings into an executive briefing presented to client leadership.",
       "result": "Delivered an executive briefing formally reviewed and accepted by client leadership, translating findings into prioritized workflow redesign recommendations for strategic planning and budget decisions.",
@@ -187,8 +182,14 @@
       "url": "",
       "status": "10+ Reports",
       "statusType": "cyber",
-      "stack": ["MITRE ATT&CK", "CVE Analysis", "NIST 800-53"],
-      "categories": ["Cybersecurity"],
+      "stack": [
+        "MITRE ATT&CK",
+        "CVE Analysis",
+        "NIST 800-53"
+      ],
+      "categories": [
+        "Cybersecurity"
+      ],
       "problem": "Security teams need concise, actionable threat intelligence as raw CVE advisories are too dense to act on quickly.",
       "evidence": "Authored a series of threat briefs analyzing real-world CVE incidents, mapped adversary TTPs to the MITRE ATT&CK framework, and outlined mitigations aligned with NIST and federal guidance for each incident.",
       "result": "Produced structured, decision-ready intelligence reports covering the full incident-to-mitigation chain across a range of CVEs and threat actors.",
@@ -203,8 +204,13 @@
       "url": "",
       "status": "Lab project",
       "statusType": "academic",
-      "stack": ["Cisco Packet Tracer", "Network Security"],
-      "categories": ["Cybersecurity"],
+      "stack": [
+        "Cisco Packet Tracer",
+        "Network Security"
+      ],
+      "categories": [
+        "Cybersecurity"
+      ],
       "problem": "Understanding secure network architecture requires hands-on configuration experience across all layers that theory alone cannot provide.",
       "evidence": "Simulated and analyzed a full internet architecture in Cisco Packet Tracer, reconfiguring IP addressing, DHCP, NAT, and routing tables with custom IPv4/IPv6 subnets verified through pings and traceroutes. Set up DNS and HTTP servers for custom domain entries and validated application-layer services from client browsers. Established VPN tunnels between networks with encrypted communication validation, edited IoT and API server behavior, and traced RIP, RIPng, and IoT packets while monitoring the SDN dashboard for host and router provisioning.",
       "result": "Demonstrated end-to-end network design and analysis from Layer 2 to the application layer, covering IPv4/IPv6 dual-stack, VPN security, IoT integration, and SDN monitoring across a simulated enterprise topology.",
@@ -222,8 +228,13 @@
       "url": "",
       "status": "Collaborative project",
       "statusType": "academic",
-      "stack": ["RAG", "LLM"],
-      "categories": ["AI / LLM"],
+      "stack": [
+        "RAG",
+        "LLM"
+      ],
+      "categories": [
+        "AI / LLM"
+      ],
       "problem": "An in-progress university chatbot lacked alignment between stakeholder expectations, student needs, and actual response quality.",
       "evidence": "Joined mid-project and partnered with advisors, IT, and departmental stakeholders to define success criteria; analyzed the RAG-based LLM architecture to improve context structuring; and moderated quality using like/dislike feedback signals to refine response guidelines.",
       "result": "Improved satisfaction from a 65/35 to 95/5 like-to-dislike ratio through iterative, feedback-driven response improvements over the engagement period.",
@@ -239,8 +250,15 @@
       "url": "",
       "status": "Product project",
       "statusType": "academic",
-      "stack": ["User Research", "Product Discovery", "Feature Prioritization", "Product Roadmapping"],
-      "categories": ["Product"],
+      "stack": [
+        "User Research",
+        "Product Discovery",
+        "Feature Prioritization",
+        "Product Roadmapping"
+      ],
+      "categories": [
+        "Product"
+      ],
       "problem": "Existing smart litter box products had persistent usability and maintenance pain points that user research confirmed competitors had not adequately addressed.",
       "evidence": "Led end-to-end product development by identifying pain points through user research and competitive analysis, defining problem statements and user personas, and translating insights into prioritized requirements aligned with user values and feasibility. Created low-fidelity prototypes targeting cleaning workflows, odor control, and user interactions, and built a phased product roadmap with documented tradeoffs.",
       "result": "Delivered a prioritized feature set and prototype grounded in user research, with a phased roadmap outlining planned improvements and their tradeoffs.",
