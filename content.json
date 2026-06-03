@@ -145,13 +145,21 @@
       "categories": [
         "Data Engineering"
       ],
-      "problem": "Global video game sales data from CSV exports had no structure for meaningful querying or trend analysis.",
-      "evidence": "Designed a normalized MySQL relational database with tables covering games, platforms, publishers, regions, year, and sales; cleaned raw entries; and wrote SQL queries with joins, aggregations, and subqueries to surface trends by platform, region, and genre.",
-      "result": "Identified high-performing titles and emerging market trends and demonstrated the full data modeling lifecycle from raw CSV to analytical query.",
+      "problem": "Market intelligence for video game publishers, built from raw sales records. The starting point was a flat CSV with 1,900 game titles and no way to ask it a real business question. You could see what sold, but not where to compete, which genres were worth entering, or whether localizing for Japan would pay off.",
+      "evidence": "I started by figuring out what questions a publisher strategy team would actually need answered. From there I designed a normalized MySQL database across six relational tables and cleaned the raw records for missing values, duplicates, and inconsistent formatting. That structure made it possible to run queries across regions, genres, and publishers in ways the flat file never could.",
+      "result": "The bigger push was turning the analysis into actual decisions. I built a genre entry scorecard that scores every genre across five factors: per-title sales efficiency, market saturation, Western market accessibility, quality-to-sales correlation, and recent growth momentum. Each genre comes out with a GO, CONSIDER, or AVOID verdict. I also built a Japan localization model that looks at each genre revenue share relative to the market average and gives a straight YES or NO based on whether the numbers justify the cost. The final report wraps everything into four written recommendations that take a real position on where to compete, how to budget, and what the post-2012 sales decline actually means for a publisher.",
       "highlights": [
-        "Normalized relational schema across games, platforms, publishers, regions, year, and sales tables",
-        "Cleaned raw CSV records with deduplication, null handling, and type normalization",
-        "Analytical queries surface genre trends, regional market share, and platform performance using joins, aggregations, and subqueries"
+        "Normalized relational schema replacing a flat CSV with six queryable tables",
+        "Cleaned 1,900 records with null handling, deduplication, and type normalization",
+        "Genre entry scorecard scores all genres and outputs explicit GO / CONSIDER / AVOID verdicts",
+        "Japan localization model gives per-genre YES or NO decisions based on revenue index vs. cost threshold",
+        "Interactive HTML report with 9 sections moves from raw data to prescriptive strategy"
+      ],
+      "preview": "GameSales/GameSales1.png",
+      "images": [
+        "GameSales/GameSales2.png",
+        "GameSales/GameSales3.png",
+        "GameSales/GameSales4.png"
       ]
     },
     {
