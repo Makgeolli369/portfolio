@@ -202,10 +202,10 @@
       "evidence": "Joined mid-project and partnered with advisors, IT, and departmental stakeholders to define success criteria; analyzed the RAG-based LLM architecture to improve context structuring; and moderated quality using like/dislike feedback signals to refine response guidelines.",
       "result": "Improved satisfaction from a 65/35 to 95/5 like-to-dislike ratio through iterative, feedback-driven response improvements over the engagement period.",
       "highlights": [
-        "Joined mid-project on an active university RAG-based chatbot deployment",
-        "Mapped requirements across advisors, IT, and departmental stakeholders",
-        "Identified context structuring improvements in the RAG pipeline to improve response relevance",
-        "Drove satisfaction from a 65/35 to 95/5 like-to-dislike ratio through iterative feedback-driven response improvements"
+        "Brought in partway through the project to help improve a chatbot already being used by students",
+        "Talked to advisors, IT staff, and department contacts to understand what the chatbot needed to do better",
+        "Found that the chatbot was pulling in the wrong context to answer questions, and flagged fixes to improve accuracy",
+        "Student satisfaction went from 65% positive to 95% positive through repeated rounds of testing and adjustments"
       ]
     },
     {
