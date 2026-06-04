@@ -188,7 +188,7 @@
     },
     {
       "name": "USG iSchool Chatbot",
-      "url": "",
+      "url": "https://ai.chatbot.umd.edu/?botName=D_USG_INFO_PUBLIC#/",
       "status": "Collaborative project",
       "statusType": "academic",
       "stack": [
@@ -209,27 +209,28 @@
       ]
     },
     {
-      "name": "Smart Pet Litter Box Redesign",
+      "name": "Fur-ever Care",
       "url": "",
-      "status": "Product project",
+      "status": "Academic / Team Project",
       "statusType": "academic",
       "stack": [
         "User Research",
-        "Product Discovery",
-        "Feature Prioritization",
-        "Product Roadmapping"
+        "Prototyping",
+        "Affinity Mapping",
+        "Usability Testing"
       ],
       "categories": [
         "Product"
       ],
-      "problem": "Existing smart litter box products had persistent usability and maintenance pain points that user research confirmed competitors had not adequately addressed.",
-      "evidence": "Led end-to-end product development by identifying pain points through user research and competitive analysis, defining problem statements and user personas, and translating insights into prioritized requirements aligned with user values and feasibility. Created low-fidelity prototypes targeting cleaning workflows, odor control, and user interactions, and built a phased product roadmap with documented tradeoffs.",
-      "result": "Delivered a prioritized feature set and prototype grounded in user research, with a phased roadmap outlining planned improvements and their tradeoffs.",
+      "problem": "Pet owners reported significant cleaning fatigue from manual litter maintenance, but existing automated products were either unreliable or too expensive, leaving demand unmet for an affordable, low-maintenance option.",
+      "evidence": "Led user research and prototype testing for a five-person team designing an affordable, app-connected automated cat litter disposal box. Conducted interviews with 7 participants across two segments (college students and adult pet owners), then synthesized findings into an affinity diagram surfacing cleaning fatigue, smart tech skepticism, and care-versus-automation preferences as the three core design constraints. Developed three user personas grounded in research and co-designed a low-fidelity prototype featuring a weight-sensing disposal trigger, in-app manual override, monitoring camera, and passive cooling system. Ran structured usability walkthroughs using a five-scenario scoring instrument with think-aloud protocol.",
+      "result": "Testing confirmed the core disposal mechanism was intuitive across participants, while camera and tracking features surfaced as the primary usability gap requiring redesign. Findings validated the concept and produced a prioritized feature recommendation, identifying odor control as the highest-impact next addition based on testing gaps and qualitative user feedback.",
       "highlights": [
-        "Identified usability and maintenance pain points through user research and competitive analysis of existing products",
-        "Defined problem statements and user personas by translating research insights into requirements aligned with user values and feasibility",
-        "Created low-fidelity prototypes for cleaning workflows, odor control, and user interaction patterns",
-        "Documented feature tradeoffs and outlined a phased product roadmap for future improvements"
+        "Ran think-aloud usability sessions with 7 participants across two segments (college students and adult pet owners), scoring 5 product scenarios on an ease/difficulty/not-done scale",
+        "Synthesized interview data into an affinity diagram surfacing cleaning fatigue, smart tech skepticism, and care-vs-automation preferences as three interconnected design constraints",
+        "Defined three user personas (time-constrained executive, college student, overworked nurse) to align the team on target use cases before any prototyping began",
+        "Camera and tracking scored majority with-difficulty ratings across testers; core cleaning mechanism scored majority with-ease, validating the disposal concept while flagging camera UX for redesign",
+        "Recommended odor control as the highest-priority next feature based on testing gaps and qualitative feedback about smell as an unaddressed pain point not covered by the prototype"
       ]
     }
   ],
