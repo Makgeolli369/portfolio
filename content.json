@@ -1,7 +1,7 @@
 {
   "name": "Michael Lee",
   "initials": "ML",
-  "tagline": "M.S. Analytics \u00c2\u00b7 Georgia Tech  \u00c2\u00b7  B.S. Information Science \u00c2\u00b7 UMD",
+  "tagline": "M.S. Analytics / Georgia Tech  /  B.S. Information Science / UMD",
   "bio": "Product manager and builder with experience in customer discovery, product strategy, and end-to-end product delivery. I use hypothesis-driven iteration and real user feedback to validate product decisions before scaling engineering investment. Background in USAF with experience spanning enterprise ERP delivery, data consulting, and SaaS product development.",
   "links": {
     "email": "leem72929@gmail.com",
@@ -46,7 +46,7 @@
     {
       "name": "ReviewStar",
       "url": "https://reviewstar.cv",
-      "status": "Live \u00c2\u00b7 SaaS",
+      "status": "Live / SaaS",
       "statusType": "live",
       "stack": [
         "FastAPI",
@@ -104,7 +104,8 @@
         "Comprehensive dbt test suite across staging, intermediate, and mart layers covering nulls, uniqueness, range checks, and accepted values",
         "Resolved multiple real-world integration bugs including Anthropic dataset restructures, Census URL migrations, and Snowflake COPY INTO idempotency",
         "Terraform IaC: S3 bucket, IAM role with Snowflake trust policy via external ID, SNS alerting"
-      ]
+      ],
+      "preview": "AILaborrisk/AILaborrisk.png"
     },
     {
       "name": "DoD Small Business Contract Pipeline",
@@ -186,52 +187,6 @@
       ]
     },
     {
-      "name": "Threat Intelligence Briefs",
-      "url": "",
-      "status": "10+ Reports",
-      "statusType": "cyber",
-      "stack": [
-        "MITRE ATT&CK",
-        "CVE Analysis",
-        "NIST 800-53"
-      ],
-      "categories": [
-        "Cybersecurity"
-      ],
-      "problem": "Security teams need concise, actionable threat intelligence as raw CVE advisories are too dense to act on quickly.",
-      "evidence": "Authored a series of threat briefs analyzing real-world CVE incidents, mapped adversary TTPs to the MITRE ATT&CK framework, and outlined mitigations aligned with NIST and federal guidance for each incident.",
-      "result": "Produced structured, decision-ready intelligence reports covering the full incident-to-mitigation chain across a range of CVEs and threat actors.",
-      "highlights": [
-        "Reports span CVEs across multiple threat actor categories and attack surfaces",
-        "Each brief follows: incident summary, TTP mapping to MITRE ATT&CK technique IDs, NIST 800-53 mitigation chain",
-        "Mitigations cross-referenced with NIST 800-53 controls and federal guidance for each incident"
-      ]
-    },
-    {
-      "name": "Internet Systems Architecture & Simulation",
-      "url": "",
-      "status": "Lab project",
-      "statusType": "academic",
-      "stack": [
-        "Cisco Packet Tracer",
-        "Network Security"
-      ],
-      "categories": [
-        "Cybersecurity"
-      ],
-      "problem": "Understanding secure network architecture requires hands-on configuration experience across all layers that theory alone cannot provide.",
-      "evidence": "Simulated and analyzed a full internet architecture in Cisco Packet Tracer, reconfiguring IP addressing, DHCP, NAT, and routing tables with custom IPv4/IPv6 subnets verified through pings and traceroutes. Set up DNS and HTTP servers for custom domain entries and validated application-layer services from client browsers. Established VPN tunnels between networks with encrypted communication validation, edited IoT and API server behavior, and traced RIP, RIPng, and IoT packets while monitoring the SDN dashboard for host and router provisioning.",
-      "result": "Demonstrated end-to-end network design and analysis from Layer 2 to the application layer, covering IPv4/IPv6 dual-stack, VPN security, IoT integration, and SDN monitoring across a simulated enterprise topology.",
-      "highlights": [
-        "Reconfigured IP addressing, DHCP, NAT, and routing tables with custom IPv4/IPv6 subnets, verified through pings and traceroutes",
-        "Set up DNS and HTTP servers for custom domain entries and validated application-layer services from client browsers",
-        "Established VPN tunnels between networks and validated end-to-end encrypted communication",
-        "Edited IoT and API server behavior within the simulation environment",
-        "Traced RIP, RIPng, and IoT packets using Cisco Packet Tracer simulation mode",
-        "Monitored SDN dashboard for host and router provisioning across the topology"
-      ]
-    },
-    {
       "name": "USG iSchool Chatbot",
       "url": "",
       "status": "Collaborative project",
@@ -277,5 +232,10 @@
         "Documented feature tradeoffs and outlined a phased product roadmap for future improvements"
       ]
     }
+  ],
+  "certifications": [
+    "CompTIA Security+",
+    "AWS Certified Cloud Practitioner",
+    "Google AI Essentials"
   ]
 }

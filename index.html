@@ -33,7 +33,9 @@
     .section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 18px; }
 
     .hero-name { font-size: 2.25rem; font-weight: 700; color: #111827; line-height: 1.15; margin-bottom: 8px; }
-    .hero-tagline { font-size: 0.875rem; color: #9CA3AF; margin-bottom: 20px; }
+    .hero-tagline { font-size: 0.875rem; color: #9CA3AF; margin-bottom: 12px; }
+    .cert-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .cert-tag { display: inline-block; font-size: 0.72rem; font-weight: 500; padding: 3px 10px; border-radius: 9999px; background: #EEF2FF; color: #3730A3; border: 1px solid #C7D2FE; }
     .hero-bio { font-size: 0.9375rem; color: #4B5563; line-height: 1.75; margin-bottom: 32px; }
 
     .cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -73,6 +75,7 @@
     <section>
       <div class="hero-name" id="hero-name"></div>
       <div class="hero-tagline" id="hero-tagline"></div>
+      <div class="cert-row" id="cert-row"></div>
       <p class="hero-bio" id="hero-bio"></p>
       <div class="cta-group">
         <a href="work.html" class="btn-primary">See All Work &rarr;</a>
@@ -110,6 +113,8 @@ fetch('content.json')
 
     document.getElementById('hero-name').textContent = data.name;
     document.getElementById('hero-tagline').textContent = data.tagline || '';
+    document.getElementById('cert-row').innerHTML = (data.certifications || [])
+      .map(c => `<span class="cert-tag">${c}</span>`).join('');
     document.getElementById('hero-bio').textContent = data.bio || '';
 
     document.getElementById('education-list').innerHTML = (data.education || []).map(e => `
