@@ -4,86 +4,291 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project | Michael Lee</title>
+  <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ── LAYOUT CONTROLS — edit these values to adjust sizing ── */
+    /* ── Design tokens (shared across all three pages) ── */
     :root {
-      --page-padding: 96px;        /* left/right margin (96px ≈ 1 inch) */
-      --image-gap: 24px;           /* project page: gap between stacked images */
-      --detail-image-width: 70%;   /* project page: image column width */
+      --color-bg:        #ffffff;
+      --color-surface:   #ffffff;
+      --color-border:    #e4e4e7;
+      --color-primary:   #09090b;
+      --color-primary-h: #27272a;
+      --color-text:      #09090b;
+      --color-muted:     #71717a;
+      --color-accent:    #f4f4f5;
+      --radius:          0.5rem;
     }
-    /* ─────────────────────────────────────────────────────────── */
+    .dark {
+      --color-bg:        #09090b;
+      --color-surface:   #09090b;
+      --color-border:    #27272a;
+      --color-primary:   #fafafa;
+      --color-primary-h: #f4f4f5;
+      --color-text:      #fafafa;
+      --color-muted:     #a1a1aa;
+      --color-accent:    #27272a;
+    }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #374151; line-height: 1.6; font-size: 15px; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--color-bg); color: var(--color-text);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
     a { color: inherit; text-decoration: none; }
-    .container { max-width: 1800px; margin: 0 auto; padding: 0 var(--page-padding); }
+    button { font-family: inherit; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+    ::selection { background: var(--color-primary); color: var(--color-bg); }
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; letter-spacing: -0.025em; }
+    svg { display: block; }
 
-    nav { padding: 20px 0; border-bottom: 1px solid #F3F4F6; display: flex; align-items: center; justify-content: space-between; }
-    .nav-name { font-size: 0.9rem; font-weight: 600; color: #111827; transition: color 0.15s; }
-    .nav-name:hover { color: #4F46E5; }
-    .nav-links { display: flex; align-items: center; gap: 20px; }
-    .nav-link { font-size: 0.825rem; color: #6B7280; transition: color 0.15s; }
-    .nav-link:hover { color: #111827; }
-    .nav-link-accent { font-size: 0.825rem; font-weight: 500; color: #4F46E5; transition: color 0.15s; }
-    .nav-link-accent:hover { color: #3730A3; }
+    .section { padding: 5rem 1.5rem; max-width: 1000px; margin: 0 auto; }
 
-    main { padding: 48px 0; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.6rem 1.25rem; border-radius: var(--radius);
+      font-weight: 500; font-size: 0.875rem; cursor: pointer;
+      transition: all 0.2s ease; text-decoration: none; border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--color-primary); color: var(--color-bg); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .btn-primary:hover { background: var(--color-primary-h); transform: scale(1.02); }
+    .btn:active { transform: scale(0.97); }
+    .btn svg { width: 14px; height: 14px; }
 
-    .back-link { display: inline-flex; align-items: center; font-size: 0.825rem; color: #9CA3AF; margin-bottom: 36px; transition: color 0.15s; }
-    .back-link:hover { color: #374151; }
+    /* ── Progress bar + navbar ── */
+    .progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--color-primary); transform: scaleX(0);
+      transform-origin: left; z-index: 1001;
+    }
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 4rem; padding: 0 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .navbar.scrolled { border-bottom-color: var(--color-border); backdrop-filter: blur(14px); background: rgba(255,255,255,0.92); }
+    .dark .navbar.scrolled { background: rgba(9,9,11,0.88); }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; transition: transform 0.2s ease; }
+    .nav-logo:hover { transform: scale(1.05); }
+    .logo-box {
+      width: 1.875rem; height: 1.875rem; border-radius: 0.25rem;
+      background: var(--color-primary); color: var(--color-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; flex-shrink: 0;
+    }
+    .logo-name { font-weight: 800; font-size: 1.05rem; color: var(--color-text); white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: 0.125rem; }
+    .nav-links a {
+      padding: 0.375rem 0.75rem; border-radius: 0.5rem;
+      font-size: 0.875rem; font-weight: 500; color: var(--color-muted);
+      transition: color 0.2s ease, background 0.2s ease; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--color-text); background: var(--color-accent); }
+    .nav-links a.nav-accent { color: #6366f1; }
+    .nav-controls { display: flex; align-items: center; gap: 0.625rem; }
+    .icon-btn {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: 0.5rem; padding: 0.4rem; cursor: pointer;
+      display: flex; align-items: center; color: var(--color-muted);
+      transition: transform 0.15s ease;
+    }
+    .icon-btn:hover { transform: scale(1.1); }
+    .icon-btn svg { width: 16px; height: 16px; }
+    .nav-burger { display: none; }
+    .mobile-menu {
+      position: fixed; top: 4rem; left: 0; right: 0; z-index: 999;
+      background: var(--color-surface); border-bottom: 1px solid var(--color-border);
+      padding: 0.75rem 1rem 1rem; display: none; flex-direction: column; gap: 0.25rem;
+      box-shadow: 0 8px 24px -4px rgba(0,0,0,0.1);
+      opacity: 0; transform: translateY(-12px); transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .mobile-menu.open { display: flex; opacity: 1; transform: none; }
+    .mobile-menu a {
+      padding: 0.75rem 1rem; border-radius: 0.5rem;
+      font-size: 0.9375rem; font-weight: 500; color: var(--color-text);
+      transition: background 0.2s ease;
+    }
+    .mobile-menu a:hover { background: var(--color-accent); }
 
-    .project-name { font-size: 1.875rem; font-weight: 700; color: #111827; line-height: 1.2; margin-bottom: 12px; }
-    .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    /* ── Project detail ── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.825rem; color: var(--color-muted); margin-bottom: 2.25rem;
+      transition: color 0.15s ease, transform 0.2s ease;
+    }
+    .back-link:hover { color: var(--color-text); transform: translateX(-4px); }
+    .back-link svg { width: 14px; height: 14px; }
 
-    .tag { display: inline-block; font-size: 0.68rem; padding: 2px 8px; border-radius: 9999px; font-weight: 500; }
-    .tag-live       { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
-    .tag-active     { background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
-    .tag-production { background: #EEF2FF; color: #3730A3; border: 1px solid #C7D2FE; }
-    .tag-cyber      { background: #F5F3FF; color: #5B21B6; border: 1px solid #DDD6FE; }
-    .tag-academic   { background: #F8FAFC; color: #475569; border: 1px solid #E2E8F0; }
+    .project-name {
+      font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1rem;
+      display: inline-block;
+      background: linear-gradient(100deg, #6366f1 0%, #06b6d4 25%, #10b981 45%, #f59e0b 65%, #ec4899 80%, #6366f1 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: gradient-name-flow 5s linear infinite;
+    }
+    @keyframes gradient-name-flow { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
-    .stack-tag { display: inline-block; font-size: 0.7rem; padding: 2px 9px; border-radius: 9999px; background: #F3F4F6; color: #6B7280; font-weight: 500; margin: 2px 2px 2px 0; }
+    .meta-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .tag { display: inline-block; font-size: 0.68rem; padding: 2px 9px; border-radius: 9999px; font-weight: 500; white-space: nowrap; }
+    .tag-live       { color: #047857; background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.35); }
+    .tag-active     { color: #1d4ed8; background: rgba(59,130,246,0.10); border: 1px solid rgba(59,130,246,0.35); }
+    .tag-production { color: #4338ca; background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.35); }
+    .tag-cyber      { color: #6d28d9; background: rgba(139,92,246,0.10); border: 1px solid rgba(139,92,246,0.35); }
+    .tag-academic   { color: #475569; background: rgba(100,116,139,0.10); border: 1px solid rgba(100,116,139,0.35); }
+    .dark .tag-live       { color: #34d399; }
+    .dark .tag-active     { color: #60a5fa; }
+    .dark .tag-production { color: #a5b4fc; }
+    .dark .tag-cyber      { color: #c4b5fd; }
+    .dark .tag-academic   { color: #94a3b8; }
 
-    .detail-para { font-size: 0.9375rem; color: #4B5563; line-height: 1.75; margin-bottom: 18px; }
+    .stack-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+    .stack-tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 500;
+      padding: 0.2rem 0.6rem; border-radius: 0.25rem;
+      background: var(--color-accent); color: var(--color-text);
+      transition: transform 0.15s ease;
+    }
+    .stack-tag:hover { transform: scale(1.08); }
 
-    /* ── Image grid (under highlights, stacked single column) ── */
-    .image-grid { display: grid; grid-template-columns: 1fr; gap: var(--image-gap); margin-top: 28px; max-width: var(--detail-image-width); }
-    .image-grid img { width: 100%; border-radius: 8px; border: 1px solid #F3F4F6; display: block; }
+    .detail-para { font-size: 0.9375rem; color: var(--color-muted); line-height: 1.75; margin-bottom: 1.125rem; max-width: 760px; }
 
-    /* ── Highlights ── */
-    .highlights-section { margin-top: 28px; padding-top: 28px; border-top: 1px solid #F3F4F6; }
-    .section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 14px; }
-    .highlight-item { display: flex; gap: 10px; font-size: 0.875rem; color: #4B5563; line-height: 1.6; margin-bottom: 10px; }
-    .highlight-bullet { color: #D1D5DB; flex-shrink: 0; margin-top: 3px; font-size: 0.7rem; }
+    .highlights-section { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--color-border); }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--color-muted); margin-bottom: 1rem;
+    }
+    .highlight-item {
+      display: flex; gap: 0.7rem; font-size: 0.875rem; color: var(--color-muted);
+      line-height: 1.65; margin-bottom: 0.7rem; max-width: 760px;
+      position: relative;
+    }
+    .highlight-dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+      margin-top: 0.55rem; background: linear-gradient(135deg, #6366f1, #06b6d4);
+    }
 
-    .view-link { display: inline-block; margin-top: 28px; font-size: 0.875rem; font-weight: 500; color: #4F46E5; transition: color 0.15s; }
-    .view-link:hover { color: #3730A3; }
+    .image-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; max-width: 760px; }
+    .image-grid img {
+      width: 100%; display: block; border-radius: var(--radius);
+      border: 1px solid var(--color-border);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .image-grid img:hover { border-color: var(--color-primary); box-shadow: 0 12px 30px -10px rgba(0,0,0,0.15); }
+    .dark .image-grid img:hover {
+      border-color: rgba(99,102,241,0.45);
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.12), 0 20px 48px -12px rgba(99,102,241,0.18);
+    }
 
-    .not-found { padding: 60px 0; color: #9CA3AF; font-size: 0.9rem; }
+    .view-link-row { margin-top: 2rem; }
+    .not-found { padding: 60px 0; color: var(--color-muted); font-size: 0.9rem; }
+    .not-found a { color: #6366f1; }
 
-    footer { padding: 24px 0; border-top: 1px solid #F3F4F6; font-size: 0.75rem; color: #9CA3AF; display: flex; justify-content: space-between; }
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
+    .reveal-left { opacity: 0; transform: translateX(-14px); transition: opacity 0.45s ease-out, transform 0.45s ease-out; }
+    .reveal.in-view, .reveal-left.in-view { opacity: 1; transform: none; }
+
+    /* ── Footer ── */
+    footer { background: var(--color-bg); border-top: 1px solid var(--color-border); padding: 3rem 1.5rem 2rem; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem; }
+    .footer-brand-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .footer-brand-row .logo-box { width: 2rem; height: 2rem; transition: transform 0.2s ease; }
+    .footer-brand-row:hover .logo-box { transform: rotate(15deg) scale(1.1); }
+    .footer-brand-row span:last-child { font-weight: 800; font-size: 1.1rem; }
+    .footer-tag { font-size: 0.875rem; color: var(--color-muted); max-width: 260px; line-height: 1.65; }
+    .footer-col-title { font-size: 0.8125rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.875rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .footer-col { display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.875rem; color: var(--color-muted); transition: color 0.2s ease, transform 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .footer-col a:hover { color: var(--color-text); transform: translateX(5px); }
+    .footer-col svg { width: 15px; height: 15px; }
+    .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    .footer-bottom p { font-size: 0.8125rem; color: var(--color-muted); }
+    .footer-icons { display: flex; gap: 1rem; }
+    .footer-icons a { color: var(--color-muted); transition: transform 0.2s ease, color 0.2s ease; }
+    .footer-icons a:hover { transform: scale(1.2) translateY(-3px); color: var(--color-text); }
+    .footer-icons svg { width: 16px; height: 16px; }
+
+    /* ── Cursor glow + scroll top ── */
+    #cursor-glow, #cursor-ring { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; top: 0; left: 0; display: none; transform: translate(-700px, -700px); }
+    #cursor-glow { width: 650px; height: 650px; background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, rgba(6,182,212,0.04) 40%, transparent 70%); }
+    #cursor-ring { width: 28px; height: 28px; border: 1.5px solid rgba(99,102,241,0.35); }
+    @media (hover: hover) { #cursor-glow, #cursor-ring { display: block; } }
+
+    .scroll-top {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 900;
+      background: var(--color-primary); color: var(--color-bg);
+      border: none; border-radius: 0.5rem; padding: 0.6rem; cursor: pointer;
+      display: flex; opacity: 0; visibility: hidden; transform: translateY(10px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      box-shadow: 0 8px 24px -6px rgba(0,0,0,0.25);
+    }
+    .scroll-top.show { opacity: 1; visibility: visible; transform: none; }
+    .scroll-top:hover { transform: translateY(-3px); }
+    .scroll-top svg { width: 16px; height: 16px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .section { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <nav>
-    <a href="index.html" class="nav-name">Michael Lee</a>
-    <div class="nav-links" id="nav-links"></div>
-  </nav>
+<div class="progress" id="progress"></div>
+<div id="cursor-glow"></div>
+<div id="cursor-ring"></div>
 
-  <main>
-    <a href="work.html" class="back-link">&larr; Work</a>
-    <div id="project-content"></div>
-  </main>
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="logo-box" id="logo-box"></span>
+    <span class="logo-name" id="logo-name"></span>
+  </a>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-controls">
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+    <button class="icon-btn nav-burger" id="menu-toggle" aria-label="Toggle menu"></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu"></div>
 
-  <footer id="footer"></footer>
-</div>
+<main class="section" style="padding-top: 7.5rem; min-height: 80vh;">
+  <a href="work.html" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Work</a>
+  <div id="project-content"></div>
+</main>
+
+<footer><div class="footer-inner" id="footer"></div></footer>
+
+<button class="scroll-top" id="scroll-top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></button>
 
 <script>
+/* ── Icons ── */
+const I = {
+  github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.13-.02-2.05-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1 0 1.52-.01 2.74-.01 3.11 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
+  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+  external: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+};
+
 const tagClass = {
   live: 'tag-live', active: 'tag-active', production: 'tag-production',
   cyber: 'tag-cyber', academic: 'tag-academic',
@@ -93,81 +298,151 @@ function slugify(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
+/* ── Theme toggle ── */
+const themeBtn = document.getElementById('theme-toggle');
+function paintThemeIcon() { themeBtn.innerHTML = document.documentElement.classList.contains('dark') ? I.sun : I.moon; }
+themeBtn.onclick = () => {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  paintThemeIcon();
+};
+paintThemeIcon();
+
+/* ── Navbar scroll state + progress bar + scroll-top ── */
+const navbar = document.getElementById('navbar');
+const progress = document.getElementById('progress');
+const scrollTopBtn = document.getElementById('scroll-top');
+function onScroll() {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+  scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+/* ── Cursor glow ── */
+if (window.matchMedia('(hover: hover)').matches) {
+  const glow = document.getElementById('cursor-glow');
+  const ring = document.getElementById('cursor-ring');
+  let mx = -300, my = -300, gx = -300, gy = -300;
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    ring.style.transform = 'translate(' + (mx - 14) + 'px,' + (my - 14) + 'px)';
+  });
+  (function loop() {
+    gx += (mx - gx) * 0.08; gy += (my - gy) * 0.08;
+    glow.style.transform = 'translate(' + (gx - 325) + 'px,' + (gy - 325) + 'px)';
+    requestAnimationFrame(loop);
+  })();
+}
+
+/* ── Scroll reveal ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); } });
+}, { rootMargin: '-60px' });
+
 fetch('content.json')
   .then(r => r.json())
   .then(data => {
     const l = data.links || {};
-    document.getElementById('nav-links').innerHTML = [
-      l.email    ? `<a href="mailto:${l.email}" class="nav-link">Email</a>` : '',
-      l.github   ? `<a href="${l.github}" target="_blank" class="nav-link">GitHub</a>` : '',
-      l.linkedin ? `<a href="${l.linkedin}" target="_blank" class="nav-link">LinkedIn</a>` : '',
-      `<a href="work.html" class="nav-link">Work</a>`,
-      l.website  ? `<a href="${l.website}" target="_blank" class="nav-link-accent">${l.websiteLabel || l.website}</a>` : '',
-    ].filter(Boolean).join('');
+    document.getElementById('logo-box').textContent = data.initials || '';
+    document.getElementById('logo-name').textContent = data.name;
 
-    document.getElementById('footer').innerHTML = `
-      <span>${data.location} &middot; ${data.availability}</span>
-      <span>${data.name} &middot; ${data.year}</span>
-    `;
+    const navItems = [
+      ['work.html', 'Work', ''],
+      [l.github, 'GitHub', '_blank'],
+      [l.linkedin, 'LinkedIn', '_blank'],
+      l.email ? ['mailto:' + l.email, 'Email', ''] : null,
+      l.website ? [l.website, l.websiteLabel || l.website, '_blank', 'nav-accent'] : null,
+    ].filter(Boolean);
+    const navHtml = navItems.map(([href, label, target, cls]) =>
+      '<a href="' + href + '"' + (target ? ' target="' + target + '"' : '') + (cls ? ' class="' + cls + '"' : '') + '>' + label + '</a>'
+    ).join('');
+    document.getElementById('nav-links').innerHTML = navHtml;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.innerHTML = navHtml;
+    const menuBtn = document.getElementById('menu-toggle');
+    menuBtn.innerHTML = I.menu;
+    menuBtn.onclick = () => {
+      const open = mobileMenu.classList.toggle('open');
+      menuBtn.innerHTML = open ? I.x : I.menu;
+    };
 
+    /* Footer */
+    document.getElementById('footer').innerHTML =
+      '<div class="footer-top">' +
+        '<div>' +
+          '<div class="footer-brand-row"><span class="logo-box">' + (data.initials || '') + '</span><span>' + data.name + '</span></div>' +
+          '<p class="footer-tag">' + (data.tagline || '') + '</p>' +
+        '</div>' +
+        '<div><p class="footer-col-title">Navigate</p><div class="footer-col">' +
+          '<a href="index.html">Home</a><a href="work.html">Work</a>' +
+          (l.website ? '<a href="' + l.website + '" target="_blank">' + (l.websiteLabel || l.website) + '</a>' : '') +
+        '</div></div>' +
+        '<div><p class="footer-col-title">Connect</p><div class="footer-col">' +
+          (l.github ? '<a href="' + l.github + '" target="_blank">' + I.github + 'GitHub</a>' : '') +
+          (l.linkedin ? '<a href="' + l.linkedin + '" target="_blank">' + I.linkedin + 'LinkedIn</a>' : '') +
+          (l.email ? '<a href="mailto:' + l.email + '">' + I.mail + 'Email</a>' : '') +
+        '</div></div>' +
+      '</div>' +
+      '<div class="footer-bottom">' +
+        '<p>&copy; ' + (data.year || '') + ' ' + data.name + ' &middot; ' + (data.location || '') + ' &middot; ' + (data.availability || '') + '</p>' +
+        '<div class="footer-icons">' +
+          (l.github ? '<a href="' + l.github + '" target="_blank" aria-label="GitHub">' + I.github + '</a>' : '') +
+          (l.linkedin ? '<a href="' + l.linkedin + '" target="_blank" aria-label="LinkedIn">' + I.linkedin + '</a>' : '') +
+          (l.email ? '<a href="mailto:' + l.email + '" aria-label="Email">' + I.mail + '</a>' : '') +
+        '</div>' +
+      '</div>';
+
+    /* Project detail */
     const slug = new URLSearchParams(window.location.search).get('p');
     const project = (data.projects || []).find(p => slugify(p.name) === slug);
 
     if (!project) {
       document.getElementById('project-content').innerHTML =
-        `<div class="not-found">Project not found. <a href="work.html" style="color:#4F46E5;">Back to Work</a></div>`;
+        '<div class="not-found">Project not found. <a href="work.html">Back to Work</a></div>';
       return;
     }
 
     document.title = project.name + ' | ' + data.name;
-
     const tc = tagClass[project.statusType] || 'tag-academic';
 
-    const stackHtml = (project.stack || []).map(t =>
-      `<span class="stack-tag">${t}</span>`
-    ).join('');
-
+    const stackHtml = (project.stack || []).map(t => '<span class="stack-tag">' + t + '</span>').join('');
     const paragraphs = [project.problem, project.evidence, project.result]
       .filter(Boolean)
-      .map(t => `<p class="detail-para">${t}</p>`)
+      .map((t, i) => '<p class="detail-para reveal" style="transition-delay:' + (i * 0.08) + 's">' + t + '</p>')
       .join('');
 
-    // Images (rendered after highlights)
-    const imgs = project.images || [];
-    let imageHtml = '';
-    if (imgs.length > 0) {
-      imageHtml = `<div class="image-grid">
-        ${imgs.map(src => `<img src="${src}" alt="${project.name}" loading="lazy" />`).join('')}
-      </div>`;
-    }
-
-    // Highlights
     const highlightsHtml = (project.highlights || []).length
-      ? `<div class="highlights-section">
-          <div class="section-label">Highlights</div>
-          ${project.highlights.map(h => `
-            <div class="highlight-item">
-              <span class="highlight-bullet">&#9656;</span>
-              <span>${h}</span>
-            </div>`).join('')}
-        </div>`
+      ? '<div class="highlights-section reveal"><div class="section-label">Highlights</div>' +
+        project.highlights.map((h, i) =>
+          '<div class="highlight-item reveal-left" style="transition-delay:' + (i * 0.07) + 's"><span class="highlight-dot"></span><span>' + h + '</span></div>'
+        ).join('') + '</div>'
+      : '';
+
+    const imgs = project.images || [];
+    const imageHtml = imgs.length
+      ? '<div class="image-grid">' + imgs.map((src, i) =>
+          '<img src="' + src + '" alt="' + project.name + '" loading="lazy" class="reveal" style="transition-delay:' + (i * 0.08) + 's" />'
+        ).join('') + '</div>'
       : '';
 
     const linkHtml = project.url
-      ? `<a href="${project.url}" target="_blank" class="view-link">View Project &#8599;</a>`
+      ? '<div class="view-link-row reveal"><a href="' + project.url + '" target="_blank" class="btn btn-primary">' + I.external + 'View Project</a></div>'
       : '';
 
-    document.getElementById('project-content').innerHTML = `
-      <h1 class="project-name">${project.name}</h1>
-      <div class="meta-row">
-        <span class="tag ${tc}">${project.status}</span>
-      </div>
-      <div style="margin-bottom:24px;">${stackHtml}</div>
-      ${paragraphs}
-      ${highlightsHtml}
-      ${imageHtml}
-      ${linkHtml}
-    `;
+    document.getElementById('project-content').innerHTML =
+      '<h1 class="project-name">' + project.name + '</h1>' +
+      '<div class="meta-row"><span class="tag ' + tc + '">' + project.status + '</span></div>' +
+      '<div class="stack-row">' + stackHtml + '</div>' +
+      paragraphs +
+      highlightsHtml +
+      imageHtml +
+      linkHtml;
+
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => io.observe(el));
+    onScroll();
   });
 </script>
 </body>
