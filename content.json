@@ -2,6 +2,12 @@
   "name": "Michael Lee",
   "initials": "ML",
   "tagline": "M.S. Analytics / Georgia Tech  /  B.S. Information Science / UMD",
+  "roles": [
+    "Product Manager & Builder",
+    "Data & Analytics",
+    "M.S. Analytics @ Georgia Tech",
+    "USAF Veteran"
+  ],
   "bio": "Product manager and builder with experience in customer discovery, product strategy, and end-to-end product delivery. I use hypothesis-driven iteration and real user feedback to validate product decisions before scaling engineering investment. Background in USAF with experience spanning enterprise ERP delivery, data consulting, and SaaS product development.",
   "links": {
     "email": "leem72929@gmail.com",
@@ -110,28 +116,30 @@
     {
       "name": "DoD Small Business Contract Pipeline",
       "url": "https://github.com/Makgeolli369/dod-sb-pipeline",
-      "status": "Functional",
+      "status": "Built",
       "statusType": "production",
       "stack": [
         "Python",
-        "PostgreSQL",
-        "Streamlit",
-        "Azure",
-        "SQLAlchemy"
+        "dbt",
+        "BigQuery",
+        "pandas",
+        "scipy",
+        "GitHub Actions"
       ],
       "categories": [
-        "Data Engineering"
+        "Data Engineering",
+        "Cloud / DevOps"
       ],
-      "problem": "Federal contract data from USASpending.gov is large, paginated, and raw with no easy way to track DoD small business trends or benchmark vendors.",
-      "evidence": "Built an end-to-end ETL with paginated REST API ingestion, pandas transforms with NAICS classification and deduplication, PostgreSQL load via SQLAlchemy 2.0, and an interactive Streamlit dashboard with KPI cards, choropleth map, and sidebar filters. Extended to Azure Blob Storage and Azure SQL.",
-      "result": "Fully functional analytics platform over federal contract data usable for vendor research and competitive landscape analysis.",
+      "problem": "USAspending.gov publishes every federal contract transaction, but the raw bulk archives are unusable as-is. Each fiscal year is a 2 GB zip of multi-part CSVs, a single award spans many modification rows, de-obligations appear as negative dollar amounts, and the years are not comparable because FY2026 is a partial year hit by a 43-day government shutdown.",
+      "evidence": "Built an analytics engineering pipeline over the full USAspending bulk archives for FY2023 through FY2026. Python ingestion filters roughly 8 GB of raw CSV down to DoD small business set-aside awards and writes Parquet, a loader pushes it to BigQuery, and dbt models a typed staging layer into six tested marts covering agency spend, set-aside trends, vendor performance, NAICS, geography, and competition. A separate analysis layer runs z-score anomaly detection, de-obligation clustering, and year-over-year change detection.",
+      "result": "Produced a trustworthy analytics layer over 98,798 transactions, 7,421 vendors, and $31.3B in DoD small business obligations. Data quality caveats are encoded in the data itself, so partial and shutdown-affected years are never compared against full years. CI lints the SQL and builds the models on every push.",
       "highlights": [
-        "Paginated ingestion from USASpending.gov with multiple validation checks and a configurable pass-rate threshold",
-        "Pipeline audit table tracks records in, records out, pass rate, and status per run",
-        "Dashboard includes KPI cards, monthly volume chart, NAICS sector spending, top recipients, award tier breakdown, and a choropleth map",
-        "Sidebar filters for sub-agency, NAICS sector, and award tier applied dynamically across all visualizations",
-        "Dry-run mode extracts and transforms without writing to the database",
-        "Architecture maps to Azure DP-900 scope: Blob Storage, Data Factory, and Azure SQL"
+        "Filters the full FY2023 through FY2026 USAspending archives down to DoD small business set-aside awards, staged as Parquet for fast columnar loads",
+        "Six dbt marts on BigQuery with consistent metric definitions for net obligation, gross obligation, de-obligation dollars, distinct awards, and vendor counts",
+        "Encodes per fiscal year data quality tiers and flags, including partial-year and 43-day shutdown handling, so FY2026 is excluded from year-over-year math",
+        "Anomaly detection in scipy flags agency-years beyond two standard deviations, de-obligation clusters above 10 percent of gross, and set-aside swings over 20 percent",
+        "Vendor performance mart enriches each row with lifetime context: years active, dominant set-aside, agency, NAICS, and lifetime awards and obligation",
+        "GitHub Actions CI runs sqlfluff lint and a slim dbt build on pull requests, and a full dbt build on merge to main"
       ]
     },
     {
