@@ -12,6 +12,17 @@ Three files. Never add more without explicit discussion.
 Deploy: `git push` to `main` triggers GitHub Actions → GitHub Pages auto-deploy.
 Remote: `https://github.com/Makgeolli369/portfolio.git`
 
+## Design System
+
+All three HTML files share the same inline design system (no external CSS/JS files, no build step):
+
+- Zinc/shadcn-style CSS variables defined in `:root` (light) and `.dark` (dark). The `dark` class is applied to `<html>`; preference persists in `localStorage.theme` (default light). A tiny inline `<head>` script applies it before paint.
+- Shared chrome on every page: fixed blur navbar with scroll progress bar, theme toggle, mobile drawer menu, cursor glow (desktop only), scroll-to-top button, 3-column footer.
+- Scroll reveal uses an IntersectionObserver adding `.in-view` to `.reveal` / `.reveal-left` elements.
+- index.html hero: dot-grid background, floating orbs, conic-ring avatar with initials, letter-by-letter gradient name, typewriter (`roles`), count-up stats bar (computed from projects/certifications/education counts), magnetic CTA buttons.
+- work.html cards: 3D tilt + mouse spotlight (desktop), gradient top strip keyed to `statusType`.
+- Any CSS change to shared chrome must be applied to all three files (styles are intentionally duplicated inline).
+
 ---
 
 ## content.json Top-Level Fields
@@ -20,7 +31,8 @@ Remote: `https://github.com/Makgeolli369/portfolio.git`
 |---|---|
 | `name` | Full name |
 | `initials` | Shown in avatar |
-| `tagline` | One line under name |
+| `tagline` | Shown in footer brand block; typewriter fallback if `roles` is missing |
+| `roles` | Array of strings cycled by the hero typewriter on index.html |
 | `bio` | Paragraph in hero section |
 | `links.email` | leem72929@gmail.com |
 | `links.github` | https://github.com/Makgeolli369 |
