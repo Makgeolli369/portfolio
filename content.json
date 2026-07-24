@@ -85,6 +85,35 @@
       ]
     },
     {
+      "name": "RconnectoR",
+      "url": "",
+      "status": "In development",
+      "statusType": "active",
+      "stack": [
+        "FastAPI",
+        "Twilio",
+        "OpenAI Realtime",
+        "gpt-4o-mini",
+        "SQLite",
+        "Docker"
+      ],
+      "categories": [
+        "AI / LLM",
+        "Automation"
+      ],
+      "problem": "Some information only lives behind a phone call, like unit availability, pricing, or eligibility that a business will only confirm to a person who calls and asks. Teams that need to gather it at scale burn staff hours dialing one number at a time and retyping the answers.",
+      "evidence": "Owned this product end to end and built a self-owned outbound voice-agent platform. An operator defines an agent in a plain web form, uploads a target list, and watches a live board fill in as the agent phones each number, holds a real conversation, and has the answers pulled into structured fields. Twilio Media Streams are bridged straight to the OpenAI Realtime model so it listens and speaks directly with natural barge-in, and gpt-4o-mini extracts the transcript into a strict JSON schema. Compliance is written as code rather than configuration, with a Maryland all-party consent disclosure spoken at the start of every call. Rebuilt the whole stack onto hosted APIs to replace a self-hosted Dograh deployment, removing local models and Docker sidecars.",
+      "result": "A complete, deployable platform that dials a target list up to a concurrency cap, retries a no-answer once, and auto-completes, with each finished transcript extracted onto a live board. It runs entirely on hosted APIs at roughly $0.10 to $0.15 per answered call and ships as a standard container for any websocket-capable host.",
+      "highlights": [
+        "Bridges Twilio Media Streams directly to the OpenAI Realtime model so it listens and speaks with no intermediate speech layer, including barge-in that cancels the response the instant the caller interrupts",
+        "Maryland all-party consent is enforced in code, not config: every call opens with a recording disclosure, a refusal ends the call as no_consent, and those transcripts are never extracted",
+        "Campaign engine dials targets up to a concurrency cap, retries no-answers once, and auto-completes, while a live board polls run status in real time",
+        "gpt-4o-mini turns each transcript into structured fields through a strict JSON schema, ready for export",
+        "Agents are authored in a simple web form instead of a node graph, versioned in SQLite, and published for either a single test call or a full campaign",
+        "All-API architecture replacing a self-hosted Dograh stack, with no local models or container sidecars and a per-answered-call cost of about $0.10 to $0.15"
+      ]
+    },
+    {
       "name": "AI Labor Market Risk Pipeline",
       "url": "https://github.com/Makgeolli369/ai-labor-pipeline",
       "status": "Production",
