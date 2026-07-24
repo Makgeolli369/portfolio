@@ -5,8 +5,7 @@
   "roles": [
     "Aspiring Product Manager & Builder",
     "Data & Analytics",
-    "M.S. Analytics @ Georgia Tech",
-    "USAF Veteran"
+    "OMS Analytics @ Georgia Tech"
   ],
   "bio": "Aspiring product manager and builder. I apply customer discovery, product strategy, and end-to-end delivery, using hypothesis-driven iteration and real user feedback to validate product decisions before scaling engineering investment. Background in USAF with experience spanning enterprise ERP delivery, data consulting, and SaaS product development.",
   "links": {
@@ -29,6 +28,38 @@
       "school": "University of Maryland, College Park",
       "degree": "B.S. Information Science",
       "year": "2025"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Founding Team Member",
+      "company": "Avera Technologies (Student Startup)",
+      "location": "Remote",
+      "period": "Jan 2026 - Apr 2026",
+      "bullets": [
+        "Conducted 50+ bilingual customer discovery sessions with patients and Korean healthcare providers to validate demand and identify adoption barriers for a medical tourism platform.",
+        "Delivered a risk assessment and go/no-go recommendation grounded in customer, market, and financial analysis that mitigated exposure to a heavily regulated, low-differentiation market."
+      ]
+    },
+    {
+      "role": "Data Analyst Consultant",
+      "company": "iConsultancy, UMD (Client: Community Forklift)",
+      "location": "College Park, MD",
+      "period": "Aug 2025 - Dec 2025",
+      "bullets": [
+        "Mapped donor and transaction workflows end-to-end from stakeholder interviews to pinpoint bottlenecks and drive workflow redesign and process simplification.",
+        "Executed a SQL-based migration across 3+ years of disconnected financial and donation records, reducing repetitive input records by roughly 20% and building the results into an executive briefing."
+      ]
+    },
+    {
+      "role": "Project Management Intern",
+      "company": "Office of Planning and Development",
+      "location": "Saipan, MP",
+      "period": "Jan 2022 - Jun 2022",
+      "bullets": [
+        "Modernized permitting workflows by helping migrate paper and Excel records to the Tyler Technologies low-code ERP platform, enabling secure, auditable processing of 8 permitting and licensing forms.",
+        "Applied ERP security settings and role-based access controls that restrict cross-department data access, strengthening compliance and lowering data-leakage risk across 8 agencies."
+      ]
     }
   ],
   "skills": [
