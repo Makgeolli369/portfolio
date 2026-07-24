@@ -342,7 +342,7 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); } });
 }, { rootMargin: '-60px' });
 
-fetch('content.json')
+fetch('content.json?v=' + Date.now())
   .then(r => r.json())
   .then(data => {
     const l = data.links || {};

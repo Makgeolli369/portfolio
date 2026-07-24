@@ -383,7 +383,7 @@ function applyFilters() {
   });
 }
 
-fetch('content.json')
+fetch('content.json?v=' + Date.now())
   .then(r => r.json())
   .then(data => {
     const l = data.links || {};
