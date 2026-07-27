@@ -36,6 +36,7 @@
       "company": "Viora Platforms (Early-stage startup)",
       "location": "Remote",
       "period": "Dec 2025 - Apr 2026",
+      "slug": "viora-platforms",
       "bullets": [
         "Served as the primary market intelligence resource for an early-stage startup, synthesizing roughly 200 customer discovery interviews across the medical tourism sector into a market entry brief that shaped target segment and product positioning.",
         "Ran competitive analysis and financial modeling on pricing, break-even, and scalability to inform go/no-go decisions, then co-led the target market, value proposition, and revenue model while building an AI-assisted MVP for stakeholder demos."
@@ -46,6 +47,7 @@
       "company": "iConsultancy, University of Maryland (Client: Community Forklift)",
       "location": "College Park, MD",
       "period": "Aug 2025 - Dec 2025",
+      "slug": "iconsultancy-community-forklift",
       "bullets": [
         "Built Python and SQL applications and executed a SQL-based migration and reconciliation of 3+ years of disconnected donor and transaction records, giving the nonprofit its first unified multi-year view of financial performance.",
         "Mapped donor and transaction workflows end-to-end, built donor segmentation and trend models, and synthesized the findings into a PowerPoint executive briefing that client leadership formally reviewed and adopted."
@@ -56,6 +58,7 @@
       "company": "USG Office of Information Technology",
       "location": "Rockville, MD",
       "period": "Apr 2025 - Dec 2025",
+      "slug": "usg-helpdesk-technician",
       "bullets": [
         "Managed the end-to-end incident lifecycle in the TOPdesk ITSM platform, analyzing roughly 100 monthly requests and authoring knowledge base and escalation procedures that cut repeat incidents by about 20% across a team of 11 technicians.",
         "Administered user accounts and role-based access in ADManager and coordinated onboarding for roughly 100 students and staff, deploying GlobalProtect VPN and CrowdStrike EDR and compiling audit-ready compliance reports."
@@ -66,6 +69,7 @@
       "company": "Universities at Shady Grove",
       "location": "Rockville, MD",
       "period": "Jan 2025 - Dec 2025",
+      "slug": "usg-cybersecurity-club",
       "bullets": [
         "Founded and led the USG Cybersecurity Club, designing and running a full-year program of technical workshops, industry sessions, and hands-on labs aligned with student goals and current industry needs.",
         "Sourced guest speakers across cybersecurity, AI, defense, and finance and grew regular attendance from 2 or 3 to about 10 active members through iterative, feedback-driven programming."
@@ -76,6 +80,7 @@
       "company": "Office of Planning and Development, CNMI Government",
       "location": "Saipan, MP",
       "period": "Jan 2022 - Jun 2022",
+      "slug": "cnmi-it-management-intern",
       "bullets": [
         "Served as lead implementation analyst for a cross-agency ERP digital transformation, leading requirements gathering, workflow documentation, and go-live coordination across 8 government agencies under a compressed 6-month timeline.",
         "Migrated permitting and licensing workflows from paper and Excel to Tyler Technologies ERP, enforced role-based access scoping each agency's financial data, and tracked 50+ delivery items with a risk log in Jira."
