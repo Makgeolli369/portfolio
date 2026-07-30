@@ -396,6 +396,7 @@ fetch('content.json?v=' + Date.now())
       [l.linkedin, 'LinkedIn', '_blank'],
       l.email ? ['mailto:' + l.email, 'Email', ''] : null,
       l.website ? [l.website, l.websiteLabel || l.website, '_blank', 'nav-accent'] : null,
+      l.rconnector ? [l.rconnector, l.rconnectorLabel || l.rconnector, '_blank', 'nav-accent'] : null,
     ].filter(Boolean);
     const navHtml = navItems.map(([href, label, target, cls]) =>
       '<a href="' + href + '"' + (target ? ' target="' + target + '"' : '') + (cls ? ' class="' + cls + '"' : '') + '>' + label + '</a>'
