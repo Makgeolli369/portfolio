@@ -170,6 +170,10 @@
         "Agents are authored in a simple web form instead of a node graph, versioned in SQLite, and published for either a single test call or a full campaign",
         "Directly targets the Affordable Housing gap: replaces the manual phone survey staff run today, so a team confirms MPDU availability across every provider without dialing one number at a time or retyping answers",
         "Ships as a self-owned solution on a hosted, all-API stack, deployable as a standard container on any websocket-capable host so a housing office can run it in-house rather than depend on an outside vendor"
+      ],
+      "preview": "RconnectoR/RconnectoR1.png",
+      "images": [
+        "RconnectoR/RconnectoR1.png"
       ]
     },
     {
