@@ -144,9 +144,9 @@
     },
     {
       "name": "RconnectoR",
-      "url": "",
-      "status": "In development",
-      "statusType": "active",
+      "url": "https://app.kindredsoftware.org/demo/",
+      "status": "Live",
+      "statusType": "live",
       "stack": [
         "FastAPI",
         "Twilio",
