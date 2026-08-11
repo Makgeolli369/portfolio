@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='15' font-weight='bold' fill='%23fff' text-anchor='middle'%3EML%3C/text%3E%3C/svg%3E" />
   <title>Michael Lee</title>
   <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,7 +51,7 @@
     h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; letter-spacing: -0.025em; }
     svg { display: block; }
 
-    .section { padding: 5rem 1.5rem; max-width: 1000px; margin: 0 auto; }
+    .section { padding: 3.5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
     .section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; }
     .section-subtitle { color: var(--color-muted); font-size: 1.1rem; }
     .sec-divider { position: relative; height: 1px; background: var(--color-border); margin: 1.25rem 0; overflow: hidden; }
@@ -227,8 +228,25 @@
     .stat-cell.stat-link:hover { background: var(--color-accent); }
 
     /* Featured Projects */
-    .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    @media (max-width: 820px) { .featured-grid { grid-template-columns: 1fr; } }
+    .feature { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; align-items: stretch;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius); overflow: hidden; position: relative;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .feature:hover { border-color: rgba(99,102,241,0.45); box-shadow: 0 20px 48px -14px rgba(99,102,241,0.18); }
+    .feature-media { position: relative; overflow: hidden; border-right: 1px solid var(--color-border); background: var(--color-accent); }
+    .feature-media img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform 0.5s ease; }
+    .feature:hover .feature-media img { transform: scale(1.03); }
+    .feature-body { padding: 2.25rem; display: flex; flex-direction: column; }
+    .feature-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+    .feature-head h3 { font-size: 1.7rem; font-weight: 700; color: var(--color-text); }
+    .feature-desc { color: var(--color-muted); font-size: 0.98rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .feature-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.75rem; }
+    .feature-tags span { font-size: 0.72rem; padding: 3px 10px; border-radius: 9999px; background: var(--color-accent); color: var(--color-muted); border: 1px solid var(--color-border); }
+    .feature-actions { display: flex; gap: 0.75rem; margin-top: auto; }
+    @media (max-width: 820px) { .feature { grid-template-columns: 1fr; }
+      .feature-media { border-right: none; border-bottom: 1px solid var(--color-border); }
+      .feature-media img { aspect-ratio: 16 / 9.5; height: auto; }
+      .feature-body { padding: 1.5rem; } }
     .card {
       background: var(--color-surface); border: 1px solid var(--color-border);
       border-radius: var(--radius); padding: 1.5rem;
@@ -344,7 +362,7 @@
 
     /* ── Footer ── */
     footer { background: var(--color-bg); border-top: 1px solid var(--color-border); padding: 3rem 1.5rem 2rem; }
-    .footer-inner { max-width: 1000px; margin: 0 auto; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem; }
     .footer-brand-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
     .footer-brand-row .logo-box { width: 2rem; height: 2rem; transition: transform 0.2s ease; }
@@ -364,10 +382,6 @@
     .footer-icons svg { width: 16px; height: 16px; }
 
     /* ── Cursor glow + scroll top ── */
-    #cursor-glow, #cursor-ring { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; top: 0; left: 0; display: none; transform: translate(-700px, -700px); }
-    #cursor-glow { width: 650px; height: 650px; background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, rgba(6,182,212,0.04) 40%, transparent 70%); }
-    #cursor-ring { width: 28px; height: 28px; border: 1.5px solid rgba(99,102,241,0.35); }
-    @media (hover: hover) { #cursor-glow, #cursor-ring { display: block; } }
 
     .scroll-top {
       position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 900;
@@ -418,8 +432,6 @@
 <body>
 
 <div class="progress" id="progress"></div>
-<div id="cursor-glow"></div>
-<div id="cursor-ring"></div>
 
 <nav class="navbar" id="navbar">
   <a href="index.html" class="nav-logo">
@@ -445,10 +457,10 @@
 
 <section class="section" id="projects">
   <div class="sec-head reveal">
-    <h2 class="section-title">Featured Projects</h2>
+    <h2 class="section-title">Featured Project</h2>
     <div class="sec-divider"><span></span></div>
   </div>
-  <div class="featured-grid" id="featured-list"></div>
+  <div id="featured-list" class="reveal"></div>
   <div class="featured-more reveal">
     <a href="work.html" class="btn btn-primary">View all work</a>
   </div>
@@ -540,21 +552,6 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-/* ── Cursor glow ── */
-if (window.matchMedia('(hover: hover)').matches) {
-  const glow = document.getElementById('cursor-glow');
-  const ring = document.getElementById('cursor-ring');
-  let mx = -300, my = -300, gx = -300, gy = -300;
-  window.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    ring.style.transform = 'translate(' + (mx - 14) + 'px,' + (my - 14) + 'px)';
-  });
-  (function loop() {
-    gx += (mx - gx) * 0.08; gy += (my - gy) * 0.08;
-    glow.style.transform = 'translate(' + (gx - 325) + 'px,' + (gy - 325) + 'px)';
-    requestAnimationFrame(loop);
-  })();
-}
 
 /* ── Scroll reveal ── */
 const io = new IntersectionObserver(entries => {
@@ -699,25 +696,29 @@ fetch('content.json?v=' + Date.now())
     document.querySelectorAll('.stat-num').forEach(el => countUp(el, parseInt(el.dataset.count, 10)));
     document.querySelectorAll('.magnetic').forEach(el => magnetize(el));
 
-    /* Featured projects (top 3) */
+    /* Featured project (RconnectoR) */
     const tagClass = { live: 'tag-live', active: 'tag-active', production: 'tag-production', cyber: 'tag-cyber', academic: 'tag-academic' };
     const stripGradient = { live: ['#10b981', '#14b8a6'], active: ['#0ea5e9', '#2563eb'], production: ['#6366f1', '#06b6d4'], cyber: ['#8b5cf6', '#d946ef'], academic: ['#64748b', '#94a3b8'] };
-    document.getElementById('featured-list').innerHTML = (data.projects || []).slice(0, 3).map((p, i) => {
-      const slug = slugify(p.name);
-      const tc = tagClass[p.statusType] || 'tag-academic';
-      const [gFrom, gTo] = stripGradient[p.statusType] || stripGradient.production;
-      return '<div class="card reveal" style="transition-delay:' + (i * 0.08) + 's">' +
-        '<div class="card-strip" style="background:linear-gradient(to right,' + gFrom + ',' + gTo + ')"></div>' +
-        (p.preview ? '<a class="card-thumb" href="project.html?p=' + slug + '"><img src="' + p.preview + '" alt="' + p.name + '" loading="lazy" /></a>' : '') +
-        '<div class="card-head"><h3>' + p.name + '</h3><span class="tag ' + tc + '">' + p.status + '</span></div>' +
-        '<p class="card-desc">' + (p.problem || '') + '</p>' +
-        '<div class="card-tags">' + (p.stack || []).slice(0, 4).map(t => '<span>' + t + '</span>').join('') + '</div>' +
-        '<div class="card-actions">' +
-          '<a href="project.html?p=' + slug + '" class="btn btn-primary">Learn More</a>' +
-          (p.url ? '<a href="' + p.url + '" target="_blank" class="btn btn-secondary">Visit</a>' : '') +
-        '</div>' +
-      '</div>';
-    }).join('');
+    const feat = (data.projects || []).find(p => p.name === 'RconnectoR') || (data.projects || [])[0];
+    if (feat) {
+      const slug = slugify(feat.name);
+      const tc = tagClass[feat.statusType] || 'tag-academic';
+      const [gFrom, gTo] = stripGradient[feat.statusType] || stripGradient.production;
+      document.getElementById('featured-list').innerHTML =
+        '<div class="feature">' +
+          '<div class="card-strip" style="background:linear-gradient(to right,' + gFrom + ',' + gTo + ')"></div>' +
+          (feat.preview ? '<a class="feature-media" href="project.html?p=' + slug + '"><img src="' + feat.preview + '" alt="' + feat.name + '" loading="lazy" /></a>' : '') +
+          '<div class="feature-body">' +
+            '<div class="feature-head"><h3>' + feat.name + '</h3><span class="tag ' + tc + '">' + feat.status + '</span></div>' +
+            '<p class="feature-desc">' + (feat.problem || '') + '</p>' +
+            '<div class="feature-tags">' + (feat.stack || []).slice(0, 6).map(t => '<span>' + t + '</span>').join('') + '</div>' +
+            '<div class="feature-actions">' +
+              '<a href="project.html?p=' + slug + '" class="btn btn-primary">Learn More</a>' +
+              (feat.url ? '<a href="' + feat.url + '" target="_blank" class="btn btn-secondary">Visit</a>' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
 
     /* Experience timeline */
     const tlColors = ['#6366f1', '#06b6d4', '#10b981', '#f59e0b'];
