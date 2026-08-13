@@ -34,7 +34,7 @@
   ],
   "experience": [
     {
-      "role": "Founding Team Member & Business Development Intern",
+      "role": "Founding Team Member / Business Developer",
       "company": "Viora Platforms (Early-stage startup)",
       "location": "Remote",
       "period": "Dec 2025 - Apr 2026",
@@ -86,6 +86,18 @@
       "bullets": [
         "Served as lead implementation analyst for a cross-agency ERP digital transformation, leading requirements gathering, workflow documentation, and go-live coordination across 8 government agencies under a compressed 6-month timeline.",
         "Migrated permitting and licensing workflows from paper and Excel to Tyler Technologies ERP, enforced role-based access scoping each agency's financial data, and tracked 50+ delivery items with a risk log in Jira."
+      ]
+    },
+    {
+      "role": "Cadet",
+      "company": "United States Air Force Academy",
+      "location": "Colorado Springs, CO",
+      "period": "Jun 2019 - Aug 2021",
+      "slug": "usafa-cadet",
+      "bullets": [
+        "Completed rigorous military and academic training in a highly structured environment, balancing a full engineering-focused course load with daily physical, leadership, and character development standards.",
+        "Rotated through cadet leadership and duty roles including safety and medical officer and operations command and control, taking responsibility for the accountability, readiness, and welfare of peers.",
+        "Operated under strict discipline, time management, and chain-of-command expectations, building the composure and ownership I now bring to fast-moving, high-stakes work."
       ]
     }
   ],
