@@ -34,6 +34,30 @@
   ],
   "experience": [
     {
+      "role": "Founder / Product Engineer",
+      "company": "RconnectoR (Independent)",
+      "location": "Remote",
+      "period": "Apr 2026 - Present",
+      "slug": "rconnector-founder",
+      "overview": "Left to build RconnectoR from a raw idea into a live product, running discovery, compliance, and full-stack delivery as a solo founder.",
+      "stack": [
+        "FastAPI",
+        "Twilio",
+        "OpenAI Realtime",
+        "gpt-4o-mini",
+        "SQLite",
+        "Docker"
+      ],
+      "bullets": [
+        "Started from an idea for cheaper access to housing and ran direct discovery with home seekers, apartment complexes, and local government housing programs to understand the compliance rules that govern how affordable housing availability can be sourced and shared.",
+        "Reshaped the product structure several times as user needs and compliance constraints shifted, ultimately landing on a voice-agent model where individual home seekers subscribe to a maintained list of apartment complexes instead of calling each one themselves.",
+        "Built and launched the platform solo end to end, bridging Twilio Media Streams to the OpenAI Realtime model with Maryland all-party consent enforced in code, and now run it live in production around the clock."
+      ],
+      "images": [
+        "RconnectoR/RconnectoR1.png"
+      ]
+    },
+    {
       "role": "Founding Team Member / Business Developer",
       "company": "Viora Platforms (Early-stage startup)",
       "location": "Remote",
