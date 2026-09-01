@@ -58,14 +58,16 @@
       ]
     },
     {
-      "role": "Founding Team Member / Business Developer",
+      "role": "Founding Team Member / Product Engineer",
       "company": "Viora Platforms (Early-stage startup)",
       "location": "Remote",
-      "period": "Dec 2025 - Apr 2026",
+      "period": "Jan 2026 - June 2026",
       "slug": "viora-platforms",
       "bullets": [
         "Served as the primary market intelligence resource for an early-stage startup, synthesizing roughly 200 customer discovery interviews across the medical tourism sector into a market entry brief that shaped target segment and product positioning.",
-        "Ran competitive analysis and financial modeling on pricing, break-even, and scalability to inform go/no-go decisions, then co-led the target market, value proposition, and revenue model while building an AI-assisted MVP for stakeholder demos."
+        "Ran competitive analysis and financial modeling on pricing, break-even, and scalability to inform go/no-go decisions, then co-led the target market, value proposition, and revenue model while building an AI-assisted MVP for stakeholder demos.",
+        "Built the startup website and MVP from scratch and shipped a functional interactive site for stakeholder demos.",
+        "Integrated third-party REST APIs to power live product features, handling data fetching, authentication, and error handling."
       ]
     },
     {
