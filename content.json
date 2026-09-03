@@ -34,30 +34,6 @@
   ],
   "experience": [
     {
-      "role": "Founder / Product Engineer",
-      "company": "RconnectoR (Independent)",
-      "location": "Remote",
-      "period": "Apr 2026 - Present",
-      "slug": "rconnector-founder",
-      "overview": "Left to build RconnectoR from a raw idea into a live product, running discovery, compliance, and full-stack delivery as a solo founder.",
-      "stack": [
-        "FastAPI",
-        "Twilio",
-        "OpenAI Realtime",
-        "gpt-4o-mini",
-        "SQLite",
-        "Docker"
-      ],
-      "bullets": [
-        "Started from an idea for cheaper access to housing and ran direct discovery with home seekers, apartment complexes, and local government housing programs to understand the compliance rules that govern how affordable housing availability can be sourced and shared.",
-        "Reshaped the product structure several times as user needs and compliance constraints shifted, ultimately landing on a voice-agent model where individual home seekers subscribe to a maintained list of apartment complexes instead of calling each one themselves.",
-        "Built and launched the platform solo end to end, bridging Twilio Media Streams to the OpenAI Realtime model with Maryland all-party consent enforced in code, and now run it live in production around the clock."
-      ],
-      "images": [
-        "RconnectoR/RconnectoR1.png"
-      ]
-    },
-    {
       "role": "Founding Team Member / Product Engineer",
       "company": "Viora Platforms (Early-stage startup)",
       "location": "Remote",
@@ -212,6 +188,41 @@
       "preview": "RconnectoR/RconnectoR1.png",
       "images": [
         "RconnectoR/RconnectoR1.png"
+      ]
+    },
+    {
+      "name": "CAT Helpline Knowledge Base",
+      "url": "",
+      "status": "Built",
+      "statusType": "active",
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "FINRA CAT",
+        "SEC Rule 613"
+      ],
+      "categories": [
+        "Product"
+      ],
+      "preview": "CATHelpline/CATHelpline1.png",
+      "images": [
+        "CATHelpline/CATHelpline2.png",
+        "CATHelpline/CATHelpline3.png",
+        "CATHelpline/CATHelpline4.png",
+        "CATHelpline/CATHelpline5.png"
+      ],
+      "problem": "The FINRA CAT Helpline supports broker-dealers reporting to the Consolidated Audit Trail, the system mandated by SEC Rule 613 that captures the full lifecycle of orders across the U.S. equity and options markets. Analysts field calls about validation and linkage errors, research the cause, resolve them before the T+3 deadline, and document each one in a CRM. No single navigable reference tied the error types, the correction steps, and the underlying rules together the way an analyst actually works a call.",
+      "evidence": "Built a self-contained web knowledge base modeled on the Helpline Analyst workflow. Researched public CAT NMS Plan and FINRA CAT materials to assemble an accurate catalog of syntax, semantic, linkage, and CAIS errors, each with what it means, the common cause, ordered correction steps, the correct T+3 deadline, and a spec reference. Its centerpiece is a full worked case that runs one real issue, a spike in intrafirm linkage errors after an OMS upgrade, end to end across four phases: intake, analysis and diagnosis, presenting findings, and implications. Each phase separates what the analyst does from why it matters, with sample call language, a hypothesis elimination table, CRM notes, and a 30 second talk track. A searchable catalog, quick triage scenarios, a Rule 613 and CAT NMS Plan reference, and a simulated error trend view round it out.",
+      "result": "A working reference tool that demonstrates command of the domain the role runs on: validation and linkage error correction, the full intake to documentation workflow, and the Rule 613 and CAT NMS Plan foundation. The worked case makes the reasoning explainable step by step. It is a single file front end with no build step, deployable as a static site.",
+      "highlights": [
+        "Full worked case takes one intrafirm linkage incident end to end through intake, analysis and diagnosis, presenting findings, and implications, with a hypothesis elimination table that narrows symptom to root cause",
+        "Every phase pairs what the analyst does with why it matters, plus sample call language and a 30 second talk track for explaining the workflow out loud",
+        "Catalog of 15 CAT validation and linkage errors across syntax, semantic, linkage, and CAIS, each with cause, ordered correction steps, the correct deadline, and a spec reference",
+        "Deadlines encoded per feed: Transaction errors by T+3 8:00 AM ET and CAIS corrections by T+3 5:00 PM ET",
+        "Covers current CAT rules including the validation that rejects a firmDesignatedID submitted as PENDING for a new account order",
+        "Reference section on SEC Rule 613, the CAT NMS Plan, the Transaction and CAIS feeds, and the reportable event lifecycle, plus a simulated error trend view for the trend spotting part of the role",
+        "Single self-contained HTML and JavaScript front end, no build step, deployable as a static site"
       ]
     },
     {
@@ -376,7 +387,7 @@
     "CompTIA Security+",
     "AWS Certified Cloud Practitioner",
     "Google AI Essentials",
-    "IBM AI Product Manager Professional",
-    "Claude AI Fluency: Framework & Foundations"
+    "Claude AI Fluency: Framework & Foundations",
+    "Claude 101"
   ]
 }
