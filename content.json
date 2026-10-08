@@ -34,7 +34,35 @@
   ],
   "experience": [
     {
-      "role": "Founding Team Member / Product Engineer",
+      "role": "Independent Product & Software Consultant",
+      "company": "Self-Employed",
+      "location": "Maryland",
+      "period": "Jan 2025 - Present",
+      "slug": "independent-product-software",
+      "overview": [
+        "Over the past two years I have independently taken software products from customer discovery through production, owning product strategy, engineering, data, and distribution. Two of these products, ReviewStar and RconnectoR, are live and in use.",
+        "I did not treat launch as the endpoint. I put the products in front of real users and organizations, used that feedback to decide what to build next, and kept iterating."
+      ],
+      "stack": [
+        "FastAPI",
+        "Next.js",
+        "PostgreSQL",
+        "Supabase",
+        "Stripe",
+        "Twilio",
+        "OpenAI Realtime",
+        "AWS"
+      ],
+      "bullets": [
+        "Independently designed, built, and launched 2 live software products, owning user research, product strategy, UX, engineering, data infrastructure, deployment, and user support.",
+        "Identified user problems through customer research and 1:1 outreach, translated feedback into requirements and MVP priorities, and shipped ReviewStar across 7 iterative releases.",
+        "Showcased products at hackathons and engaged local government and community stakeholders to explore partnership and distribution opportunities within existing public programs.",
+        "Secured adoption of ReviewStar by the Universities at Shady Grove mentoring program, which now uses it as a resource for its students.",
+        "Built backend and data systems including a FastAPI and PostgreSQL SaaS with live Stripe billing, and an outbound voice agent that turns phone calls into structured, exportable records."
+      ]
+    },
+    {
+      "role": "Product Engineer",
       "company": "Viora Platforms (Early-stage startup)",
       "location": "Remote",
       "period": "Jan 2026 - June 2026",
